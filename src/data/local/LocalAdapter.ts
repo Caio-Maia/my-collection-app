@@ -1,6 +1,6 @@
 import { db } from './db';
 import type { DataProvider, AuthChangeCallback } from '../DataProvider';
-import type { Profile, Collection, CollectionItem, Activity, AuthUser } from '../../types';
+import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf } from '../../types';
 import { generateId, now, fileToBase64 } from '../../lib/utils';
 
 // DEV-ONLY: LocalAdapter is an unauthenticated, client-editable mock. It must never
@@ -113,18 +113,22 @@ export class LocalAdapter implements DataProvider {
     return profile;
   }
 
+  private normalizeCollection(c: Collection): Collection {
+    return { ...c, attribute_schema: c.attribute_schema ?? {}, cover_color: c.cover_color ?? '', cover_image: c.cover_image ?? '', is_public: c.is_public ?? false };
+  }
+
   async listCollections(userId: string): Promise<Collection[]> {
     const rows = await db.collections.where('user_id').equals(userId).toArray();
-    return rows.map(c => ({ ...c, attribute_schema: c.attribute_schema ?? {}, cover_color: c.cover_color ?? '', cover_image: c.cover_image ?? '' }));
+    return rows.map(c => this.normalizeCollection(c));
   }
 
   async getCollection(id: string): Promise<Collection | null> {
     const c = await db.collections.get(id);
-    return c ? { ...c, attribute_schema: c.attribute_schema ?? {}, cover_color: c.cover_color ?? '', cover_image: c.cover_image ?? '' } : null;
+    return c ? this.normalizeCollection(c) : null;
   }
 
   async createCollection(userId: string, data: Omit<Collection, 'id' | 'user_id' | 'created_at'>): Promise<Collection> {
-    const collection: Collection = { ...data, id: generateId(), user_id: userId, created_at: now() };
+    const collection: Collection = { ...data, is_public: data.is_public ?? false, id: generateId(), user_id: userId, created_at: now() };
     await db.collections.add(collection);
     return collection;
   }
@@ -142,8 +146,13 @@ export class LocalAdapter implements DataProvider {
     await db.collections.delete(id);
   }
 
+  private normalizeItem(i: CollectionItem): CollectionItem {
+    return { ...i, shelf_id: i.shelf_id ?? null, shelf_row: i.shelf_row ?? null, shelf_col: i.shelf_col ?? null };
+  }
+
   async listItems(collectionId: string): Promise<CollectionItem[]> {
-    return db.items.where('collection_id').equals(collectionId).toArray();
+    const rows = await db.items.where('collection_id').equals(collectionId).toArray();
+    return rows.map(i => this.normalizeItem(i));
   }
 
   async getItem(id: string): Promise<CollectionItem | null> {
@@ -247,5 +256,70 @@ export class LocalAdapter implements DataProvider {
   async uploadImage(file: File): Promise<string> {
     const base64 = await fileToBase64(file);
     return base64;
+  }
+
+  async setItemPlacement(
+    itemId: string,
+    shelfId: string | null,
+    row: number | null,
+    col: number | null,
+  ): Promise<CollectionItem> {
+    await db.items.update(itemId, { shelf_id: shelfId, shelf_row: row, shelf_col: col });
+    const item = await db.items.get(itemId);
+    if (!item) throw new Error('Item not found');
+    return item;
+  }
+
+  private normalizeShelf(s: Shelf): Shelf {
+    return { ...s, theme: s.theme ?? 'default', theme_color: s.theme_color ?? '' };
+  }
+
+  async listShelves(collectionId: string): Promise<Shelf[]> {
+    const rows = await db.shelves.where('collection_id').equals(collectionId).toArray();
+    return rows.map(s => this.normalizeShelf(s));
+  }
+
+  async createShelf(collectionId: string, data: Pick<Shelf, 'name' | 'rows' | 'cols' | 'theme' | 'theme_color'>): Promise<Shelf> {
+    const shelf: Shelf = {
+      ...data,
+      theme: data.theme ?? 'default',
+      theme_color: data.theme_color ?? '',
+      id: generateId(),
+      collection_id: collectionId,
+      created_at: now(),
+    };
+    await db.shelves.add(shelf);
+    return shelf;
+  }
+
+  async updateShelf(id: string, data: Partial<Pick<Shelf, 'name' | 'rows' | 'cols' | 'theme' | 'theme_color'>>): Promise<Shelf> {
+    await db.shelves.update(id, data);
+    const shelf = await db.shelves.get(id);
+    if (!shelf) throw new Error('Shelf not found');
+    // Desposicionar itens fora dos novos limites
+    if (data.rows !== undefined || data.cols !== undefined) {
+      const rows = shelf.rows;
+      const cols = shelf.cols;
+      const outOfBounds = await db.items
+        .where('shelf_id').equals(id)
+        .filter(item => (item.shelf_row ?? 0) >= rows || (item.shelf_col ?? 0) >= cols)
+        .toArray();
+      if (outOfBounds.length > 0) {
+        await db.items.bulkPut(
+          outOfBounds.map(i => ({ ...i, shelf_id: null, shelf_row: null, shelf_col: null }))
+        );
+      }
+    }
+    return shelf;
+  }
+
+  async deleteShelf(id: string): Promise<void> {
+    const items = await db.items.where('shelf_id').equals(id).toArray();
+    if (items.length > 0) {
+      await db.items.bulkPut(
+        items.map(i => ({ ...i, shelf_id: null, shelf_row: null, shelf_col: null }))
+      );
+    }
+    await db.shelves.delete(id);
   }
 }

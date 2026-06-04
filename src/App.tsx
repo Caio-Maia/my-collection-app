@@ -5,6 +5,8 @@ import { ProtectedRoute } from './auth/ProtectedRoute';
 import { Home } from './pages/Home';
 import { Collections } from './pages/Collections';
 import { CollectionDetail } from './pages/CollectionDetail';
+import { Shelves } from './pages/Shelves';
+import { PublicCollection } from './pages/PublicCollection';
 import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
@@ -25,7 +27,7 @@ function AppRoutes() {
   return (
     <>
       {user && <Navbar />}
-      <main className={user ? '' : ''}>
+      <main>
         <Routes>
           <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
           <Route path="/signup" element={user ? <Navigate to="/" replace /> : <SignUp />} />
@@ -47,6 +49,14 @@ function AppRoutes() {
             }
           />
           <Route
+            path="/collections/:id/shelves"
+            element={
+              <ProtectedRoute>
+                <Shelves />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/profile"
             element={
               <ProtectedRoute>
@@ -64,7 +74,10 @@ function AppRoutes() {
 function App() {
   return (
     <>
-      <AppRoutes />
+      <Routes>
+        <Route path="/p/:id" element={<PublicCollection />} />
+        <Route path="*" element={<AppRoutes />} />
+      </Routes>
       <Toaster richColors position="top-right" />
     </>
   );

@@ -15,6 +15,7 @@ import { Label } from './ui/label';
 import { useData } from '../data/DataContext';
 import { useAuth } from '../auth/AuthContext';
 import type { CollectionItem } from '../types';
+import { isCollectionExport } from '../lib/export';
 import { toast } from 'sonner';
 
 interface Props {
@@ -25,10 +26,13 @@ interface Props {
 
 type Row = Record<string, string>;
 
-function parseJson(text: string): Row[] {
+function parseJson(text: string): { rows: Row[]; isExport: boolean } {
   const parsed = JSON.parse(text);
-  if (Array.isArray(parsed)) return parsed as Row[];
-  throw new Error('JSON deve ser um array de objetos.');
+  if (isCollectionExport(parsed)) {
+    return { rows: parsed.items as unknown as Row[], isExport: true };
+  }
+  if (Array.isArray(parsed)) return { rows: parsed as Row[], isExport: false };
+  throw new Error('JSON deve ser um array de objetos ou um arquivo de exportação de coleção.');
 }
 
 function mapRows(rows: Row[]): Array<Omit<CollectionItem, 'id' | 'collection_id' | 'created_at' | 'updated_at'>> {
@@ -43,6 +47,9 @@ function mapRows(rows: Row[]): Array<Omit<CollectionItem, 'id' | 'collection_id'
       description: description ?? '',
       photo_url: photo_url ?? '',
       attributes,
+      shelf_id: null,
+      shelf_row: null,
+      shelf_col: null,
     };
   });
 }
@@ -55,11 +62,13 @@ export function ImportDialog({ collectionId, open, onOpenChange }: Props) {
   const [preview, setPreview] = useState<Row[]>([]);
   const [error, setError] = useState('');
   const [fileName, setFileName] = useState('');
+  const [isExportFormat, setIsExportFormat] = useState(false);
 
   const reset = () => {
     setPreview([]);
     setError('');
     setFileName('');
+    setIsExportFormat(false);
   };
 
   const handleFile = (file: File) => {
@@ -70,11 +79,14 @@ export function ImportDialog({ collectionId, open, onOpenChange }: Props) {
       try {
         const text = e.target?.result as string;
         if (file.name.endsWith('.json')) {
-          setPreview(parseJson(text));
+          const { rows, isExport } = parseJson(text);
+          setPreview(rows);
+          setIsExportFormat(isExport);
         } else {
           const result = Papa.parse<Row>(text, { header: true, skipEmptyLines: true });
           if (result.errors.length > 0) throw new Error(result.errors[0].message);
           setPreview(result.data);
+          setIsExportFormat(false);
         }
       } catch (err) {
         setError((err as Error).message);
@@ -129,6 +141,13 @@ export function ImportDialog({ collectionId, open, onOpenChange }: Props) {
             onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
           />
         </div>
+
+        {isExportFormat && (
+          <div className="flex items-start gap-2 rounded-md bg-blue-500/10 border border-blue-500/20 p-3 text-blue-700 dark:text-blue-300 text-sm">
+            <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
+            Arquivo de exportação de coleção detectado — apenas os itens serão importados para esta coleção.
+          </div>
+        )}
 
         {error && (
           <div className="flex items-start gap-2 rounded-md bg-destructive/10 p-3 text-destructive text-sm">

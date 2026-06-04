@@ -1,4 +1,4 @@
-import type { Profile, Collection, CollectionItem, Activity, AuthUser } from '../types';
+import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf } from '../types';
 
 export type AuthChangeCallback = (user: AuthUser | null) => void;
 
@@ -28,6 +28,13 @@ export interface DataProvider {
   updateItem(id: string, data: Partial<Omit<CollectionItem, 'id' | 'collection_id' | 'created_at'>>): Promise<CollectionItem>;
   deleteItem(id: string): Promise<void>;
   bulkCreateItems(collectionId: string, userId: string, items: Array<Omit<CollectionItem, 'id' | 'collection_id' | 'created_at' | 'updated_at'>>): Promise<CollectionItem[]>;
+  setItemPlacement(itemId: string, shelfId: string | null, row: number | null, col: number | null): Promise<CollectionItem>;
+
+  // Shelves
+  listShelves(collectionId: string): Promise<Shelf[]>;
+  createShelf(collectionId: string, data: Pick<Shelf, 'name' | 'rows' | 'cols' | 'theme' | 'theme_color'>): Promise<Shelf>;
+  updateShelf(id: string, data: Partial<Pick<Shelf, 'name' | 'rows' | 'cols' | 'theme' | 'theme_color'>>): Promise<Shelf>;
+  deleteShelf(id: string): Promise<void>;
 
   // Activity
   listActivities(userId: string, limit?: number): Promise<Activity[]>;

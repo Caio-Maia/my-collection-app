@@ -83,6 +83,9 @@ export function ItemForm({ initial, onSubmit, onCancel, loading, enableOmdb, att
       description: values.description,
       photo_url: values.photo_url,
       attributes,
+      shelf_id: null,
+      shelf_row: null,
+      shelf_col: null,
     });
   };
 

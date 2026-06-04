@@ -27,9 +27,10 @@ interface Props {
   attributeSchema?: AttributeSchema;
   autocompleteValues?: Record<string, string[]>;
   attributeKeyDisplays?: Record<string, string>;
+  readonly?: boolean;
 }
 
-export function ItemDialog({ item, open, onOpenChange, attributeSchema, autocompleteValues, attributeKeyDisplays }: Props) {
+export function ItemDialog({ item, open, onOpenChange, attributeSchema, autocompleteValues, attributeKeyDisplays, readonly }: Props) {
   const data = useData();
   const { user } = useAuth();
   const qc = useQueryClient();
@@ -159,21 +160,23 @@ export function ItemDialog({ item, open, onOpenChange, attributeSchema, autocomp
               </>
             )}
 
-            <DialogFooter className="gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setConfirmDelete(true)}
-                className="text-destructive border-destructive hover:bg-destructive/10"
-              >
-                <Trash2 className="h-4 w-4 mr-1.5" />
-                Remover
-              </Button>
-              <Button size="sm" onClick={() => setEditing(true)}>
-                <Edit className="h-4 w-4 mr-1.5" />
-                Editar
-              </Button>
-            </DialogFooter>
+            {!readonly && (
+              <DialogFooter className="gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setConfirmDelete(true)}
+                  className="text-destructive border-destructive hover:bg-destructive/10"
+                >
+                  <Trash2 className="h-4 w-4 mr-1.5" />
+                  Remover
+                </Button>
+                <Button size="sm" onClick={() => setEditing(true)}>
+                  <Edit className="h-4 w-4 mr-1.5" />
+                  Editar
+                </Button>
+              </DialogFooter>
+            )}
           </>
         )}
       </DialogContent>

@@ -1,5 +1,5 @@
 import Dexie, { type Table } from 'dexie';
-import type { Profile, Collection, CollectionItem, Activity } from '../../types';
+import type { Profile, Collection, CollectionItem, Activity, Shelf } from '../../types';
 
 interface LocalUser {
   id: string;
@@ -22,6 +22,7 @@ export class CollectionsDB extends Dexie {
   items!: Table<CollectionItem>;
   activities!: Table<Activity>;
   images!: Table<StoredImage>;
+  shelves!: Table<Shelf>;
 
   constructor() {
     super('my-collection-db');
@@ -32,6 +33,15 @@ export class CollectionsDB extends Dexie {
       items: 'id, collection_id, created_at',
       activities: 'id, user_id, created_at',
       images: 'id',
+    });
+    this.version(2).stores({
+      users: 'id, email',
+      profiles: 'id, email',
+      collections: 'id, user_id, created_at',
+      items: 'id, collection_id, created_at, shelf_id',
+      activities: 'id, user_id, created_at',
+      images: 'id',
+      shelves: 'id, collection_id, created_at',
     });
   }
 }

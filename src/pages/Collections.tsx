@@ -1,12 +1,13 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-  Library, Plus, MoreVertical, Pencil, Trash2,
+  Library, Plus, MoreVertical, Pencil, Trash2, FileUp,
   BookOpen, Disc, Film, Music, Star, Heart, Gamepad2,
   Camera, Shirt, Wine, Trophy, Puzzle, Globe, Leaf,
   type LucideIcon,
 } from 'lucide-react';
+import { isCollectionExport, type CollectionExport } from '../lib/export';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   BookOpen, Disc, Film, Music, Star, Heart, Gamepad2,
@@ -31,9 +32,13 @@ export function Collections() {
   const data = useData();
   const { user } = useAuth();
   const qc = useQueryClient();
+  const navigate = useNavigate();
+  const importFileRef = useRef<HTMLInputElement>(null);
   const [createOpen, setCreateOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<Collection | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Collection | null>(null);
+  const [importColData, setImportColData] = useState<CollectionExport | null>(null);
+  const [importColError, setImportColError] = useState('');
 
   const { data: collections = [], isLoading } = useQuery({
     queryKey: ['collections', user?.id],
@@ -73,6 +78,48 @@ export function Collections() {
     onError: (e: Error) => toast.error(e.message),
   });
 
+  const importColMutation = useMutation({
+    mutationFn: async () => {
+      if (!importColData) throw new Error('Nenhum arquivo selecionado.');
+      const col = await data.createCollection(user!.id, {
+        ...importColData.collection,
+        is_public: false,
+      });
+      if (importColData.items.length > 0) {
+        await data.bulkCreateItems(col.id, user!.id, importColData.items.map(item => ({
+          ...item,
+          shelf_id: null,
+          shelf_row: null,
+          shelf_col: null,
+        })));
+      }
+      return col;
+    },
+    onSuccess: (col) => {
+      qc.invalidateQueries({ queryKey: ['collections', user?.id] });
+      const count = importColData?.items.length ?? 0;
+      setImportColData(null);
+      toast.success(`"${col.name}" importada com ${count} item(s)!`);
+      navigate(`/collections/${col.id}`);
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  function handleImportColFile(file: File) {
+    setImportColError('');
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parsed = JSON.parse(e.target?.result as string);
+        if (!isCollectionExport(parsed)) throw new Error('Arquivo inválido. Use um arquivo exportado pelo app.');
+        setImportColData(parsed);
+      } catch (err) {
+        setImportColError((err as Error).message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
   return (
     <div className="container mx-auto max-w-5xl px-4 py-6 space-y-6">
       <div className="flex items-center justify-between">
@@ -80,10 +127,23 @@ export function Collections() {
           <h1 className="text-2xl font-bold">Coleções</h1>
           <p className="text-muted-foreground text-sm">{collections.length} coleção{collections.length !== 1 ? 'ões' : ''}</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)}>
-          <Plus className="h-4 w-4 mr-1.5" />
-          Nova coleção
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => importFileRef.current?.click()}>
+            <FileUp className="h-4 w-4 mr-1.5" />
+            <span className="hidden sm:inline">Importar coleção</span>
+          </Button>
+          <input
+            ref={importFileRef}
+            type="file"
+            accept=".json"
+            className="hidden"
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleImportColFile(f); e.target.value = ''; }}
+          />
+          <Button onClick={() => setCreateOpen(true)}>
+            <Plus className="h-4 w-4 mr-1.5" />
+            Nova coleção
+          </Button>
+        </div>
       </div>
 
       {isLoading ? (
@@ -193,6 +253,37 @@ export function Collections() {
               loading={editMutation.isPending}
             />
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Import collection dialog */}
+      <Dialog
+        open={!!importColData || !!importColError}
+        onOpenChange={(v) => { if (!v) { setImportColData(null); setImportColError(''); } }}
+      >
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Importar coleção</DialogTitle>
+            {importColData && (
+              <DialogDescription>
+                Coleção <strong>{importColData.collection.name}</strong> com{' '}
+                <strong>{importColData.items.length}</strong> item(s) será criada na sua conta.
+              </DialogDescription>
+            )}
+          </DialogHeader>
+          {importColError && (
+            <p className="text-sm text-destructive">{importColError}</p>
+          )}
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={() => { setImportColData(null); setImportColError(''); }}>
+              Cancelar
+            </Button>
+            {importColData && (
+              <Button onClick={() => importColMutation.mutate()} disabled={importColMutation.isPending}>
+                {importColMutation.isPending ? 'Importando...' : 'Importar'}
+              </Button>
+            )}
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 

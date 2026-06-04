@@ -1,6 +1,6 @@
 import { supabase } from '../../lib/supabaseClient';
 import type { DataProvider, AuthChangeCallback } from '../DataProvider';
-import type { Profile, Collection, CollectionItem, Activity, AuthUser } from '../../types';
+import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf } from '../../types';
 
 function translateAuthError(message: string): string {
   if (message.includes('over_email_send_rate_limit') || message.includes('email rate limit'))
@@ -238,5 +238,66 @@ export class SupabaseAdapter implements DataProvider {
     if (error) throw new Error(error.message);
     const { data } = supabase.storage.from('item-photos').getPublicUrl(path);
     return data.publicUrl;
+  }
+
+  async setItemPlacement(
+    itemId: string,
+    shelfId: string | null,
+    row: number | null,
+    col: number | null,
+  ): Promise<CollectionItem> {
+    const { data, error } = await supabase
+      .from('items')
+      .update({ shelf_id: shelfId, shelf_row: row, shelf_col: col })
+      .eq('id', itemId)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async listShelves(collectionId: string): Promise<Shelf[]> {
+    const { data, error } = await supabase
+      .from('shelves')
+      .select('*')
+      .eq('collection_id', collectionId)
+      .order('created_at', { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  }
+
+  async createShelf(collectionId: string, data: Pick<Shelf, 'name' | 'rows' | 'cols'>): Promise<Shelf> {
+    const { data: result, error } = await supabase
+      .from('shelves')
+      .insert({ ...data, collection_id: collectionId })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return result;
+  }
+
+  async updateShelf(id: string, data: Partial<Pick<Shelf, 'name' | 'rows' | 'cols'>>): Promise<Shelf> {
+    const { data: result, error } = await supabase
+      .from('shelves')
+      .update(data)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    // Desposicionar itens fora dos novos limites
+    if (data.rows !== undefined || data.cols !== undefined) {
+      await supabase
+        .from('items')
+        .update({ shelf_id: null, shelf_row: null, shelf_col: null })
+        .eq('shelf_id', id)
+        .or(`shelf_row.gte.${result.rows},shelf_col.gte.${result.cols}`);
+    }
+    return result;
+  }
+
+  async deleteShelf(id: string): Promise<void> {
+    // on delete set null na FK cuida dos itens
+    const { error } = await supabase.from('shelves').delete().eq('id', id);
+    if (error) throw new Error(error.message);
   }
 }

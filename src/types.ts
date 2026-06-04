@@ -22,6 +22,7 @@ export interface Collection {
   attribute_schema: AttributeSchema;
   cover_color: string;
   cover_image: string;
+  is_public: boolean;
   created_at: string;
 }
 
@@ -34,6 +35,20 @@ export interface CollectionItem {
   attributes: Record<string, string>;
   created_at: string;
   updated_at: string;
+  shelf_id: string | null;
+  shelf_row: number | null;
+  shelf_col: number | null;
+}
+
+export interface Shelf {
+  id: string;
+  collection_id: string;
+  name: string;
+  rows: number;
+  cols: number;
+  theme: string;
+  theme_color: string;
+  created_at: string;
 }
 
 export interface Activity {

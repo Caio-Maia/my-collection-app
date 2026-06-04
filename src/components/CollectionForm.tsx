@@ -22,12 +22,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 const ICONS = Object.keys(ICON_MAP);
 
-const COVER_COLORS = [
-  '#ef4444', '#f97316', '#f59e0b', '#84cc16',
-  '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6',
-  '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e',
-  '#64748b', '#475569', '#1e293b', '#0f172a',
-];
+import { COVER_COLORS } from '../lib/constants';
 
 const ATTR_TYPES = [
   { value: 'text',     label: 'Texto'                 },
@@ -111,6 +106,7 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
       cover_color: values.cover_color,
       cover_image: values.cover_image,
       attribute_schema,
+      is_public: initial?.is_public ?? false,
     });
   };
 
