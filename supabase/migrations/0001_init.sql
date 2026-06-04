@@ -1,6 +1,3 @@
--- Enable UUID extension
-create extension if not exists "uuid-ossp";
-
 -- profiles table (mirrors auth.users)
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
@@ -11,7 +8,7 @@ create table if not exists public.profiles (
 
 -- collections table
 create table if not exists public.collections (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   name text not null,
   description text not null default '',
@@ -21,7 +18,7 @@ create table if not exists public.collections (
 
 -- items table
 create table if not exists public.items (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   collection_id uuid not null references public.collections(id) on delete cascade,
   title text not null,
   description text not null default '',
@@ -33,7 +30,7 @@ create table if not exists public.items (
 
 -- activities table
 create table if not exists public.activities (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   type text not null check (type in ('added', 'edited', 'removed')),
   collection_id uuid not null,
