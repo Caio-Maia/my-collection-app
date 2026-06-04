@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Blade Runner",
+    "description": "Filme noir de ficção científica de Ridley Scott (1982).",
+    "photo_url": "https://upload.wikimedia.org/wikipedia/en/9/9f/Blade_Runner_%281982_poster%29.png",
+    "Diretor": "Ridley Scott",
+    "Ano": "1982",
+    "Gênero": "Ficção Científica"
+  },
+  {
+    "title": "Interstellar",
+    "description": "Viagem espacial e buracos de minhoca por Christopher Nolan.",
+    "photo_url": "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg",
+    "Diretor": "Christopher Nolan",
+    "Ano": "2014",
+    "Gênero": "Ficção Científica"
+  },
+  {
+    "title": "O Poderoso Chefão",
+    "description": "A saga da família Corleone por Francis Ford Coppola.",
+    "photo_url": "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
+    "Diretor": "Francis Ford Coppola",
+    "Ano": "1972",
+    "Gênero": "Crime / Drama"
+  },
+  {
+    "title": "Matrix",
+    "description": "Uma realidade simulada criada pelas máquinas. Wachowski Sisters.",
+    "photo_url": "https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg",
+    "Diretor": "Lilly e Lana Wachowski",
+    "Ano": "1999",
+    "Gênero": "Ficção Científica"
+  }
+]
