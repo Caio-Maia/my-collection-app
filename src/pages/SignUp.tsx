@@ -48,7 +48,7 @@ export function SignUp() {
           <CardTitle className="text-2xl">Criar conta</CardTitle>
           <CardDescription>
             {IS_SUPABASE_MODE
-              ? 'Cadastro via Supabase Auth'
+              ? 'Crie sua conta com email e senha'
               : 'Modo local — dados salvos no navegador'}
           </CardDescription>
         </CardHeader>

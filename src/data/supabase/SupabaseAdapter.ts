@@ -2,6 +2,20 @@ import { supabase } from '../../lib/supabaseClient';
 import type { DataProvider, AuthChangeCallback } from '../DataProvider';
 import type { Profile, Collection, CollectionItem, Activity, AuthUser } from '../../types';
 
+function translateAuthError(message: string): string {
+  if (message.includes('over_email_send_rate_limit') || message.includes('email rate limit'))
+    return 'Limite de emails atingido. Aguarde alguns minutos ou desative a confirmação por email no painel Supabase.';
+  if (message.includes('User already registered') || message.includes('already been registered'))
+    return 'Não foi possível concluir o cadastro.';
+  if (message.includes('Invalid login credentials') || message.includes('invalid_credentials'))
+    return 'Email ou senha inválidos.';
+  if (message.includes('Email not confirmed'))
+    return 'Confirme seu email antes de entrar.';
+  if (message.includes('Password should be at least'))
+    return 'Senha deve ter pelo menos 6 caracteres.';
+  return message;
+}
+
 function toAuthUser(user: { id: string; email?: string }, profile?: Profile | null): AuthUser {
   return {
     id: user.id,
@@ -17,14 +31,14 @@ export class SupabaseAdapter implements DataProvider {
       password,
       options: { data: { display_name: displayName } },
     });
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(translateAuthError(error.message));
     if (!data.user) throw new Error('Falha ao criar usuário.');
     return toAuthUser(data.user);
   }
 
   async signIn(email: string, password: string): Promise<AuthUser> {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(translateAuthError(error.message));
     if (!data.user) throw new Error('Falha ao autenticar.');
     const profile = await this.getProfile(data.user.id);
     return toAuthUser(data.user, profile);

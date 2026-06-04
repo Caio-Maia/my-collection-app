@@ -39,7 +39,7 @@ export function Login() {
           <CardTitle className="text-2xl">Entrar</CardTitle>
           <CardDescription>
             {IS_SUPABASE_MODE
-              ? 'Entre com sua conta Supabase'
+              ? 'Entre com seu email e senha'
               : 'Modo local — dados salvos no navegador'}
           </CardDescription>
         </CardHeader>

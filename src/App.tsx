@@ -8,6 +8,7 @@ import { CollectionDetail } from './pages/CollectionDetail';
 import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
+import { Welcome } from './pages/Welcome';
 import { useAuth } from './auth/AuthContext';
 
 function AppRoutes() {
@@ -28,14 +29,7 @@ function AppRoutes() {
         <Routes>
           <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
           <Route path="/signup" element={user ? <Navigate to="/" replace /> : <SignUp />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={user ? <Home /> : <Welcome />} />
           <Route
             path="/collections"
             element={
