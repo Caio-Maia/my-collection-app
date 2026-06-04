@@ -2,12 +2,13 @@ import { useState, useRef } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Plus, Trash2, Upload } from 'lucide-react';
+import { Plus, Trash2, Upload, Search } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { AttributeInput } from './AttributeInput';
+import { OmdbSearchPanel } from './OmdbSearchPanel';
 import { useData } from '../data/DataContext';
 import { normalize } from '../lib/utils';
 import type { CollectionItem, AttributeSchema } from '../types';
@@ -26,17 +27,19 @@ interface Props {
   onSubmit(data: Omit<CollectionItem, 'id' | 'collection_id' | 'created_at' | 'updated_at'>): Promise<unknown>;
   onCancel(): void;
   loading?: boolean;
+  enableOmdb?: boolean;
   attributeSchema?: AttributeSchema;
   autocompleteValues?: Record<string, string[]>;
   /** normalized key → display key, used for quick-add suggestions */
   attributeKeyDisplays?: Record<string, string>;
 }
 
-export function ItemForm({ initial, onSubmit, onCancel, loading, attributeSchema, autocompleteValues, attributeKeyDisplays }: Props) {
+export function ItemForm({ initial, onSubmit, onCancel, loading, enableOmdb, attributeSchema, autocompleteValues, attributeKeyDisplays }: Props) {
   const data = useData();
   const fileRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string>(initial?.photo_url ?? '');
   const [uploading, setUploading] = useState(false);
+  const [omdbOpen, setOmdbOpen] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -85,6 +88,30 @@ export function ItemForm({ initial, onSubmit, onCancel, loading, attributeSchema
 
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+      {enableOmdb && (
+        omdbOpen ? (
+          <OmdbSearchPanel
+            onClose={() => setOmdbOpen(false)}
+            onSelect={(values) => {
+              form.reset(values);
+              setPreview(values.photo_url);
+              setOmdbOpen(false);
+            }}
+          />
+        ) : (
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="w-full border-dashed text-muted-foreground hover:text-foreground"
+            onClick={() => setOmdbOpen(true)}
+          >
+            <Search className="h-3.5 w-3.5 mr-2" />
+            Pré-preencher via OMDB
+          </Button>
+        )
+      )}
+
       <div className="space-y-1.5">
         <Label htmlFor="title">Título *</Label>
         <Input id="title" {...form.register('title')} placeholder="Nome do item" />

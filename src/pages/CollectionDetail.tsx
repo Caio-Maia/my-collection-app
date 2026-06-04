@@ -47,8 +47,18 @@ function normTag(key: string, value: string): string {
   return `${normalize(key)}::${normalize(value)}`;
 }
 
+/** Attribute keys whose values are comma-separated lists — each item becomes its own tag. */
+const LIST_ATTR_KEYS = new Set(['atores', 'gênero', 'genero']);
+
+/** Split a value for list-type keys; returns a single-element array otherwise. */
+function attrValues(normKey: string, raw: string): string[] {
+  if (!LIST_ATTR_KEYS.has(normKey)) return [raw.trim()];
+  return raw.split(',').map(s => s.trim()).filter(Boolean);
+}
+
 /**
  * Collect unique tags from items.
+ * List-type keys (Atores, Gênero) are split by comma so each entry becomes its own tag.
  * Deduplication is case-insensitive; the first occurrence's casing is kept for display.
  */
 function collectTags(items: CollectionItem[]): string[] {
@@ -57,11 +67,14 @@ function collectTags(items: CollectionItem[]): string[] {
   items.forEach((item) => {
     Object.entries(item.attributes ?? {}).forEach(([k, v]) => {
       if (!k.trim() || !v.trim()) return;
-      const norm = normTag(k, v);
-      if (!seen.has(norm)) {
-        seen.add(norm);
-        result.push(`${k.trim()}::${v.trim()}`);
-      }
+      const nk = normalize(k);
+      attrValues(nk, v).forEach(val => {
+        const norm = normTag(k, val);
+        if (!seen.has(norm)) {
+          seen.add(norm);
+          result.push(`${k.trim()}::${val}`);
+        }
+      });
     });
   });
   return result.sort((a, b) => a.localeCompare(b));
@@ -77,9 +90,10 @@ interface RangeFilter { key: string; from: number; to: number; label: string; }
 /** activeTags stores normalized ids ("normalizedKey::normalizedValue"). */
 function itemMatchesTags(item: CollectionItem, tags: Set<string>): boolean {
   if (tags.size === 0) return true;
-  const itemTags = new Set(
-    Object.entries(item.attributes ?? {}).map(([k, v]) => normTag(k, v))
-  );
+  const itemTags = new Set<string>();
+  Object.entries(item.attributes ?? {}).forEach(([k, v]) => {
+    attrValues(normalize(k), v).forEach(val => itemTags.add(normTag(k, val)));
+  });
   for (const t of tags) if (itemTags.has(t)) return true;
   return false;
 }
@@ -167,6 +181,17 @@ const DURATION_PRESETS = [
   { label: '90–120 min',  from: 91,  to: 120  },
   { label: '> 120 min',   from: 121, to: Infinity },
 ];
+
+const IMDB_PRESETS = [
+  { label: '< 6',   from: 0,   to: 5.99  },
+  { label: '6–7',   from: 6,   to: 6.99  },
+  { label: '7–8',   from: 7,   to: 7.99  },
+  { label: '8–9',   from: 8,   to: 8.99  },
+  { label: '≥ 9',   from: 9,   to: Infinity },
+];
+
+/** Attribute keys treated as IMDb-style 0–10 ratings. */
+const RATING_ATTR_KEYS = new Set(['imdb']);
 
 const TEXT_MAX_CHIPS = 8;
 
@@ -474,9 +499,10 @@ export function CollectionDetail() {
               {Array.from(tagsByKey.entries()).map(([normKey, { displayKey, values }]) => {
                 const cfg        = normalizedSchema[normKey];
                 const isDuration = cfg?.type === 'duration';
-                const isYear     = cfg?.type === 'year' ||
-                  (!isDuration && isAllNumeric(values) && looksLikeYears(values));
-                const isNumeric  = !isYear && !isDuration && isAllNumeric(values);
+                const isRating   = RATING_ATTR_KEYS.has(normKey);
+                const isYear     = !isRating && (cfg?.type === 'year' ||
+                  (!isDuration && isAllNumeric(values) && looksLikeYears(values)));
+                const isNumeric  = !isYear && !isDuration && !isRating && isAllNumeric(values);
                 const cr         = customRange[normKey] ?? { from: '', to: '', open: false };
                 const key        = normKey;
 
@@ -540,6 +566,8 @@ export function CollectionDetail() {
                       <RangeButtons presets={getDecades(values)} />
                     ) : isDuration ? (
                       <RangeButtons presets={DURATION_PRESETS} />
+                    ) : isRating ? (
+                      <RangeButtons presets={IMDB_PRESETS} />
                     ) : isNumeric ? (
                       // Auto-detected numeric field: smart intervals + De/Até
                       <RangeButtons presets={autoRanges(values)} />
@@ -752,6 +780,7 @@ export function CollectionDetail() {
             onSubmit={(vals) => addMutation.mutateAsync(vals)}
             onCancel={() => setAddOpen(false)}
             loading={addMutation.isPending}
+            enableOmdb
             attributeSchema={attributeSchema}
             autocompleteValues={autocompleteValues}
             attributeKeyDisplays={attributeKeyDisplays}

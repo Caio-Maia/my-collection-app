@@ -1,7 +1,12 @@
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Plus, Trash2, ChevronDown, ChevronUp, X } from 'lucide-react';
+import {
+  Plus, Trash2, ChevronDown, ChevronUp, X,
+  BookOpen, Disc, Film, Music, Star, Heart, Gamepad2,
+  Camera, Shirt, Wine, Trophy, Puzzle, Globe, Leaf,
+  type LucideIcon,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -10,10 +15,12 @@ import { Label } from './ui/label';
 import { cn } from '../lib/utils';
 import type { Collection, AttributeSchema } from '../types';
 
-const ICONS = [
-  'BookOpen', 'Disc', 'Film', 'Music', 'Star', 'Heart', 'Gamepad2',
-  'Camera', 'Shirt', 'Wine', 'Trophy', 'Puzzle', 'Globe', 'Leaf',
-];
+const ICON_MAP: Record<string, LucideIcon> = {
+  BookOpen, Disc, Film, Music, Star, Heart, Gamepad2,
+  Camera, Shirt, Wine, Trophy, Puzzle, Globe, Leaf,
+};
+
+const ICONS = Object.keys(ICON_MAP);
 
 const COVER_COLORS = [
   '#ef4444', '#f97316', '#f59e0b', '#84cc16',
@@ -123,16 +130,39 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
       </div>
 
       <div className="space-y-1.5">
-        <Label>Ícone</Label>
-        <div className="flex flex-wrap gap-2">
-          {ICONS.map((icon) => (
-            <button key={icon} type="button" onClick={() => form.setValue('icon', icon)}
-              className={cn('px-3 py-1.5 rounded-md border text-sm transition-colors',
-                selectedIcon === icon ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:bg-accent border-input'
-              )}>
-              {icon}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <Label>Ícone</Label>
+          {(() => {
+            const SelectedIcon = ICON_MAP[selectedIcon];
+            return SelectedIcon ? (
+              <span className="inline-flex items-center gap-1.5 rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                <SelectedIcon className="h-3.5 w-3.5" />
+                {selectedIcon}
+              </span>
+            ) : null;
+          })()}
+        </div>
+        <div className="grid grid-cols-7 gap-1.5">
+          {ICONS.map((icon) => {
+            const Icon = ICON_MAP[icon];
+            return (
+              <button
+                key={icon}
+                type="button"
+                title={icon}
+                onClick={() => form.setValue('icon', icon)}
+                className={cn(
+                  'flex flex-col items-center gap-1 rounded-md border p-2 text-[10px] transition-colors',
+                  selectedIcon === icon
+                    ? 'bg-primary text-primary-foreground border-primary'
+                    : 'bg-background hover:bg-accent border-input text-muted-foreground hover:text-foreground'
+                )}
+              >
+                {Icon && <Icon className="h-5 w-5" />}
+                <span className="truncate w-full text-center leading-none">{icon}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

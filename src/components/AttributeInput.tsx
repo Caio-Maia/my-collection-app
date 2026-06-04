@@ -36,10 +36,13 @@ export function parseDuration(raw: string): number | null {
   return null;
 }
 
-/** Format total minutes to a readable string. */
+/** Format total minutes to a readable string.
+ *  < 120 min → "Xmin"   (filme curto ainda legível em minutos)
+ *  ≥ 120 min → "Xh" / "Xh Ymin"
+ */
 export function formatDuration(minutes: number): string {
   if (!isFinite(minutes) || minutes < 0) return '';
-  if (minutes < 60) return `${minutes}min`;
+  if (minutes < 120) return `${minutes}min`;
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return m === 0 ? `${h}h` : `${h}h ${m}min`;

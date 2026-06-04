@@ -3,10 +3,12 @@ import type { DataProvider, AuthChangeCallback } from '../DataProvider';
 import type { Profile, Collection, CollectionItem, Activity, AuthUser } from '../../types';
 import { generateId, now, fileToBase64 } from '../../lib/utils';
 
+// DEV-ONLY: LocalAdapter is an unauthenticated, client-editable mock. It must never
+// run in production (DataContext enforces this). The session and password hash below
+// are intentionally minimal — security is not a goal for this code path.
 const SESSION_KEY = 'local-auth-user';
 
 function hashPassword(password: string): string {
-  // Simple deterministic hash for local mock auth (not cryptographically secure)
   let hash = 0;
   for (let i = 0; i < password.length; i++) {
     const char = password.charCodeAt(i);
@@ -25,6 +27,11 @@ function getSessionUser(): AuthUser | null {
   }
 }
 
+console.warn(
+  '[LocalAdapter] Running in local/dev mode: session is stored in localStorage without ' +
+  'any server-side enforcement. Do not use with real data.',
+);
+
 function setSessionUser(user: AuthUser | null): void {
   if (user) {
     localStorage.setItem(SESSION_KEY, JSON.stringify(user));
@@ -42,7 +49,7 @@ export class LocalAdapter implements DataProvider {
 
   async signUp(email: string, password: string, displayName: string): Promise<AuthUser> {
     const existing = await db.users.where('email').equals(email).first();
-    if (existing) throw new Error('Email já cadastrado.');
+    if (existing) throw new Error('Não foi possível concluir o cadastro.');
 
     const id = generateId();
     const createdAt = now();
@@ -108,12 +115,12 @@ export class LocalAdapter implements DataProvider {
 
   async listCollections(userId: string): Promise<Collection[]> {
     const rows = await db.collections.where('user_id').equals(userId).toArray();
-    return rows.map(c => ({ attribute_schema: {}, cover_color: '', cover_image: '', ...c }));
+    return rows.map(c => ({ ...c, attribute_schema: c.attribute_schema ?? {}, cover_color: c.cover_color ?? '', cover_image: c.cover_image ?? '' }));
   }
 
   async getCollection(id: string): Promise<Collection | null> {
     const c = await db.collections.get(id);
-    return c ? { attribute_schema: {}, cover_color: '', cover_image: '', ...c } : null;
+    return c ? { ...c, attribute_schema: c.attribute_schema ?? {}, cover_color: c.cover_color ?? '', cover_image: c.cover_image ?? '' } : null;
   }
 
   async createCollection(userId: string, data: Omit<Collection, 'id' | 'user_id' | 'created_at'>): Promise<Collection> {
