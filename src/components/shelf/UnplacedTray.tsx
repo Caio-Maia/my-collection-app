@@ -10,7 +10,7 @@ interface Props {
   schema: AttributeSchema;
   onDrop(itemId: string): void;
   onItemClick(item: CollectionItem): void;
-  onLongPressStart?(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem, x: number, y: number): void;
 }
 
 export function UnplacedTray({ items, schema, onDrop, onItemClick, onLongPressStart }: Props) {
@@ -71,25 +71,32 @@ function TrayItem({
   item: CollectionItem;
   schema: AttributeSchema;
   onClick(): void;
-  onLongPressStart?(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem, x: number, y: number): void;
 }) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number } | null>(null);
-  const longPressTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressTimer     = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressActivated = useRef(false);
+  const touchActiveRef     = useRef(false);
+  const touchCoordsRef     = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   function handleMouseEnter() {
+    if (touchActiveRef.current) return;
     if (btnRef.current) {
       const r = btnRef.current.getBoundingClientRect();
       setPreviewPos({ x: r.left, y: r.top });
     }
   }
 
-  function handleTouchStart() {
+  function handleTouchStart(e: React.TouchEvent) {
+    touchActiveRef.current = true;
     longPressActivated.current = false;
+    const touch = e.touches[0];
+    touchCoordsRef.current = { x: touch.clientX, y: touch.clientY };
     longPressTimer.current = setTimeout(() => {
       longPressActivated.current = true;
-      onLongPressStart?.(item);
+      setPreviewPos(null);
+      onLongPressStart?.(item, touchCoordsRef.current.x, touchCoordsRef.current.y);
     }, 400);
   }
 
@@ -98,6 +105,11 @@ function TrayItem({
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
     }
+  }
+
+  function handleTouchEnd() {
+    touchActiveRef.current = false;
+    cancelLongPress();
   }
 
   return (
@@ -114,7 +126,7 @@ function TrayItem({
         onMouseLeave={() => setPreviewPos(null)}
         onTouchStart={handleTouchStart}
         onTouchMove={cancelLongPress}
-        onTouchEnd={cancelLongPress}
+        onTouchEnd={handleTouchEnd}
         className="flex items-center gap-1.5 rounded-md border bg-card px-2 py-1.5 text-xs font-medium hover:border-primary/50 hover:bg-accent transition-colors cursor-grab active:cursor-grabbing"
         title={item.title}
       >

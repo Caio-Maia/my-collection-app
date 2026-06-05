@@ -34,12 +34,18 @@ export function Shelves() {
   const [selectedItem, setSelectedItem] = useState<CollectionItem | null>(null);
   const [search, setSearch] = useState('');
 
-  // Touch drag state
+  // Touch drag state — only touchDragItem and touchDragOverCell in React state;
+  // ghost position is updated imperatively to avoid re-renders on every touchmove.
   const [touchDragItem, setTouchDragItem]         = useState<CollectionItem | null>(null);
-  const [touchDragPos, setTouchDragPos]           = useState<{ x: number; y: number } | null>(null);
   const [touchDragOverCell, setTouchDragOverCell] = useState<{ row: number; col: number } | null>(null);
+
   const touchDragItemRef     = useRef<CollectionItem | null>(null);
   const touchDragOverCellRef = useRef<{ row: number; col: number } | null>(null);
+  const initialPosRef        = useRef<{ x: number; y: number } | null>(null);
+  const ghostRef             = useRef<HTMLDivElement>(null);
+  const scrollContainerRef   = useRef<HTMLDivElement>(null);
+  const scrollRafRef         = useRef<number | null>(null);
+  const scrollSpeedRef       = useRef<number>(0);
   const handleDropRef        = useRef<(itemId: string, row: number, col: number) => void>(() => {});
 
   const { data: collection, isLoading: loadingCol } = useQuery({
@@ -139,47 +145,100 @@ export function Shelves() {
     placementMutation.mutate({ itemId, shelfId: null, row: null, col: null });
   }
 
-  // Keep ref up to date so the touch effect always calls the latest version
   handleDropRef.current = handleDrop;
 
-  function handleLongPressStart(item: CollectionItem) {
+  function handleLongPressStart(item: CollectionItem, x: number, y: number) {
+    initialPosRef.current = { x, y };
     touchDragItemRef.current = item;
     setTouchDragItem(item);
-    setTouchDragPos(null);
+    setSelectedItem(null); // close ItemDialog if open
   }
 
-  // Global touch handlers while a touch drag is active
+  // Auto-scroll helpers
+  function stopScrollLoop() {
+    scrollSpeedRef.current = 0;
+    if (scrollRafRef.current !== null) {
+      cancelAnimationFrame(scrollRafRef.current);
+      scrollRafRef.current = null;
+    }
+  }
+
+  function startScrollLoop() {
+    if (scrollRafRef.current !== null) return; // already running
+    const loop = () => {
+      const speed = scrollSpeedRef.current;
+      if (!speed || !scrollContainerRef.current) {
+        scrollRafRef.current = null;
+        return;
+      }
+      scrollContainerRef.current.scrollLeft += speed;
+      scrollRafRef.current = requestAnimationFrame(loop);
+    };
+    scrollRafRef.current = requestAnimationFrame(loop);
+  }
+
+  // Global touch handlers while a drag is active
   useEffect(() => {
     if (!touchDragItem) return;
 
     function onTouchMove(e: TouchEvent) {
       e.preventDefault();
       const touch = e.touches[0];
-      setTouchDragPos({ x: touch.clientX, y: touch.clientY });
+      const { clientX, clientY } = touch;
 
-      const els = document.elementsFromPoint(touch.clientX, touch.clientY);
+      // Move ghost imperatively — no setState, no re-render
+      if (ghostRef.current) {
+        ghostRef.current.style.left = `${clientX}px`;
+        ghostRef.current.style.top  = `${clientY}px`;
+      }
+
+      // Auto-scroll when near the horizontal edges of the scroll container
+      const container = scrollContainerRef.current;
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        const ZONE = 56;
+        const rightDist = rect.right  - clientX;
+        const leftDist  = clientX     - rect.left;
+
+        if (rightDist < ZONE && rightDist > 0) {
+          scrollSpeedRef.current = Math.ceil((1 - rightDist / ZONE) * 8);
+          startScrollLoop();
+        } else if (leftDist < ZONE && leftDist > 0) {
+          scrollSpeedRef.current = -Math.ceil((1 - leftDist / ZONE) * 8);
+          startScrollLoop();
+        } else {
+          stopScrollLoop();
+        }
+      }
+
+      // Update highlighted cell only when it actually changes
+      const els = document.elementsFromPoint(clientX, clientY);
       const cellEl = els.find(el => el.hasAttribute('data-cell-row'));
       if (cellEl) {
         const row = parseInt(cellEl.getAttribute('data-cell-row')!);
         const col = parseInt(cellEl.getAttribute('data-cell-col')!);
-        touchDragOverCellRef.current = { row, col };
-        setTouchDragOverCell({ row, col });
-      } else {
+        const prev = touchDragOverCellRef.current;
+        if (!prev || prev.row !== row || prev.col !== col) {
+          touchDragOverCellRef.current = { row, col };
+          setTouchDragOverCell({ row, col });
+        }
+      } else if (touchDragOverCellRef.current !== null) {
         touchDragOverCellRef.current = null;
         setTouchDragOverCell(null);
       }
     }
 
     function onTouchEnd() {
+      stopScrollLoop();
       const item = touchDragItemRef.current;
       const cell = touchDragOverCellRef.current;
       if (item && cell) {
         handleDropRef.current(item.id, cell.row, cell.col);
       }
-      touchDragItemRef.current = null;
+      touchDragItemRef.current     = null;
       touchDragOverCellRef.current = null;
+      initialPosRef.current        = null;
       setTouchDragItem(null);
-      setTouchDragPos(null);
       setTouchDragOverCell(null);
     }
 
@@ -188,6 +247,7 @@ export function Shelves() {
     return () => {
       document.removeEventListener('touchmove', onTouchMove);
       document.removeEventListener('touchend', onTouchEnd);
+      stopScrollLoop();
     };
   }, [touchDragItem]);
 
@@ -320,6 +380,7 @@ export function Shelves() {
                 onItemClick={setSelectedItem}
                 onLongPressStart={handleLongPressStart}
                 touchDragOverCell={touchDragOverCell}
+                scrollRef={scrollContainerRef}
               />
               <p className="text-xs text-muted-foreground text-center">
                 {activeShelf.rows} linhas × {activeShelf.cols} colunas
@@ -338,11 +399,16 @@ export function Shelves() {
         </>
       )}
 
-      {/* Touch drag ghost */}
-      {touchDragItem && touchDragPos && createPortal(
+      {/* Touch drag ghost — positioned imperatively via ghostRef */}
+      {touchDragItem && createPortal(
         <div
+          ref={ghostRef}
           className="fixed z-[9999] pointer-events-none select-none"
-          style={{ left: touchDragPos.x, top: touchDragPos.y, transform: 'translate(-50%, -50%)' }}
+          style={{
+            left: initialPosRef.current?.x ?? -9999,
+            top:  initialPosRef.current?.y ?? -9999,
+            transform: 'translate(-50%, -50%)',
+          }}
         >
           <div className="flex items-center gap-1.5 rounded-md border bg-card shadow-xl px-2 py-1.5 text-xs font-medium opacity-90 scale-110">
             {touchDragItem.photo_url ? (

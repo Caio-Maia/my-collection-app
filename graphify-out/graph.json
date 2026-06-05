@@ -1078,7 +1078,7 @@
       "label": "ShelfGrid()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L18",
+      "source_location": "L20",
       "id": "shelf_shelfgrid_shelfgrid",
       "community": 2,
       "norm_label": "shelfgrid()"
@@ -1087,7 +1087,7 @@
       "label": "CellProps",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L115",
+      "source_location": "L117",
       "id": "shelf_shelfgrid_cellprops",
       "community": 3,
       "norm_label": "cellprops"
@@ -1096,7 +1096,7 @@
       "label": "Cell()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L131",
+      "source_location": "L135",
       "id": "shelf_shelfgrid_cell",
       "community": 3,
       "norm_label": "cell()"
@@ -1105,7 +1105,7 @@
       "label": "CellItem()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L175",
+      "source_location": "L187",
       "id": "shelf_shelfgrid_cellitem",
       "community": 3,
       "norm_label": "cellitem()"
@@ -1159,7 +1159,7 @@
       "label": "UnplacedTray()",
       "file_type": "code",
       "source_file": "src/components/shelf/UnplacedTray.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "id": "shelf_unplacedtray_unplacedtray",
       "community": 2,
       "norm_label": "unplacedtray()"
@@ -1168,7 +1168,7 @@
       "label": "TrayItem()",
       "file_type": "code",
       "source_file": "src/components/shelf/UnplacedTray.tsx",
-      "source_location": "L58",
+      "source_location": "L65",
       "id": "shelf_unplacedtray_trayitem",
       "community": 3,
       "norm_label": "trayitem()"
@@ -1204,7 +1204,7 @@
       "label": "getShelfTheme()",
       "file_type": "code",
       "source_file": "src/components/shelf/shelfThemes.ts",
-      "source_location": "L69",
+      "source_location": "L92",
       "id": "shelf_shelfthemes_getshelftheme",
       "community": 2,
       "norm_label": "getshelftheme()"
@@ -3031,7 +3031,7 @@
       "label": "Shelves()",
       "file_type": "code",
       "source_file": "src/pages/Shelves.tsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "id": "pages_shelves_shelves",
       "community": 1,
       "norm_label": "shelves()"
@@ -5555,9 +5555,9 @@
       "source_file": "src/components/CollectionForm.tsx",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_collectionform",
-      "target": "lib_constants",
-      "confidence_score": 1.0
+      "target": "lib_constants"
     },
     {
       "relation": "imports",
@@ -5566,9 +5566,9 @@
       "source_file": "src/components/CollectionForm.tsx",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_collectionform",
-      "target": "lib_constants_cover_colors",
-      "confidence_score": 1.0
+      "target": "lib_constants_cover_colors"
     },
     {
       "relation": "imports_from",
@@ -6480,9 +6480,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "components_itemfilterpanel_itemfilterpanel",
-      "confidence_score": 1.0
+      "target": "components_itemfilterpanel_itemfilterpanel"
     },
     {
       "relation": "contains",
@@ -6490,9 +6490,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "components_itemfilterpanel_props",
-      "confidence_score": 1.0
+      "target": "components_itemfilterpanel_props"
     },
     {
       "relation": "imports_from",
@@ -6501,9 +6501,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters"
     },
     {
       "relation": "imports",
@@ -6512,9 +6512,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_autoranges",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_autoranges"
     },
     {
       "relation": "imports",
@@ -6523,9 +6523,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_collecttags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_collecttags"
     },
     {
       "relation": "imports",
@@ -6534,9 +6534,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_collecttagsbykey",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_collecttagsbykey"
     },
     {
       "relation": "imports",
@@ -6545,9 +6545,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_duration_presets",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_duration_presets"
     },
     {
       "relation": "imports",
@@ -6556,9 +6556,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_getdecades",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_getdecades"
     },
     {
       "relation": "imports",
@@ -6567,9 +6567,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_imdb_presets",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_imdb_presets"
     },
     {
       "relation": "imports",
@@ -6578,9 +6578,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_isallnumeric",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_isallnumeric"
     },
     {
       "relation": "imports",
@@ -6589,9 +6589,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_lookslikeyears",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_lookslikeyears"
     },
     {
       "relation": "imports",
@@ -6600,9 +6600,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_normtag",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_normtag"
     },
     {
       "relation": "imports",
@@ -6611,9 +6611,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_rangefilter",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rangefilter"
     },
     {
       "relation": "imports",
@@ -6622,9 +6622,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_rating_attr_keys",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rating_attr_keys"
     },
     {
       "relation": "imports",
@@ -6633,9 +6633,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_itemfilters_taglabel",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_taglabel"
     },
     {
       "relation": "imports_from",
@@ -6644,9 +6644,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_utils",
-      "confidence_score": 1.0
+      "target": "lib_utils"
     },
     {
       "relation": "imports",
@@ -6655,9 +6655,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_utils_cn",
-      "confidence_score": 1.0
+      "target": "lib_utils_cn"
     },
     {
       "relation": "imports",
@@ -6666,9 +6666,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "lib_utils_normalize",
-      "confidence_score": 1.0
+      "target": "lib_utils_normalize"
     },
     {
       "relation": "imports_from",
@@ -6677,9 +6677,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "src_types",
-      "confidence_score": 1.0
+      "target": "src_types"
     },
     {
       "relation": "imports",
@@ -6688,9 +6688,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "src_types_attributeschema",
-      "confidence_score": 1.0
+      "target": "src_types_attributeschema"
     },
     {
       "relation": "imports",
@@ -6699,9 +6699,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "src_types_collectionitem",
-      "confidence_score": 1.0
+      "target": "src_types_collectionitem"
     },
     {
       "relation": "imports_from",
@@ -6710,9 +6710,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "ui_button",
-      "confidence_score": 1.0
+      "target": "ui_button"
     },
     {
       "relation": "imports",
@@ -6721,9 +6721,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel",
-      "target": "ui_button_button",
-      "confidence_score": 1.0
+      "target": "ui_button_button"
     },
     {
       "relation": "imports_from",
@@ -6732,9 +6732,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "components_itemfilterpanel",
-      "confidence_score": 1.0
+      "target": "components_itemfilterpanel"
     },
     {
       "relation": "imports_from",
@@ -6743,9 +6743,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "components_itemfilterpanel",
-      "confidence_score": 1.0
+      "target": "components_itemfilterpanel"
     },
     {
       "relation": "references",
@@ -6754,9 +6754,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel_props",
-      "target": "lib_itemfilters_rangefilter",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rangefilter"
     },
     {
       "relation": "references",
@@ -6765,9 +6765,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel_props",
-      "target": "src_types_attributeschema",
-      "confidence_score": 1.0
+      "target": "src_types_attributeschema"
     },
     {
       "relation": "references",
@@ -6776,9 +6776,9 @@
       "source_file": "src/components/ItemFilterPanel.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_itemfilterpanel_props",
-      "target": "src_types_collectionitem",
-      "confidence_score": 1.0
+      "target": "src_types_collectionitem"
     },
     {
       "relation": "imports",
@@ -6787,9 +6787,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "components_itemfilterpanel_itemfilterpanel",
-      "confidence_score": 1.0
+      "target": "components_itemfilterpanel_itemfilterpanel"
     },
     {
       "relation": "imports",
@@ -6798,9 +6798,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "components_itemfilterpanel_itemfilterpanel",
-      "confidence_score": 1.0
+      "target": "components_itemfilterpanel_itemfilterpanel"
     },
     {
       "relation": "contains",
@@ -7536,9 +7536,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "components_searchdialog",
-      "confidence_score": 1.0
+      "target": "components_searchdialog"
     },
     {
       "relation": "references",
@@ -7580,9 +7580,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "components_searchdialog_searchdialog",
-      "confidence_score": 1.0
+      "target": "components_searchdialog_searchdialog"
     },
     {
       "relation": "imports_from",
@@ -7602,9 +7602,9 @@
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
-      "target": "lib_constants",
-      "confidence_score": 1.0
+      "target": "lib_constants"
     },
     {
       "relation": "imports",
@@ -7613,9 +7613,9 @@
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
-      "target": "lib_constants_cover_colors",
-      "confidence_score": 1.0
+      "target": "lib_constants_cover_colors"
     },
     {
       "relation": "imports_from",
@@ -7624,9 +7624,9 @@
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
-      "target": "lib_utils",
-      "confidence_score": 1.0
+      "target": "lib_utils"
     },
     {
       "relation": "imports",
@@ -7635,9 +7635,9 @@
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
-      "target": "lib_utils_cn",
-      "confidence_score": 1.0
+      "target": "lib_utils_cn"
     },
     {
       "relation": "contains",
@@ -7686,9 +7686,9 @@
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
-      "target": "shelf_shelfthemes",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes"
     },
     {
       "relation": "imports",
@@ -7697,9 +7697,9 @@
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
-      "target": "shelf_shelfthemes_shelf_themes",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes_shelf_themes"
     },
     {
       "relation": "imports_from",
@@ -7978,9 +7978,9 @@
       "source_file": "src/components/shelf/ShelfGrid.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfgrid",
-      "target": "shelf_shelfthemes",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes"
     },
     {
       "relation": "imports",
@@ -7989,9 +7989,9 @@
       "source_file": "src/components/shelf/ShelfGrid.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfgrid",
-      "target": "shelf_shelfthemes_getshelftheme",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes_getshelftheme"
     },
     {
       "relation": "imports_from",
@@ -8434,9 +8434,9 @@
       "source_file": "src/components/shelf/shelfThemes.ts",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfthemes",
-      "target": "shelf_shelfthemes_getshelftheme",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes_getshelftheme"
     },
     {
       "relation": "contains",
@@ -8444,9 +8444,9 @@
       "source_file": "src/components/shelf/shelfThemes.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfthemes",
-      "target": "shelf_shelfthemes_shelf_themes",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes_shelf_themes"
     },
     {
       "relation": "contains",
@@ -8454,9 +8454,9 @@
       "source_file": "src/components/shelf/shelfThemes.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "shelf_shelfthemes",
-      "target": "shelf_shelfthemes_shelftheme",
-      "confidence_score": 1.0
+      "target": "shelf_shelfthemes_shelftheme"
     },
     {
       "relation": "imports_from",
@@ -11029,9 +11029,9 @@
       "source_file": "src/data/local/LocalAdapter.ts",
       "source_location": "L273",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "local_localadapter_localadapter",
-      "target": "local_localadapter_localadapter_normalizeshelf",
-      "confidence_score": 1.0
+      "target": "local_localadapter_localadapter_normalizeshelf"
     },
     {
       "relation": "method",
@@ -11579,9 +11579,9 @@
       "source_file": "src/data/local/LocalAdapter.ts",
       "source_location": "L273",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "local_localadapter_localadapter_normalizeshelf",
-      "target": "src_types_shelf",
-      "confidence_score": 1.0
+      "target": "src_types_shelf"
     },
     {
       "relation": "references",
@@ -12837,9 +12837,9 @@
       "source_file": "src/lib/constants.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_constants",
-      "target": "lib_constants_cover_colors",
-      "confidence_score": 1.0
+      "target": "lib_constants_cover_colors"
     },
     {
       "relation": "contains",
@@ -12987,9 +12987,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_attrvalues",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_attrvalues"
     },
     {
       "relation": "contains",
@@ -12997,9 +12997,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L104",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_autoranges",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_autoranges"
     },
     {
       "relation": "contains",
@@ -13007,9 +13007,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_collecttags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_collecttags"
     },
     {
       "relation": "contains",
@@ -13017,9 +13017,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_collecttagsbykey",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_collecttagsbykey"
     },
     {
       "relation": "contains",
@@ -13027,9 +13027,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L132",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_duration_presets",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_duration_presets"
     },
     {
       "relation": "contains",
@@ -13037,9 +13037,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_getdecades",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_getdecades"
     },
     {
       "relation": "contains",
@@ -13047,9 +13047,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L139",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_imdb_presets",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_imdb_presets"
     },
     {
       "relation": "contains",
@@ -13057,9 +13057,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L95",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_isallnumeric",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_isallnumeric"
     },
     {
       "relation": "contains",
@@ -13067,9 +13067,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_itemmatchesranges",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_itemmatchesranges"
     },
     {
       "relation": "contains",
@@ -13077,9 +13077,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L71",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_itemmatchestags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_itemmatchestags"
     },
     {
       "relation": "contains",
@@ -13087,9 +13087,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L30",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_list_attr_keys",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_list_attr_keys"
     },
     {
       "relation": "contains",
@@ -13097,9 +13097,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L99",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_lookslikeyears",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_lookslikeyears"
     },
     {
       "relation": "contains",
@@ -13107,9 +13107,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_normtag",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_normtag"
     },
     {
       "relation": "contains",
@@ -13117,9 +13117,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_rangefilter",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rangefilter"
     },
     {
       "relation": "contains",
@@ -13127,9 +13127,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L147",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_rating_attr_keys",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rating_attr_keys"
     },
     {
       "relation": "contains",
@@ -13137,9 +13137,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_sort_labels",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sort_labels"
     },
     {
       "relation": "contains",
@@ -13147,9 +13147,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_sortitems",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sortitems"
     },
     {
       "relation": "contains",
@@ -13157,9 +13157,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_sortkey",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sortkey"
     },
     {
       "relation": "contains",
@@ -13167,9 +13167,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_itemfilters_taglabel",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_taglabel"
     },
     {
       "relation": "imports_from",
@@ -13178,9 +13178,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_utils",
-      "confidence_score": 1.0
+      "target": "lib_utils"
     },
     {
       "relation": "imports",
@@ -13189,9 +13189,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "lib_utils_normalize",
-      "confidence_score": 1.0
+      "target": "lib_utils_normalize"
     },
     {
       "relation": "imports_from",
@@ -13200,9 +13200,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "src_types",
-      "confidence_score": 1.0
+      "target": "src_types"
     },
     {
       "relation": "imports",
@@ -13211,9 +13211,9 @@
       "source_file": "src/lib/itemFilters.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_itemfilters",
-      "target": "src_types_collectionitem",
-      "confidence_score": 1.0
+      "target": "src_types_collectionitem"
     },
     {
       "relation": "imports_from",
@@ -13222,9 +13222,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters"
     },
     {
       "relation": "imports_from",
@@ -13233,9 +13233,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters"
     },
     {
       "relation": "imports",
@@ -13244,9 +13244,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_sortkey",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sortkey"
     },
     {
       "relation": "imports",
@@ -13255,9 +13255,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_sortkey",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sortkey"
     },
     {
       "relation": "imports",
@@ -13266,9 +13266,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_sortitems",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sortitems"
     },
     {
       "relation": "imports",
@@ -13277,9 +13277,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_sortitems",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_sortitems"
     },
     {
       "relation": "imports",
@@ -13288,9 +13288,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_rangefilter",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rangefilter"
     },
     {
       "relation": "imports",
@@ -13299,9 +13299,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_rangefilter",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_rangefilter"
     },
     {
       "relation": "calls",
@@ -13321,9 +13321,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_normtag",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_normtag"
     },
     {
       "relation": "imports",
@@ -13332,9 +13332,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_normtag",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_normtag"
     },
     {
       "relation": "imports",
@@ -13343,9 +13343,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_collecttags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_collecttags"
     },
     {
       "relation": "imports",
@@ -13354,9 +13354,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_collecttags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_collecttags"
     },
     {
       "relation": "imports",
@@ -13365,9 +13365,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_taglabel",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_taglabel"
     },
     {
       "relation": "imports",
@@ -13376,9 +13376,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_taglabel",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_taglabel"
     },
     {
       "relation": "imports",
@@ -13387,9 +13387,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_itemmatchestags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_itemmatchestags"
     },
     {
       "relation": "imports",
@@ -13398,9 +13398,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_itemmatchestags",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_itemmatchestags"
     },
     {
       "relation": "imports",
@@ -13409,9 +13409,9 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
-      "target": "lib_itemfilters_itemmatchesranges",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_itemmatchesranges"
     },
     {
       "relation": "imports",
@@ -13420,9 +13420,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "lib_itemfilters_itemmatchesranges",
-      "confidence_score": 1.0
+      "target": "lib_itemfilters_itemmatchesranges"
     },
     {
       "relation": "contains",
@@ -14271,9 +14271,9 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_publiccollection",
-      "target": "pages_publiccollection_sort_options",
-      "confidence_score": 1.0
+      "target": "pages_publiccollection_sort_options"
     },
     {
       "relation": "contains",
@@ -14944,5 +14944,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "cb3ccc8487d9c89235e7324f051bec347daadffe"
+  "built_at_commit": "3d0ca2bdd26573b6f16840223d413f4350e4a170"
 }

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo, memo } from 'react';
 import { createPortal } from 'react-dom';
 import { Package } from 'lucide-react';
 import { cn } from '../../lib/utils';
@@ -13,11 +13,15 @@ interface Props {
   highlightItemId?: string | null;
   onDrop(itemId: string, row: number, col: number): void;
   onItemClick(item: CollectionItem): void;
-  onLongPressStart?(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem, x: number, y: number): void;
   touchDragOverCell?: { row: number; col: number } | null;
+  scrollRef?: React.Ref<HTMLDivElement>;
 }
 
-export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onItemClick, onLongPressStart, touchDragOverCell }: Props) {
+export const ShelfGrid = memo(function ShelfGrid({
+  shelf, items, schema, highlightItemId, onDrop, onItemClick,
+  onLongPressStart, touchDragOverCell, scrollRef,
+}: Props) {
   const [dragOverCell, setDragOverCell] = useState<string | null>(null);
   const theme = getShelfTheme(shelf.theme);
 
@@ -28,14 +32,18 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
       : {}),
   };
 
-  const cellMap = new Map<string, CollectionItem[]>();
-  items.forEach(item => {
-    if (item.shelf_id === shelf.id && item.shelf_row !== null && item.shelf_col !== null) {
-      const key = `${item.shelf_row}-${item.shelf_col}`;
-      if (!cellMap.has(key)) cellMap.set(key, []);
-      cellMap.get(key)!.push(item);
-    }
-  });
+  // Memoize cellMap so it only rebuilds when items or shelf changes
+  const cellMap = useMemo(() => {
+    const map = new Map<string, CollectionItem[]>();
+    items.forEach(item => {
+      if (item.shelf_id === shelf.id && item.shelf_row !== null && item.shelf_col !== null) {
+        const key = `${item.shelf_row}-${item.shelf_col}`;
+        if (!map.has(key)) map.set(key, []);
+        map.get(key)!.push(item);
+      }
+    });
+    return map;
+  }, [items, shelf.id]);
 
   function handleDragOver(e: React.DragEvent, key: string) {
     e.preventDefault();
@@ -51,6 +59,7 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
 
   return (
     <div
+      ref={scrollRef}
       className={cn('overflow-auto', theme.board.className)}
       style={boardStyle}
     >
@@ -112,7 +121,7 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
       </div>
     </div>
   );
-}
+});
 
 interface CellProps {
   cellKey: string;
@@ -129,7 +138,7 @@ interface CellProps {
   onDragLeave(): void;
   onDrop(e: React.DragEvent, row: number, col: number): void;
   onItemClick(item: CollectionItem): void;
-  onLongPressStart?(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem, x: number, y: number): void;
 }
 
 function Cell({
@@ -193,25 +202,33 @@ function CellItem({
   item: CollectionItem;
   schema: AttributeSchema;
   onItemClick(item: CollectionItem): void;
-  onLongPressStart?(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem, x: number, y: number): void;
 }) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number } | null>(null);
-  const longPressTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressTimer     = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressActivated = useRef(false);
+  const touchActiveRef     = useRef(false);
+  // Capture touch coords at touchstart for accurate ghost initial position
+  const touchCoordsRef     = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   function handleMouseEnter() {
+    if (touchActiveRef.current) return; // suppress preview during touch interaction
     if (btnRef.current) {
       const r = btnRef.current.getBoundingClientRect();
       setPreviewPos({ x: r.left, y: r.top });
     }
   }
 
-  function handleTouchStart() {
+  function handleTouchStart(e: React.TouchEvent) {
+    touchActiveRef.current = true;
     longPressActivated.current = false;
+    const touch = e.touches[0];
+    touchCoordsRef.current = { x: touch.clientX, y: touch.clientY };
     longPressTimer.current = setTimeout(() => {
       longPressActivated.current = true;
-      onLongPressStart?.(item);
+      setPreviewPos(null); // ensure preview is closed when drag activates
+      onLongPressStart?.(item, touchCoordsRef.current.x, touchCoordsRef.current.y);
     }, 400);
   }
 
@@ -220,6 +237,15 @@ function CellItem({
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
     }
+  }
+
+  function handleTouchMove() {
+    cancelLongPress();
+  }
+
+  function handleTouchEnd() {
+    touchActiveRef.current = false;
+    cancelLongPress();
   }
 
   return (
@@ -235,8 +261,8 @@ function CellItem({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setPreviewPos(null)}
         onTouchStart={handleTouchStart}
-        onTouchMove={cancelLongPress}
-        onTouchEnd={cancelLongPress}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         className="w-full flex items-center gap-1 rounded bg-card border px-1 py-1 text-[11px] hover:border-primary/50 hover:bg-accent transition-colors cursor-grab active:cursor-grabbing text-left"
         title={item.title}
       >

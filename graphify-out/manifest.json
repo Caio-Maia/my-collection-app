@@ -165,13 +165,13 @@
     "semantic_hash": ""
   },
   "src/pages/CollectionDetail.tsx": {
-    "mtime": 1780601562.5567307,
-    "ast_hash": "79007d55791ee4a499cb4767b2e6cfa9",
+    "mtime": 1780672602.327793,
+    "ast_hash": "d7a73dd84fda23c32f817bb888d69db2",
     "semantic_hash": ""
   },
   "src/pages/Collections.tsx": {
-    "mtime": 1780599191.7405634,
-    "ast_hash": "229d1e9e62fef1d850394b633c2eb040",
+    "mtime": 1780670834.247249,
+    "ast_hash": "7017d7dbaa22c9d3b6536fc0e239c652",
     "semantic_hash": ""
   },
   "src/pages/Home.tsx": {
@@ -250,8 +250,8 @@
     "semantic_hash": ""
   },
   "public/favicon.svg": {
-    "mtime": 1780528492.5909016,
-    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "mtime": 1780663743.2969027,
+    "ast_hash": "e5b15445875684dc33e9a35647fbe01a",
     "semantic_hash": ""
   },
   "public/icons.svg": {
@@ -290,8 +290,8 @@
     "semantic_hash": ""
   },
   "src/components/shelf/ShelfGrid.tsx": {
-    "mtime": 1780600929.302157,
-    "ast_hash": "807a3132e318d816a215db35771237bb",
+    "mtime": 1780672277.4163733,
+    "ast_hash": "6aa040d26c5939b25502e9ba12c1fbcd",
     "semantic_hash": ""
   },
   "src/components/shelf/ShelfItemPreview.tsx": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "src/components/shelf/UnplacedTray.tsx": {
-    "mtime": 1780599824.2656298,
-    "ast_hash": "e01da24eb07dfed0a1914220354c3e49",
+    "mtime": 1780672295.542319,
+    "ast_hash": "70ff5d13d2ad8a1bde9420e3f2101f41",
     "semantic_hash": ""
   },
   "src/data/public.ts": {
@@ -320,13 +320,13 @@
     "semantic_hash": ""
   },
   "src/pages/PublicCollection.tsx": {
-    "mtime": 1780601545.5591137,
-    "ast_hash": "8603015639c06b5075b194739dd0c8c7",
+    "mtime": 1780663435.5744007,
+    "ast_hash": "fc86c72c370535de7e4c356e97c2f4bf",
     "semantic_hash": ""
   },
   "src/pages/Shelves.tsx": {
-    "mtime": 1780600897.933662,
-    "ast_hash": "33a752b30a9c73ff12f45b99b58a54cf",
+    "mtime": 1780672642.3264763,
+    "ast_hash": "6d503d39ad334f4f9840731e79725c9f",
     "semantic_hash": ""
   },
   "src/pages/Welcome.tsx": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/components/shelf/shelfThemes.ts": {
-    "mtime": 1780600857.6722941,
-    "ast_hash": "faaa22c1a5af2ca38d0b0c4508c94073",
+    "mtime": 1780672737.2411585,
+    "ast_hash": "ccc1eae7162ffe01836f67c0ab5b24c7",
     "semantic_hash": ""
   },
   "src/lib/constants.ts": {
