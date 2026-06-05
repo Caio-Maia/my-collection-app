@@ -1,10 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
-  ArrowLeft, Plus, Library, Pencil, Trash2, Search, X,
+  ArrowLeft, Plus, Library, Pencil, Trash2, Search, X, Package,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { createPortal } from 'react-dom';
 import { useData } from '../data/DataContext';
 import { useAuth } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
@@ -33,6 +34,14 @@ export function Shelves() {
   const [selectedItem, setSelectedItem] = useState<CollectionItem | null>(null);
   const [search, setSearch] = useState('');
 
+  // Touch drag state
+  const [touchDragItem, setTouchDragItem]         = useState<CollectionItem | null>(null);
+  const [touchDragPos, setTouchDragPos]           = useState<{ x: number; y: number } | null>(null);
+  const [touchDragOverCell, setTouchDragOverCell] = useState<{ row: number; col: number } | null>(null);
+  const touchDragItemRef     = useRef<CollectionItem | null>(null);
+  const touchDragOverCellRef = useRef<{ row: number; col: number } | null>(null);
+  const handleDropRef        = useRef<(itemId: string, row: number, col: number) => void>(() => {});
+
   const { data: collection, isLoading: loadingCol } = useQuery({
     queryKey: ['collection', id],
     queryFn: () => data.getCollection(id!),
@@ -51,18 +60,15 @@ export function Shelves() {
     enabled: !!id,
   });
 
-  // Auto-select first shelf when loaded
   const activeShelf = shelves.find(s => s.id === activeShelfId) ?? shelves[0] ?? null;
 
   const attributeSchema = (collection?.attribute_schema ?? {}) as AttributeSchema;
 
-  // Items not placed in any shelf
   const unplacedItems = useMemo(
     () => items.filter(i => i.shelf_id === null || !shelves.some(s => s.id === i.shelf_id)),
     [items, shelves],
   );
 
-  // Find item by search match (positioned in active shelf)
   const searchMatch = useMemo(() => {
     if (!search.trim() || !activeShelf) return null;
     const q = normalize(search);
@@ -133,6 +139,58 @@ export function Shelves() {
     placementMutation.mutate({ itemId, shelfId: null, row: null, col: null });
   }
 
+  // Keep ref up to date so the touch effect always calls the latest version
+  handleDropRef.current = handleDrop;
+
+  function handleLongPressStart(item: CollectionItem) {
+    touchDragItemRef.current = item;
+    setTouchDragItem(item);
+    setTouchDragPos(null);
+  }
+
+  // Global touch handlers while a touch drag is active
+  useEffect(() => {
+    if (!touchDragItem) return;
+
+    function onTouchMove(e: TouchEvent) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      setTouchDragPos({ x: touch.clientX, y: touch.clientY });
+
+      const els = document.elementsFromPoint(touch.clientX, touch.clientY);
+      const cellEl = els.find(el => el.hasAttribute('data-cell-row'));
+      if (cellEl) {
+        const row = parseInt(cellEl.getAttribute('data-cell-row')!);
+        const col = parseInt(cellEl.getAttribute('data-cell-col')!);
+        touchDragOverCellRef.current = { row, col };
+        setTouchDragOverCell({ row, col });
+      } else {
+        touchDragOverCellRef.current = null;
+        setTouchDragOverCell(null);
+      }
+    }
+
+    function onTouchEnd() {
+      const item = touchDragItemRef.current;
+      const cell = touchDragOverCellRef.current;
+      if (item && cell) {
+        handleDropRef.current(item.id, cell.row, cell.col);
+      }
+      touchDragItemRef.current = null;
+      touchDragOverCellRef.current = null;
+      setTouchDragItem(null);
+      setTouchDragPos(null);
+      setTouchDragOverCell(null);
+    }
+
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('touchend', onTouchEnd);
+    return () => {
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [touchDragItem]);
+
   const loading = loadingCol || loadingItems || loadingShelves;
 
   if (loading) {
@@ -162,8 +220,8 @@ export function Shelves() {
           </p>
         </div>
         <Button size="sm" onClick={() => setFormOpen(true)}>
-          <Plus className="h-4 w-4 mr-1.5" />
-          Nova estante
+          <Plus className="h-4 w-4 sm:mr-1.5" />
+          <span className="hidden sm:inline">Nova estante</span>
         </Button>
       </div>
 
@@ -260,6 +318,8 @@ export function Shelves() {
                 highlightItemId={searchMatch?.id}
                 onDrop={handleDrop}
                 onItemClick={setSelectedItem}
+                onLongPressStart={handleLongPressStart}
+                touchDragOverCell={touchDragOverCell}
               />
               <p className="text-xs text-muted-foreground text-center">
                 {activeShelf.rows} linhas × {activeShelf.cols} colunas
@@ -271,10 +331,29 @@ export function Shelves() {
                 schema={attributeSchema}
                 onDrop={handleUnplace}
                 onItemClick={setSelectedItem}
+                onLongPressStart={handleLongPressStart}
               />
             </>
           )}
         </>
+      )}
+
+      {/* Touch drag ghost */}
+      {touchDragItem && touchDragPos && createPortal(
+        <div
+          className="fixed z-[9999] pointer-events-none select-none"
+          style={{ left: touchDragPos.x, top: touchDragPos.y, transform: 'translate(-50%, -50%)' }}
+        >
+          <div className="flex items-center gap-1.5 rounded-md border bg-card shadow-xl px-2 py-1.5 text-xs font-medium opacity-90 scale-110">
+            {touchDragItem.photo_url ? (
+              <img src={touchDragItem.photo_url} alt="" className="h-5 w-5 rounded object-cover shrink-0" />
+            ) : (
+              <Package className="h-4 w-4 text-muted-foreground shrink-0" />
+            )}
+            <span className="max-w-[120px] truncate">{touchDragItem.title}</span>
+          </div>
+        </div>,
+        document.body,
       )}
 
       {/* Create shelf dialog */}

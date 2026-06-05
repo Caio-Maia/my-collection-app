@@ -10,9 +10,10 @@ interface Props {
   schema: AttributeSchema;
   onDrop(itemId: string): void;
   onItemClick(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem): void;
 }
 
-export function UnplacedTray({ items, schema, onDrop, onItemClick }: Props) {
+export function UnplacedTray({ items, schema, onDrop, onItemClick, onLongPressStart }: Props) {
   const [dragOver, setDragOver] = useState(false);
 
   function handleDragOver(e: React.DragEvent) {
@@ -47,7 +48,13 @@ export function UnplacedTray({ items, schema, onDrop, onItemClick }: Props) {
       ) : (
         <div className="flex flex-wrap gap-2">
           {items.map(item => (
-            <TrayItem key={item.id} item={item} schema={schema} onClick={() => onItemClick(item)} />
+            <TrayItem
+              key={item.id}
+              item={item}
+              schema={schema}
+              onClick={() => onItemClick(item)}
+              onLongPressStart={onLongPressStart}
+            />
           ))}
         </div>
       )}
@@ -59,18 +66,37 @@ function TrayItem({
   item,
   schema,
   onClick,
+  onLongPressStart,
 }: {
   item: CollectionItem;
   schema: AttributeSchema;
   onClick(): void;
+  onLongPressStart?(item: CollectionItem): void;
 }) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number } | null>(null);
+  const longPressTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressActivated = useRef(false);
 
   function handleMouseEnter() {
     if (btnRef.current) {
       const r = btnRef.current.getBoundingClientRect();
       setPreviewPos({ x: r.left, y: r.top });
+    }
+  }
+
+  function handleTouchStart() {
+    longPressActivated.current = false;
+    longPressTimer.current = setTimeout(() => {
+      longPressActivated.current = true;
+      onLongPressStart?.(item);
+    }, 400);
+  }
+
+  function cancelLongPress() {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
     }
   }
 
@@ -80,9 +106,15 @@ function TrayItem({
         ref={btnRef}
         draggable
         onDragStart={e => e.dataTransfer.setData('text/plain', item.id)}
-        onClick={onClick}
+        onClick={() => {
+          if (longPressActivated.current) { longPressActivated.current = false; return; }
+          onClick();
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setPreviewPos(null)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={cancelLongPress}
+        onTouchEnd={cancelLongPress}
         className="flex items-center gap-1.5 rounded-md border bg-card px-2 py-1.5 text-xs font-medium hover:border-primary/50 hover:bg-accent transition-colors cursor-grab active:cursor-grabbing"
         title={item.title}
       >

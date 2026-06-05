@@ -339,7 +339,7 @@ export function CollectionDetail() {
               {currentSort.icon}
             </button>
 
-            {/* View toggle */}
+            {/* View toggle + shelf */}
             <div className="flex shrink-0 h-9 rounded-md border border-input overflow-hidden">
               <button
                 onClick={() => setViewMode('list')}
@@ -365,14 +365,14 @@ export function CollectionDetail() {
               >
                 <LayoutGrid className="h-4 w-4" />
               </button>
-            </div>
-
-            {/* Shelf view link */}
-            <Link to={`/collections/${id}/shelves`} className="shrink-0">
-              <Button variant="outline" size="icon" title="Estantes">
+              <Link
+                to={`/collections/${id}/shelves`}
+                className="flex items-center justify-center w-9 h-full transition-colors border-l border-input bg-background hover:bg-accent text-muted-foreground"
+                title="Estantes"
+              >
                 <Library className="h-4 w-4" />
-              </Button>
-            </Link>
+              </Link>
+            </div>
           </div>
 
           <ItemFilterPanel

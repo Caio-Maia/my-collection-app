@@ -13,9 +13,11 @@ interface Props {
   highlightItemId?: string | null;
   onDrop(itemId: string, row: number, col: number): void;
   onItemClick(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem): void;
+  touchDragOverCell?: { row: number; col: number } | null;
 }
 
-export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onItemClick }: Props) {
+export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onItemClick, onLongPressStart, touchDragOverCell }: Props) {
   const [dragOverCell, setDragOverCell] = useState<string | null>(null);
   const theme = getShelfTheme(shelf.theme);
 
@@ -26,7 +28,6 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
       : {}),
   };
 
-  // Build lookup: `${row}-${col}` → items[]
   const cellMap = new Map<string, CollectionItem[]>();
   items.forEach(item => {
     if (item.shelf_id === shelf.id && item.shelf_row !== null && item.shelf_col !== null) {
@@ -71,7 +72,6 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
         {/* Rows */}
         {Array.from({ length: shelf.rows }, (_, r) => (
           <>
-            {/* Row label */}
             <div
               key={`label-${r}`}
               className={cn('flex items-center justify-end pr-2 text-[10px] font-semibold uppercase tracking-wider', theme.labelClass)}
@@ -79,12 +79,12 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
               L{r + 1}
             </div>
 
-            {/* Cells */}
             {Array.from({ length: shelf.cols }, (_, c) => {
               const key = `${r}-${c}`;
               const cellItems = cellMap.get(key) ?? [];
               const isDragOver = dragOverCell === key;
               const hasHighlight = cellItems.some(i => i.id === highlightItemId);
+              const isTouchDragOver = touchDragOverCell?.row === r && touchDragOverCell?.col === c;
 
               return (
                 <Cell
@@ -95,6 +95,7 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
                   items={cellItems}
                   schema={schema}
                   isDragOver={isDragOver}
+                  isTouchDragOver={isTouchDragOver}
                   isHighlighted={hasHighlight}
                   cellBase={theme.cellBase}
                   plank={theme.plank}
@@ -102,6 +103,7 @@ export function ShelfGrid({ shelf, items, schema, highlightItemId, onDrop, onIte
                   onDragLeave={() => setDragOverCell(null)}
                   onDrop={handleDrop}
                   onItemClick={onItemClick}
+                  onLongPressStart={onLongPressStart}
                 />
               );
             })}
@@ -119,6 +121,7 @@ interface CellProps {
   items: CollectionItem[];
   schema: AttributeSchema;
   isDragOver: boolean;
+  isTouchDragOver: boolean;
   isHighlighted: boolean;
   cellBase: string;
   plank?: string;
@@ -126,20 +129,23 @@ interface CellProps {
   onDragLeave(): void;
   onDrop(e: React.DragEvent, row: number, col: number): void;
   onItemClick(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem): void;
 }
 
 function Cell({
-  cellKey, row, col, items, schema, isDragOver, isHighlighted,
-  cellBase, plank, onDragOver, onDragLeave, onDrop, onItemClick,
+  cellKey, row, col, items, schema, isDragOver, isTouchDragOver, isHighlighted,
+  cellBase, plank, onDragOver, onDragLeave, onDrop, onItemClick, onLongPressStart,
 }: CellProps) {
   return (
     <div
+      data-cell-row={row}
+      data-cell-col={col}
       onDragOver={e => onDragOver(e, cellKey)}
       onDragLeave={onDragLeave}
       onDrop={e => onDrop(e, row, col)}
       className={cn(
         'relative min-h-[72px] rounded-md transition-all duration-150 p-1',
-        isDragOver
+        isDragOver || isTouchDragOver
           ? 'border-2 border-primary bg-primary/10 scale-[1.02]'
           : isHighlighted
           ? 'border-2 border-amber-400 bg-amber-50 dark:bg-amber-950/30 ring-2 ring-amber-300'
@@ -154,7 +160,13 @@ function Cell({
       ) : (
         <div className="flex flex-col gap-1">
           {items.slice(0, 3).map(item => (
-            <CellItem key={item.id} item={item} schema={schema} onItemClick={onItemClick} />
+            <CellItem
+              key={item.id}
+              item={item}
+              schema={schema}
+              onItemClick={onItemClick}
+              onLongPressStart={onLongPressStart}
+            />
           ))}
           {items.length > 3 && (
             <span className="text-[10px] text-muted-foreground text-center">
@@ -176,18 +188,37 @@ function CellItem({
   item,
   schema,
   onItemClick,
+  onLongPressStart,
 }: {
   item: CollectionItem;
   schema: AttributeSchema;
   onItemClick(item: CollectionItem): void;
+  onLongPressStart?(item: CollectionItem): void;
 }) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const [previewPos, setPreviewPos] = useState<{ x: number; y: number } | null>(null);
+  const longPressTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressActivated = useRef(false);
 
   function handleMouseEnter() {
     if (btnRef.current) {
       const r = btnRef.current.getBoundingClientRect();
       setPreviewPos({ x: r.left, y: r.top });
+    }
+  }
+
+  function handleTouchStart() {
+    longPressActivated.current = false;
+    longPressTimer.current = setTimeout(() => {
+      longPressActivated.current = true;
+      onLongPressStart?.(item);
+    }, 400);
+  }
+
+  function cancelLongPress() {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
     }
   }
 
@@ -197,9 +228,15 @@ function CellItem({
         ref={btnRef}
         draggable
         onDragStart={e => e.dataTransfer.setData('text/plain', item.id)}
-        onClick={() => onItemClick(item)}
+        onClick={() => {
+          if (longPressActivated.current) { longPressActivated.current = false; return; }
+          onItemClick(item);
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setPreviewPos(null)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={cancelLongPress}
+        onTouchEnd={cancelLongPress}
         className="w-full flex items-center gap-1 rounded bg-card border px-1 py-1 text-[11px] hover:border-primary/50 hover:bg-accent transition-colors cursor-grab active:cursor-grabbing text-left"
         title={item.title}
       >

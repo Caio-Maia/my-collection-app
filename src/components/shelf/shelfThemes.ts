@@ -24,27 +24,50 @@ export const SHELF_THEMES: ShelfTheme[] = [
     id: 'wood',
     label: 'Madeira',
     board: {
-      className: 'rounded-xl border-2 border-amber-900/60 shadow-inner p-3',
+      className: 'rounded-xl border-2 border-amber-950/70 p-3',
       style: {
         background: `
           repeating-linear-gradient(
-            92deg,
-            rgba(120,70,20,0.06) 0px,
-            rgba(180,110,40,0.10) 2px,
-            rgba(140,80,25,0.04) 5px,
-            rgba(160,100,35,0.08) 9px,
-            transparent 12px
+            93deg,
+            rgba(50,20,3,0.22) 0px,
+            rgba(160,90,25,0.06) 4px,
+            rgba(50,20,3,0.16) 11px,
+            transparent 18px,
+            rgba(40,15,2,0.24) 26px,
+            rgba(190,120,40,0.07) 30px,
+            rgba(40,15,2,0.18) 39px,
+            transparent 50px
           ),
-          linear-gradient(180deg, #b5813a 0%, #9a6b2c 40%, #8a5e24 70%, #a07030 100%)
+          repeating-linear-gradient(
+            89deg,
+            rgba(0,0,0,0.08) 0px,
+            transparent 1px,
+            rgba(0,0,0,0.05) 3px,
+            transparent 5px,
+            rgba(220,155,65,0.10) 8px,
+            transparent 11px
+          ),
+          linear-gradient(
+            180deg,
+            #cc9540 0%,
+            #a56c20 28%,
+            #8a5618 52%,
+            #b27a28 72%,
+            #c48c38 100%
+          )
         `,
+        boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.35), inset 0 -2px 5px rgba(0,0,0,0.2)',
       },
     },
-    cellBase: 'bg-amber-50/10 border border-amber-900/30 hover:bg-amber-50/20',
-    labelClass: 'text-amber-100/80',
-    plank: 'border-b-4 border-amber-950/50 shadow-[0_3px_0_rgba(0,0,0,0.3)]',
+    cellBase: 'bg-amber-900/20 border border-amber-950/40 hover:bg-amber-900/30',
+    labelClass: 'text-amber-100/90',
+    plank: 'border-b-[3px] border-amber-950/60 shadow-[0_3px_0_rgba(0,0,0,0.35)]',
     swatch: {
-      background: 'linear-gradient(135deg, #b5813a 0%, #8a5e24 60%, #a07030 100%)',
-      border: '1px solid #7a4f1a',
+      background: `
+        repeating-linear-gradient(93deg, rgba(50,20,3,0.28) 0px, transparent 9px, rgba(40,15,2,0.24) 22px, transparent 34px),
+        linear-gradient(135deg, #cc9540 0%, #8a5618 55%, #b27a28 100%)
+      `,
+      border: '1px solid #5a2e0a',
     },
   },
   {
