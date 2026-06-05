@@ -225,9 +225,6 @@ export function Shelves() {
                     </button>
                   )}
                 </div>
-                <span className="text-xs text-muted-foreground ml-1">
-                  {activeShelf.rows} linhas × {activeShelf.cols} colunas
-                </span>
                 <div className="ml-auto flex gap-1.5">
                   <Button
                     variant="outline"
@@ -264,6 +261,9 @@ export function Shelves() {
                 onDrop={handleDrop}
                 onItemClick={setSelectedItem}
               />
+              <p className="text-xs text-muted-foreground text-center">
+                {activeShelf.rows} linhas × {activeShelf.cols} colunas
+              </p>
 
               {/* Unplaced tray */}
               <UnplacedTray

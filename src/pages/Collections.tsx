@@ -200,7 +200,7 @@ export function Collections() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity bg-background/80 backdrop-blur-sm hover:bg-background"
+                      className="h-8 w-8 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity bg-background/80 backdrop-blur-sm hover:bg-background"
                     >
                       <MoreVertical className="h-4 w-4" />
                     </Button>
@@ -227,7 +227,7 @@ export function Collections() {
 
       {/* Create dialog */}
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Nova coleção</DialogTitle>
           </DialogHeader>
@@ -241,7 +241,7 @@ export function Collections() {
 
       {/* Edit dialog */}
       <Dialog open={!!editTarget} onOpenChange={(v) => !v && setEditTarget(null)}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Editar coleção</DialogTitle>
           </DialogHeader>

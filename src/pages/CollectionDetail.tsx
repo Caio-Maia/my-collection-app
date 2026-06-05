@@ -5,7 +5,7 @@ import {
   ArrowLeft, Plus, Upload, Package,
   LayoutGrid, LayoutList, ArrowUpAZ, ArrowDownAZ,
   CalendarArrowUp, CalendarArrowDown, SlidersHorizontal, Library,
-  Download, Globe, Lock, Share2, Search,
+  Download, Globe, Lock, Share2, Search, MoreVertical,
 } from 'lucide-react';
 import { useData } from '../data/DataContext';
 import { useAuth } from '../auth/AuthContext';
@@ -66,6 +66,8 @@ export function CollectionDetail() {
   const [selectedItem, setSelectedItem] = useState<CollectionItem | null>(null);
   const [addOpen, setAddOpen]           = useState(false);
   const [importOpen, setImportOpen]     = useState(false);
+  const [menuOpen, setMenuOpen]         = useState(false);
+  const [sharingLink, setSharingLink]   = useState(false);
 
   const { data: collection, isLoading: loadingCol } = useQuery({
     queryKey: ['collection', id],
@@ -211,14 +213,6 @@ export function CollectionDetail() {
           <Button
             variant="outline"
             size="icon"
-            title="Exportar coleção"
-            onClick={() => exportCollection(collection!, items)}
-          >
-            <Download className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
             title={collection?.is_public ? 'Tornar privada' : 'Tornar pública'}
             onClick={() => togglePublicMutation.mutate()}
             disabled={togglePublicMutation.isPending}
@@ -233,18 +227,69 @@ export function CollectionDetail() {
               variant="outline"
               size="icon"
               title="Copiar link público"
-              onClick={() => {
-                navigator.clipboard.writeText(`${window.location.origin}/p/${id}`);
-                toast.success('Link copiado!');
+              disabled={sharingLink}
+              onClick={async () => {
+                const url = `${window.location.origin}/p/${id}`;
+                setSharingLink(true);
+                try {
+                  const res = await fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(url)}`);
+                  const short = await res.text();
+                  await navigator.clipboard.writeText(short.trim());
+                  toast.success('Link encurtado copiado!');
+                } catch {
+                  await navigator.clipboard.writeText(url);
+                  toast.success('Link copiado!');
+                } finally {
+                  setSharingLink(false);
+                }
               }}
             >
-              <Share2 className="h-4 w-4" />
+              {sharingLink
+                ? <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                : <Share2 className="h-4 w-4" />
+              }
             </Button>
           )}
-          <Button variant="outline" size="sm" onClick={() => setImportOpen(true)}>
+          <Button variant="outline" size="sm" className="hidden sm:inline-flex" onClick={() => setImportOpen(true)}>
             <Upload className="h-4 w-4 mr-1.5" />
-            <span className="hidden sm:inline">Importar</span>
+            Importar
           </Button>
+          <Button variant="outline" size="sm" className="hidden sm:inline-flex" onClick={() => exportCollection(collection!, items)}>
+            <Download className="h-4 w-4 mr-1.5" />
+            Baixar
+          </Button>
+          {/* Mobile options menu */}
+          <div className="relative sm:hidden">
+            <Button
+              variant="outline"
+              size="icon"
+              title="Mais opções"
+              onClick={() => setMenuOpen(v => !v)}
+            >
+              <MoreVertical className="h-4 w-4" />
+            </Button>
+            {menuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
+                <div className="absolute right-0 top-full mt-1 z-50 min-w-36 rounded-md border bg-popover shadow-md py-1">
+                  <button
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-accent transition-colors"
+                    onClick={() => { setImportOpen(true); setMenuOpen(false); }}
+                  >
+                    <Upload className="h-4 w-4" />
+                    Importar
+                  </button>
+                  <button
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm hover:bg-accent transition-colors"
+                    onClick={() => { exportCollection(collection!, items); setMenuOpen(false); }}
+                  >
+                    <Download className="h-4 w-4" />
+                    Baixar
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
           <Button size="sm" onClick={() => setAddOpen(true)}>
             <Plus className="h-4 w-4 mr-1.5" />
             <span className="hidden sm:inline">Adicionar</span>
@@ -282,28 +327,24 @@ export function CollectionDetail() {
               </Button>
             )}
 
-            {/* Sort */}
-            <div className="relative shrink-0">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as SortKey)}
-                className="h-9 appearance-none rounded-md border border-input bg-background pl-3 pr-8 text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 hover:bg-accent transition-colors"
-              >
-                {SORT_OPTIONS.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground">
-                {currentSort.icon}
-              </div>
-            </div>
+            {/* Sort — cycles through options on click */}
+            <button
+              onClick={() => {
+                const idx = SORT_OPTIONS.findIndex(o => o.value === sortBy);
+                setSortBy(SORT_OPTIONS[(idx + 1) % SORT_OPTIONS.length].value);
+              }}
+              className="flex items-center justify-center h-9 w-9 rounded-md border border-input bg-background shrink-0 hover:bg-accent transition-colors text-muted-foreground"
+              title={currentSort.label}
+            >
+              {currentSort.icon}
+            </button>
 
             {/* View toggle */}
-            <div className="flex shrink-0 rounded-md border border-input overflow-hidden">
+            <div className="flex shrink-0 h-9 rounded-md border border-input overflow-hidden">
               <button
                 onClick={() => setViewMode('list')}
                 className={cn(
-                  'flex items-center justify-center w-9 h-9 transition-colors',
+                  'flex items-center justify-center w-9 h-full transition-colors',
                   viewMode === 'list'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-background hover:bg-accent text-muted-foreground'
@@ -315,7 +356,7 @@ export function CollectionDetail() {
               <button
                 onClick={() => setViewMode('grid')}
                 className={cn(
-                  'flex items-center justify-center w-9 h-9 transition-colors border-l border-input',
+                  'flex items-center justify-center w-9 h-full transition-colors border-l border-input',
                   viewMode === 'grid'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-background hover:bg-accent text-muted-foreground'

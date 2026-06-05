@@ -165,28 +165,24 @@ export function PublicCollection() {
                 </button>
               )}
 
-              {/* Sort */}
-              <div className="relative shrink-0">
-                <select
-                  value={sortBy}
-                  onChange={e => setSortBy(e.target.value as SortKey)}
-                  className="h-9 appearance-none rounded-md border border-input bg-background pl-3 pr-8 text-sm font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 hover:bg-accent transition-colors"
-                >
-                  {SORT_OPTIONS.map(o => (
-                    <option key={o.value} value={o.value}>{o.label}</option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground">
-                  {currentSort.icon}
-                </div>
-              </div>
+              {/* Sort — cycles through options on click */}
+              <button
+                onClick={() => {
+                  const idx = SORT_OPTIONS.findIndex(o => o.value === sortBy);
+                  setSortBy(SORT_OPTIONS[(idx + 1) % SORT_OPTIONS.length].value);
+                }}
+                className="flex items-center justify-center h-9 w-9 rounded-md border border-input bg-background shrink-0 hover:bg-accent transition-colors text-muted-foreground"
+                title={currentSort.label}
+              >
+                {currentSort.icon}
+              </button>
 
               {/* View toggle */}
-              <div className="flex shrink-0 rounded-md border border-input overflow-hidden">
+              <div className="flex shrink-0 h-9 rounded-md border border-input overflow-hidden">
                 <button
                   onClick={() => setViewMode('list')}
                   className={cn(
-                    'flex items-center justify-center w-9 h-9 transition-colors',
+                    'flex items-center justify-center w-9 h-full transition-colors',
                     viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-accent text-muted-foreground',
                   )}
                 >
@@ -195,7 +191,7 @@ export function PublicCollection() {
                 <button
                   onClick={() => setViewMode('grid')}
                   className={cn(
-                    'flex items-center justify-center w-9 h-9 transition-colors border-l border-input',
+                    'flex items-center justify-center w-9 h-full transition-colors border-l border-input',
                     viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-accent text-muted-foreground',
                   )}
                 >

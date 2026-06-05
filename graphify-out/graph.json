@@ -18,7 +18,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "id": "package",
-      "community": 4,
+      "community": 5,
       "norm_label": "package.json"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "id": "package_name",
-      "community": 4,
+      "community": 5,
       "norm_label": "name"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "id": "package_private",
-      "community": 4,
+      "community": 5,
       "norm_label": "private"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "id": "package_version",
-      "community": 4,
+      "community": 5,
       "norm_label": "version"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "id": "package_type",
-      "community": 4,
+      "community": 5,
       "norm_label": "type"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "id": "package_scripts",
-      "community": 4,
+      "community": 5,
       "norm_label": "scripts"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "id": "package_scripts_dev",
-      "community": 4,
+      "community": 5,
       "norm_label": "dev"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "package.json",
       "source_location": "L8",
       "id": "package_scripts_build",
-      "community": 4,
+      "community": 5,
       "norm_label": "build"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "package.json",
       "source_location": "L9",
       "id": "package_scripts_lint",
-      "community": 4,
+      "community": 5,
       "norm_label": "lint"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "package.json",
       "source_location": "L10",
       "id": "package_scripts_preview",
-      "community": 4,
+      "community": 5,
       "norm_label": "preview"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "package.json",
       "source_location": "L11",
       "id": "package_scripts_supa",
-      "community": 4,
+      "community": 5,
       "norm_label": "supa"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "package.json",
       "source_location": "L12",
       "id": "package_scripts_mig",
-      "community": 4,
+      "community": 5,
       "norm_label": "mig"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "src/auth/AuthContext.tsx",
       "source_location": "L5",
       "id": "auth_authcontext_authcontextvalue",
-      "community": 1,
+      "community": 0,
       "norm_label": "authcontextvalue"
     },
     {
@@ -697,19 +697,10 @@
       "norm_label": "icons"
     },
     {
-      "label": "COVER_COLORS",
-      "file_type": "code",
-      "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L25",
-      "id": "components_collectionform_cover_colors",
-      "community": 18,
-      "norm_label": "cover_colors"
-    },
-    {
       "label": "ATTR_TYPES",
       "file_type": "code",
       "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L32",
+      "source_location": "L27",
       "id": "components_collectionform_attr_types",
       "community": 18,
       "norm_label": "attr_types"
@@ -718,7 +709,7 @@
       "label": "schema",
       "file_type": "code",
       "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L39",
+      "source_location": "L34",
       "id": "components_collectionform_schema",
       "community": 18,
       "norm_label": "schema"
@@ -727,7 +718,7 @@
       "label": "FormData",
       "file_type": "code",
       "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L51",
+      "source_location": "L46",
       "id": "components_collectionform_formdata",
       "community": 18,
       "norm_label": "formdata"
@@ -736,16 +727,16 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L53",
+      "source_location": "L48",
       "id": "components_collectionform_props",
-      "community": 0,
+      "community": 18,
       "norm_label": "props"
     },
     {
       "label": "CollapsibleSection()",
       "file_type": "code",
       "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L60",
+      "source_location": "L55",
       "id": "components_collectionform_collapsiblesection",
       "community": 18,
       "norm_label": "collapsiblesection()"
@@ -754,7 +745,7 @@
       "label": "CollectionForm()",
       "file_type": "code",
       "source_file": "src/components/CollectionForm.tsx",
-      "source_location": "L78",
+      "source_location": "L73",
       "id": "components_collectionform_collectionform",
       "community": 18,
       "norm_label": "collectionform()"
@@ -868,6 +859,33 @@
       "norm_label": "itemdialog()"
     },
     {
+      "label": "ItemFilterPanel.tsx",
+      "file_type": "code",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L1",
+      "id": "components_itemfilterpanel",
+      "community": 6,
+      "norm_label": "itemfilterpanel.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L13",
+      "id": "components_itemfilterpanel_props",
+      "community": 6,
+      "norm_label": "props"
+    },
+    {
+      "label": "ItemFilterPanel()",
+      "file_type": "code",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L25",
+      "id": "components_itemfilterpanel_itemfilterpanel",
+      "community": 6,
+      "norm_label": "itemfilterpanel()"
+    },
+    {
       "label": "ItemForm.tsx",
       "file_type": "code",
       "source_file": "src/components/ItemForm.tsx",
@@ -936,7 +954,7 @@
       "source_file": "src/components/Navbar.tsx",
       "source_location": "L22",
       "id": "components_navbar_navbar",
-      "community": 17,
+      "community": 1,
       "norm_label": "navbar()"
     },
     {
@@ -1006,7 +1024,7 @@
       "label": "schema",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
-      "source_location": "L13",
+      "source_location": "L17",
       "id": "shelf_shelfformdialog_schema",
       "community": 2,
       "norm_label": "schema"
@@ -1015,7 +1033,7 @@
       "label": "FormValues",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
-      "source_location": "L19",
+      "source_location": "L25",
       "id": "shelf_shelfformdialog_formvalues",
       "community": 2,
       "norm_label": "formvalues"
@@ -1024,7 +1042,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
-      "source_location": "L21",
+      "source_location": "L27",
       "id": "shelf_shelfformdialog_props",
       "community": 0,
       "norm_label": "props"
@@ -1033,7 +1051,7 @@
       "label": "ShelfFormDialog()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfFormDialog.tsx",
-      "source_location": "L29",
+      "source_location": "L35",
       "id": "shelf_shelfformdialog_shelfformdialog",
       "community": 2,
       "norm_label": "shelfformdialog()"
@@ -1051,7 +1069,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "id": "shelf_shelfgrid_props",
       "community": 3,
       "norm_label": "props"
@@ -1060,16 +1078,16 @@
       "label": "ShelfGrid()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "id": "shelf_shelfgrid_shelfgrid",
-      "community": 3,
+      "community": 2,
       "norm_label": "shelfgrid()"
     },
     {
       "label": "CellProps",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L95",
+      "source_location": "L115",
       "id": "shelf_shelfgrid_cellprops",
       "community": 3,
       "norm_label": "cellprops"
@@ -1078,16 +1096,16 @@
       "label": "Cell()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L109",
+      "source_location": "L131",
       "id": "shelf_shelfgrid_cell",
-      "community": 17,
+      "community": 3,
       "norm_label": "cell()"
     },
     {
       "label": "CellItem()",
       "file_type": "code",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
-      "source_location": "L152",
+      "source_location": "L175",
       "id": "shelf_shelfgrid_cellitem",
       "community": 3,
       "norm_label": "cellitem()"
@@ -1143,7 +1161,7 @@
       "source_file": "src/components/shelf/UnplacedTray.tsx",
       "source_location": "L15",
       "id": "shelf_unplacedtray_unplacedtray",
-      "community": 17,
+      "community": 2,
       "norm_label": "unplacedtray()"
     },
     {
@@ -1154,6 +1172,42 @@
       "id": "shelf_unplacedtray_trayitem",
       "community": 3,
       "norm_label": "trayitem()"
+    },
+    {
+      "label": "shelfThemes.ts",
+      "file_type": "code",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L1",
+      "id": "shelf_shelfthemes",
+      "community": 2,
+      "norm_label": "shelfthemes.ts"
+    },
+    {
+      "label": "ShelfTheme",
+      "file_type": "code",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L3",
+      "id": "shelf_shelfthemes_shelftheme",
+      "community": 2,
+      "norm_label": "shelftheme"
+    },
+    {
+      "label": "SHELF_THEMES",
+      "file_type": "code",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L14",
+      "id": "shelf_shelfthemes_shelf_themes",
+      "community": 2,
+      "norm_label": "shelf_themes"
+    },
+    {
+      "label": "getShelfTheme()",
+      "file_type": "code",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L69",
+      "id": "shelf_shelfthemes_getshelftheme",
+      "community": 2,
+      "norm_label": "getshelftheme()"
     },
     {
       "label": "avatar.tsx",
@@ -1912,10 +1966,19 @@
       "norm_label": ".setitemplacement()"
     },
     {
-      "label": ".listShelves()",
+      "label": ".normalizeShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
       "source_location": "L273",
+      "id": "local_localadapter_localadapter_normalizeshelf",
+      "community": 0,
+      "norm_label": ".normalizeshelf()"
+    },
+    {
+      "label": ".listShelves()",
+      "file_type": "code",
+      "source_file": "src/data/local/LocalAdapter.ts",
+      "source_location": "L277",
       "id": "local_localadapter_localadapter_listshelves",
       "community": 0,
       "norm_label": ".listshelves()"
@@ -1924,7 +1987,7 @@
       "label": ".createShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L277",
+      "source_location": "L282",
       "id": "local_localadapter_localadapter_createshelf",
       "community": 0,
       "norm_label": ".createshelf()"
@@ -1933,7 +1996,7 @@
       "label": ".updateShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L283",
+      "source_location": "L295",
       "id": "local_localadapter_localadapter_updateshelf",
       "community": 0,
       "norm_label": ".updateshelf()"
@@ -1942,7 +2005,7 @@
       "label": ".deleteShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L304",
+      "source_location": "L316",
       "id": "local_localadapter_localadapter_deleteshelf",
       "community": 0,
       "norm_label": ".deleteshelf()"
@@ -2052,7 +2115,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L5",
       "id": "supabase_supabaseadapter_translateautherror",
-      "community": 0,
+      "community": 21,
       "norm_label": "translateautherror()"
     },
     {
@@ -2061,7 +2124,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L19",
       "id": "supabase_supabaseadapter_toauthuser",
-      "community": 0,
+      "community": 21,
       "norm_label": "toauthuser()"
     },
     {
@@ -2070,7 +2133,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L27",
       "id": "supabase_supabaseadapter_supabaseadapter",
-      "community": 0,
+      "community": 21,
       "norm_label": "supabaseadapter"
     },
     {
@@ -2079,7 +2142,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L28",
       "id": "supabase_supabaseadapter_supabaseadapter_signup",
-      "community": 0,
+      "community": 21,
       "norm_label": ".signup()"
     },
     {
@@ -2088,7 +2151,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L39",
       "id": "supabase_supabaseadapter_supabaseadapter_signin",
-      "community": 0,
+      "community": 21,
       "norm_label": ".signin()"
     },
     {
@@ -2097,7 +2160,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L47",
       "id": "supabase_supabaseadapter_supabaseadapter_signout",
-      "community": 0,
+      "community": 21,
       "norm_label": ".signout()"
     },
     {
@@ -2106,7 +2169,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L51",
       "id": "supabase_supabaseadapter_supabaseadapter_getcurrentuser",
-      "community": 0,
+      "community": 21,
       "norm_label": ".getcurrentuser()"
     },
     {
@@ -2115,7 +2178,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L58",
       "id": "supabase_supabaseadapter_supabaseadapter_onauthchange",
-      "community": 0,
+      "community": 21,
       "norm_label": ".onauthchange()"
     },
     {
@@ -2124,7 +2187,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L70",
       "id": "supabase_supabaseadapter_supabaseadapter_getprofile",
-      "community": 0,
+      "community": 21,
       "norm_label": ".getprofile()"
     },
     {
@@ -2133,7 +2196,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L75",
       "id": "supabase_supabaseadapter_supabaseadapter_updateprofile",
-      "community": 0,
+      "community": 21,
       "norm_label": ".updateprofile()"
     },
     {
@@ -2151,7 +2214,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L96",
       "id": "supabase_supabaseadapter_supabaseadapter_getcollection",
-      "community": 0,
+      "community": 21,
       "norm_label": ".getcollection()"
     },
     {
@@ -2160,7 +2223,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L101",
       "id": "supabase_supabaseadapter_supabaseadapter_createcollection",
-      "community": 0,
+      "community": 21,
       "norm_label": ".createcollection()"
     },
     {
@@ -2178,7 +2241,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L122",
       "id": "supabase_supabaseadapter_supabaseadapter_deletecollection",
-      "community": 0,
+      "community": 21,
       "norm_label": ".deletecollection()"
     },
     {
@@ -2187,7 +2250,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L127",
       "id": "supabase_supabaseadapter_supabaseadapter_listitems",
-      "community": 0,
+      "community": 21,
       "norm_label": ".listitems()"
     },
     {
@@ -2196,7 +2259,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L137",
       "id": "supabase_supabaseadapter_supabaseadapter_getitem",
-      "community": 0,
+      "community": 21,
       "norm_label": ".getitem()"
     },
     {
@@ -2205,7 +2268,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L142",
       "id": "supabase_supabaseadapter_supabaseadapter_logactivity",
-      "community": 0,
+      "community": 21,
       "norm_label": ".logactivity()"
     },
     {
@@ -2214,7 +2277,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L158",
       "id": "supabase_supabaseadapter_supabaseadapter_createitem",
-      "community": 0,
+      "community": 21,
       "norm_label": ".createitem()"
     },
     {
@@ -2223,7 +2286,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L174",
       "id": "supabase_supabaseadapter_supabaseadapter_updateitem",
-      "community": 0,
+      "community": 21,
       "norm_label": ".updateitem()"
     },
     {
@@ -2232,7 +2295,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L193",
       "id": "supabase_supabaseadapter_supabaseadapter_deleteitem",
-      "community": 0,
+      "community": 21,
       "norm_label": ".deleteitem()"
     },
     {
@@ -2241,7 +2304,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L206",
       "id": "supabase_supabaseadapter_supabaseadapter_bulkcreateitems",
-      "community": 0,
+      "community": 21,
       "norm_label": ".bulkcreateitems()"
     },
     {
@@ -2250,7 +2313,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L223",
       "id": "supabase_supabaseadapter_supabaseadapter_listactivities",
-      "community": 0,
+      "community": 21,
       "norm_label": ".listactivities()"
     },
     {
@@ -2259,7 +2322,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L234",
       "id": "supabase_supabaseadapter_supabaseadapter_uploadimage",
-      "community": 0,
+      "community": 21,
       "norm_label": ".uploadimage()"
     },
     {
@@ -2268,7 +2331,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L243",
       "id": "supabase_supabaseadapter_supabaseadapter_setitemplacement",
-      "community": 0,
+      "community": 21,
       "norm_label": ".setitemplacement()"
     },
     {
@@ -2304,7 +2367,7 @@
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
       "source_location": "L298",
       "id": "supabase_supabaseadapter_supabaseadapter_deleteshelf",
-      "community": 0,
+      "community": 21,
       "norm_label": ".deleteshelf()"
     },
     {
@@ -2335,12 +2398,30 @@
       "norm_label": "supabaseanonkey"
     },
     {
+      "label": "constants.ts",
+      "file_type": "code",
+      "source_file": "src/lib/constants.ts",
+      "source_location": "L1",
+      "id": "lib_constants",
+      "community": 18,
+      "norm_label": "constants.ts"
+    },
+    {
+      "label": "COVER_COLORS",
+      "file_type": "code",
+      "source_file": "src/lib/constants.ts",
+      "source_location": "L1",
+      "id": "lib_constants_cover_colors",
+      "community": 18,
+      "norm_label": "cover_colors"
+    },
+    {
       "label": "export.ts",
       "file_type": "code",
       "source_file": "src/lib/export.ts",
       "source_location": "L1",
       "id": "lib_export",
-      "community": 2,
+      "community": 0,
       "norm_label": "export.ts"
     },
     {
@@ -2349,7 +2430,7 @@
       "source_file": "src/lib/export.ts",
       "source_location": "L3",
       "id": "lib_export_collectionexport",
-      "community": 2,
+      "community": 0,
       "norm_label": "collectionexport"
     },
     {
@@ -2358,7 +2439,7 @@
       "source_file": "src/lib/export.ts",
       "source_location": "L9",
       "id": "lib_export_exportcollection",
-      "community": 2,
+      "community": 0,
       "norm_label": "exportcollection()"
     },
     {
@@ -2369,6 +2450,186 @@
       "id": "lib_export_iscollectionexport",
       "community": 2,
       "norm_label": "iscollectionexport()"
+    },
+    {
+      "label": "itemFilters.ts",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L1",
+      "id": "lib_itemfilters",
+      "community": 6,
+      "norm_label": "itemfilters.ts"
+    },
+    {
+      "label": "SortKey",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L4",
+      "id": "lib_itemfilters_sortkey",
+      "community": 6,
+      "norm_label": "sortkey"
+    },
+    {
+      "label": "SORT_LABELS",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L6",
+      "id": "lib_itemfilters_sort_labels",
+      "community": 6,
+      "norm_label": "sort_labels"
+    },
+    {
+      "label": "sortItems()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L13",
+      "id": "lib_itemfilters_sortitems",
+      "community": 6,
+      "norm_label": "sortitems()"
+    },
+    {
+      "label": "RangeFilter",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L24",
+      "id": "lib_itemfilters_rangefilter",
+      "community": 6,
+      "norm_label": "rangefilter"
+    },
+    {
+      "label": "normTag()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L26",
+      "id": "lib_itemfilters_normtag",
+      "community": 6,
+      "norm_label": "normtag()"
+    },
+    {
+      "label": "LIST_ATTR_KEYS",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L30",
+      "id": "lib_itemfilters_list_attr_keys",
+      "community": 6,
+      "norm_label": "list_attr_keys"
+    },
+    {
+      "label": "attrValues()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L32",
+      "id": "lib_itemfilters_attrvalues",
+      "community": 6,
+      "norm_label": "attrvalues()"
+    },
+    {
+      "label": "collectTags()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L37",
+      "id": "lib_itemfilters_collecttags",
+      "community": 6,
+      "norm_label": "collecttags()"
+    },
+    {
+      "label": "tagLabel()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L53",
+      "id": "lib_itemfilters_taglabel",
+      "community": 6,
+      "norm_label": "taglabel()"
+    },
+    {
+      "label": "collectTagsByKey()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L58",
+      "id": "lib_itemfilters_collecttagsbykey",
+      "community": 6,
+      "norm_label": "collecttagsbykey()"
+    },
+    {
+      "label": "itemMatchesTags()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L71",
+      "id": "lib_itemfilters_itemmatchestags",
+      "community": 6,
+      "norm_label": "itemmatchestags()"
+    },
+    {
+      "label": "itemMatchesRanges()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L81",
+      "id": "lib_itemfilters_itemmatchesranges",
+      "community": 6,
+      "norm_label": "itemmatchesranges()"
+    },
+    {
+      "label": "isAllNumeric()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L95",
+      "id": "lib_itemfilters_isallnumeric",
+      "community": 6,
+      "norm_label": "isallnumeric()"
+    },
+    {
+      "label": "looksLikeYears()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L99",
+      "id": "lib_itemfilters_lookslikeyears",
+      "community": 6,
+      "norm_label": "lookslikeyears()"
+    },
+    {
+      "label": "autoRanges()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L104",
+      "id": "lib_itemfilters_autoranges",
+      "community": 6,
+      "norm_label": "autoranges()"
+    },
+    {
+      "label": "getDecades()",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L126",
+      "id": "lib_itemfilters_getdecades",
+      "community": 6,
+      "norm_label": "getdecades()"
+    },
+    {
+      "label": "DURATION_PRESETS",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L132",
+      "id": "lib_itemfilters_duration_presets",
+      "community": 6,
+      "norm_label": "duration_presets"
+    },
+    {
+      "label": "IMDB_PRESETS",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L139",
+      "id": "lib_itemfilters_imdb_presets",
+      "community": 6,
+      "norm_label": "imdb_presets"
+    },
+    {
+      "label": "RATING_ATTR_KEYS",
+      "file_type": "code",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L147",
+      "id": "lib_itemfilters_rating_attr_keys",
+      "community": 6,
+      "norm_label": "rating_attr_keys"
     },
     {
       "label": "omdb.ts",
@@ -2484,7 +2745,7 @@
       "source_file": "src/lib/utils.ts",
       "source_location": "L5",
       "id": "lib_utils_cn",
-      "community": 17,
+      "community": 2,
       "norm_label": "cn()"
     },
     {
@@ -2581,178 +2842,25 @@
       "label": "ViewMode",
       "file_type": "code",
       "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L26",
+      "source_location": "L32",
       "id": "pages_collectiondetail_viewmode",
       "community": 6,
       "norm_label": "viewmode"
     },
     {
-      "label": "SortKey",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L27",
-      "id": "pages_collectiondetail_sortkey",
-      "community": 6,
-      "norm_label": "sortkey"
-    },
-    {
       "label": "SORT_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L29",
+      "source_location": "L34",
       "id": "pages_collectiondetail_sort_options",
       "community": 6,
       "norm_label": "sort_options"
     },
     {
-      "label": "sortItems()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L36",
-      "id": "pages_collectiondetail_sortitems",
-      "community": 6,
-      "norm_label": "sortitems()"
-    },
-    {
-      "label": "normTag()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L48",
-      "id": "pages_collectiondetail_normtag",
-      "community": 6,
-      "norm_label": "normtag()"
-    },
-    {
-      "label": "LIST_ATTR_KEYS",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L53",
-      "id": "pages_collectiondetail_list_attr_keys",
-      "community": 6,
-      "norm_label": "list_attr_keys"
-    },
-    {
-      "label": "attrValues()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L56",
-      "id": "pages_collectiondetail_attrvalues",
-      "community": 6,
-      "norm_label": "attrvalues()"
-    },
-    {
-      "label": "collectTags()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L66",
-      "id": "pages_collectiondetail_collecttags",
-      "community": 6,
-      "norm_label": "collecttags()"
-    },
-    {
-      "label": "tagLabel()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L85",
-      "id": "pages_collectiondetail_taglabel",
-      "community": 6,
-      "norm_label": "taglabel()"
-    },
-    {
-      "label": "RangeFilter",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L90",
-      "id": "pages_collectiondetail_rangefilter",
-      "community": 6,
-      "norm_label": "rangefilter"
-    },
-    {
-      "label": "itemMatchesTags()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L93",
-      "id": "pages_collectiondetail_itemmatchestags",
-      "community": 6,
-      "norm_label": "itemmatchestags()"
-    },
-    {
-      "label": "itemMatchesRanges()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L103",
-      "id": "pages_collectiondetail_itemmatchesranges",
-      "community": 6,
-      "norm_label": "itemmatchesranges()"
-    },
-    {
-      "label": "isAllNumeric()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L119",
-      "id": "pages_collectiondetail_isallnumeric",
-      "community": 6,
-      "norm_label": "isallnumeric()"
-    },
-    {
-      "label": "looksLikeYears()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L124",
-      "id": "pages_collectiondetail_lookslikeyears",
-      "community": 6,
-      "norm_label": "lookslikeyears()"
-    },
-    {
-      "label": "autoRanges()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L130",
-      "id": "pages_collectiondetail_autoranges",
-      "community": 6,
-      "norm_label": "autoranges()"
-    },
-    {
-      "label": "getDecades()",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L156",
-      "id": "pages_collectiondetail_getdecades",
-      "community": 6,
-      "norm_label": "getdecades()"
-    },
-    {
-      "label": "DURATION_PRESETS",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L166",
-      "id": "pages_collectiondetail_duration_presets",
-      "community": 6,
-      "norm_label": "duration_presets"
-    },
-    {
-      "label": "IMDB_PRESETS",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L173",
-      "id": "pages_collectiondetail_imdb_presets",
-      "community": 6,
-      "norm_label": "imdb_presets"
-    },
-    {
-      "label": "RATING_ATTR_KEYS",
-      "file_type": "code",
-      "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L182",
-      "id": "pages_collectiondetail_rating_attr_keys",
-      "community": 6,
-      "norm_label": "rating_attr_keys"
-    },
-    {
       "label": "usePersistedViewMode()",
       "file_type": "code",
       "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L186",
+      "source_location": "L41",
       "id": "pages_collectiondetail_usepersistedviewmode",
       "community": 6,
       "norm_label": "usepersistedviewmode()"
@@ -2761,7 +2869,7 @@
       "label": "CollectionDetail()",
       "file_type": "code",
       "source_file": "src/pages/CollectionDetail.tsx",
-      "source_location": "L199",
+      "source_location": "L54",
       "id": "pages_collectiondetail_collectiondetail",
       "community": 1,
       "norm_label": "collectiondetail()"
@@ -2880,25 +2988,34 @@
       "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L1",
       "id": "pages_publiccollection",
-      "community": 3,
+      "community": 6,
       "norm_label": "publiccollection.tsx"
     },
     {
       "label": "ViewMode",
       "file_type": "code",
       "source_file": "src/pages/PublicCollection.tsx",
-      "source_location": "L12",
+      "source_location": "L21",
       "id": "pages_publiccollection_viewmode",
-      "community": 3,
+      "community": 6,
       "norm_label": "viewmode"
+    },
+    {
+      "label": "SORT_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L23",
+      "id": "pages_publiccollection_sort_options",
+      "community": 6,
+      "norm_label": "sort_options"
     },
     {
       "label": "PublicCollection()",
       "file_type": "code",
       "source_file": "src/pages/PublicCollection.tsx",
-      "source_location": "L14",
+      "source_location": "L30",
       "id": "pages_publiccollection_publiccollection",
-      "community": 3,
+      "community": 1,
       "norm_label": "publiccollection()"
     },
     {
@@ -3040,7 +3157,7 @@
       "label": "Activity",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L52",
+      "source_location": "L54",
       "id": "src_types_activity",
       "community": 0,
       "norm_label": "activity"
@@ -3049,7 +3166,7 @@
       "label": "AuthUser",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L62",
+      "source_location": "L64",
       "id": "src_types_authuser",
       "community": 0,
       "norm_label": "authuser"
@@ -3530,6 +3647,168 @@
       "id": "readme_expanding_the_eslint_configuration",
       "community": 9,
       "norm_label": "expanding the eslint configuration"
+    },
+    {
+      "label": "COVER_COLORS",
+      "file_type": "code",
+      "source_file": "src/components/CollectionForm.tsx",
+      "source_location": "L25",
+      "community": 18,
+      "norm_label": "cover_colors",
+      "id": "components_collectionform_cover_colors"
+    },
+    {
+      "label": "SortKey",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L27",
+      "community": 6,
+      "norm_label": "sortkey",
+      "id": "pages_collectiondetail_sortkey"
+    },
+    {
+      "label": "sortItems()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L36",
+      "community": 6,
+      "norm_label": "sortitems()",
+      "id": "pages_collectiondetail_sortitems"
+    },
+    {
+      "label": "normTag()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L48",
+      "community": 6,
+      "norm_label": "normtag()",
+      "id": "pages_collectiondetail_normtag"
+    },
+    {
+      "label": "LIST_ATTR_KEYS",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L53",
+      "community": 6,
+      "norm_label": "list_attr_keys",
+      "id": "pages_collectiondetail_list_attr_keys"
+    },
+    {
+      "label": "attrValues()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L56",
+      "community": 6,
+      "norm_label": "attrvalues()",
+      "id": "pages_collectiondetail_attrvalues"
+    },
+    {
+      "label": "collectTags()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L66",
+      "community": 6,
+      "norm_label": "collecttags()",
+      "id": "pages_collectiondetail_collecttags"
+    },
+    {
+      "label": "tagLabel()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L85",
+      "community": 6,
+      "norm_label": "taglabel()",
+      "id": "pages_collectiondetail_taglabel"
+    },
+    {
+      "label": "RangeFilter",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L90",
+      "community": 6,
+      "norm_label": "rangefilter",
+      "id": "pages_collectiondetail_rangefilter"
+    },
+    {
+      "label": "itemMatchesTags()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L93",
+      "community": 6,
+      "norm_label": "itemmatchestags()",
+      "id": "pages_collectiondetail_itemmatchestags"
+    },
+    {
+      "label": "itemMatchesRanges()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L103",
+      "community": 6,
+      "norm_label": "itemmatchesranges()",
+      "id": "pages_collectiondetail_itemmatchesranges"
+    },
+    {
+      "label": "isAllNumeric()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L119",
+      "community": 6,
+      "norm_label": "isallnumeric()",
+      "id": "pages_collectiondetail_isallnumeric"
+    },
+    {
+      "label": "looksLikeYears()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L124",
+      "community": 6,
+      "norm_label": "lookslikeyears()",
+      "id": "pages_collectiondetail_lookslikeyears"
+    },
+    {
+      "label": "autoRanges()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L130",
+      "community": 6,
+      "norm_label": "autoranges()",
+      "id": "pages_collectiondetail_autoranges"
+    },
+    {
+      "label": "getDecades()",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L156",
+      "community": 6,
+      "norm_label": "getdecades()",
+      "id": "pages_collectiondetail_getdecades"
+    },
+    {
+      "label": "DURATION_PRESETS",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L166",
+      "community": 6,
+      "norm_label": "duration_presets",
+      "id": "pages_collectiondetail_duration_presets"
+    },
+    {
+      "label": "IMDB_PRESETS",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L173",
+      "community": 6,
+      "norm_label": "imdb_presets",
+      "id": "pages_collectiondetail_imdb_presets"
+    },
+    {
+      "label": "RATING_ATTR_KEYS",
+      "file_type": "code",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L182",
+      "community": 6,
+      "norm_label": "rating_attr_keys",
+      "id": "pages_collectiondetail_rating_attr_keys"
     },
     {
       "label": "ATTR_TYPE_ORDER",
@@ -5043,9 +5322,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "components_attributeinput",
-      "confidence_score": 1.0
+      "target": "components_attributeinput"
     },
     {
       "relation": "imports_from",
@@ -5109,9 +5388,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "components_attributeinput_formatduration",
-      "confidence_score": 1.0
+      "target": "components_attributeinput_formatduration"
     },
     {
       "relation": "imports",
@@ -5268,6 +5547,28 @@
       "confidence_score": 1.0,
       "source": "components_collectionform",
       "target": "components_collectionform_schema"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CollectionForm.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "components_collectionform",
+      "target": "lib_constants",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CollectionForm.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "components_collectionform",
+      "target": "lib_constants_cover_colors",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -6176,6 +6477,334 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "components_itemfilterpanel_itemfilterpanel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "components_itemfilterpanel_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_autoranges",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_collecttags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_collecttagsbykey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_duration_presets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_getdecades",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_imdb_presets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_isallnumeric",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_lookslikeyears",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_normtag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_rangefilter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_rating_attr_keys",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_itemfilters_taglabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_utils_cn",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "lib_utils_normalize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "src_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "src_types_attributeschema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "src_types_collectionitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "ui_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel",
+      "target": "ui_button_button",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "components_itemfilterpanel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "components_itemfilterpanel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel_props",
+      "target": "lib_itemfilters_rangefilter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel_props",
+      "target": "src_types_attributeschema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ItemFilterPanel.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "components_itemfilterpanel_props",
+      "target": "src_types_collectionitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "components_itemfilterpanel_itemfilterpanel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "components_itemfilterpanel_itemfilterpanel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/ItemForm.tsx",
       "source_location": "L22",
       "weight": 1.0,
@@ -6776,9 +7405,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "components_searchdialog_props",
-      "confidence_score": 1.0
+      "target": "components_searchdialog_props"
     },
     {
       "relation": "contains",
@@ -6786,9 +7415,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "components_searchdialog_searchdialog",
-      "confidence_score": 1.0
+      "target": "components_searchdialog_searchdialog"
     },
     {
       "relation": "imports_from",
@@ -6797,9 +7426,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "lib_utils",
-      "confidence_score": 1.0
+      "target": "lib_utils"
     },
     {
       "relation": "imports",
@@ -6808,9 +7437,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "lib_utils_cn",
-      "confidence_score": 1.0
+      "target": "lib_utils_cn"
     },
     {
       "relation": "imports",
@@ -6819,9 +7448,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "lib_utils_normalize",
-      "confidence_score": 1.0
+      "target": "lib_utils_normalize"
     },
     {
       "relation": "imports",
@@ -6830,9 +7459,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "lib_utils_sortedattrs",
-      "confidence_score": 1.0
+      "target": "lib_utils_sortedattrs"
     },
     {
       "relation": "imports_from",
@@ -6841,9 +7470,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "src_types",
-      "confidence_score": 1.0
+      "target": "src_types"
     },
     {
       "relation": "imports",
@@ -6852,9 +7481,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "src_types_attributeschema",
-      "confidence_score": 1.0
+      "target": "src_types_attributeschema"
     },
     {
       "relation": "imports",
@@ -6863,9 +7492,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "src_types_collectionitem",
-      "confidence_score": 1.0
+      "target": "src_types_collectionitem"
     },
     {
       "relation": "imports_from",
@@ -6874,9 +7503,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "ui_dialog",
-      "confidence_score": 1.0
+      "target": "ui_dialog"
     },
     {
       "relation": "imports",
@@ -6885,9 +7514,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog",
-      "target": "ui_dialog_dialogcontent",
-      "confidence_score": 1.0
+      "target": "ui_dialog_dialogcontent"
     },
     {
       "relation": "imports_from",
@@ -6896,7 +7525,18 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
+      "target": "components_searchdialog"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
       "target": "components_searchdialog",
       "confidence_score": 1.0
     },
@@ -6907,9 +7547,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog_props",
-      "target": "src_types_attributeschema",
-      "confidence_score": 1.0
+      "target": "src_types_attributeschema"
     },
     {
       "relation": "references",
@@ -6918,9 +7558,9 @@
       "source_file": "src/components/SearchDialog.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_searchdialog_props",
-      "target": "src_types_collectionitem",
-      "confidence_score": 1.0
+      "target": "src_types_collectionitem"
     },
     {
       "relation": "imports",
@@ -6929,7 +7569,18 @@
       "source_file": "src/pages/CollectionDetail.tsx",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_collectiondetail",
+      "target": "components_searchdialog_searchdialog"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
       "target": "components_searchdialog_searchdialog",
       "confidence_score": 1.0
     },
@@ -6943,6 +7594,50 @@
       "confidence_score": 1.0,
       "source": "pages_shelves",
       "target": "shelf_shelfformdialog"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfFormDialog.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "shelf_shelfformdialog",
+      "target": "lib_constants",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfFormDialog.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "shelf_shelfformdialog",
+      "target": "lib_constants_cover_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfFormDialog.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "shelf_shelfformdialog",
+      "target": "lib_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfFormDialog.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "shelf_shelfformdialog",
+      "target": "lib_utils_cn",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6983,6 +7678,28 @@
       "confidence_score": 1.0,
       "source": "shelf_shelfformdialog",
       "target": "shelf_shelfformdialog_shelfformdialog"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfFormDialog.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "shelf_shelfformdialog",
+      "target": "shelf_shelfthemes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfFormDialog.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "shelf_shelfformdialog",
+      "target": "shelf_shelfthemes_shelf_themes",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -7259,6 +7976,28 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/shelf/ShelfGrid.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "shelf_shelfgrid",
+      "target": "shelf_shelfthemes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfGrid.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "shelf_shelfgrid",
+      "target": "shelf_shelfthemes_getshelftheme",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/ShelfGrid.tsx",
       "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -7341,6 +8080,28 @@
       "confidence_score": 1.0,
       "source": "pages_shelves",
       "target": "shelf_shelfgrid_shelfgrid"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/shelf/ShelfGrid.tsx",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "shelf_shelfgrid_shelfgrid",
+      "target": "lib_utils_cn"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/shelf/ShelfGrid.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "shelf_shelfgrid_shelfgrid",
+      "target": "shelf_shelfthemes_getshelftheme"
     },
     {
       "relation": "references",
@@ -7666,6 +8427,36 @@
       "weight": 1.0,
       "source": "shelf_unplacedtray_unplacedtray",
       "target": "lib_utils_cn"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "shelf_shelfthemes",
+      "target": "shelf_shelfthemes_getshelftheme",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "shelf_shelfthemes",
+      "target": "shelf_shelfthemes_shelf_themes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/shelf/shelfThemes.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "shelf_shelfthemes",
+      "target": "shelf_shelfthemes_shelftheme",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -10236,6 +11027,16 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/data/local/LocalAdapter.ts",
+      "source_location": "L273",
+      "weight": 1.0,
+      "source": "local_localadapter_localadapter",
+      "target": "local_localadapter_localadapter_normalizeshelf",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/local/LocalAdapter.ts",
       "source_location": "L39",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -10770,6 +11571,17 @@
       "confidence_score": 1.0,
       "source": "local_localadapter_localadapter_setitemplacement",
       "target": "src_types_collectionitem"
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/local/LocalAdapter.ts",
+      "source_location": "L273",
+      "weight": 1.0,
+      "source": "local_localadapter_localadapter_normalizeshelf",
+      "target": "src_types_shelf",
+      "confidence_score": 1.0
     },
     {
       "relation": "references",
@@ -12022,6 +12834,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/lib/constants.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_constants",
+      "target": "lib_constants_cover_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/lib/export.ts",
       "source_location": "L3",
       "weight": 1.0,
@@ -12158,6 +12980,449 @@
       "confidence_score": 1.0,
       "source": "pages_collections",
       "target": "lib_export_iscollectionexport"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_attrvalues",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_autoranges",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_collecttags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_collecttagsbykey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L132",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_duration_presets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L126",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_getdecades",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_imdb_presets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L95",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_isallnumeric",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_itemmatchesranges",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L71",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_itemmatchestags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_list_attr_keys",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L99",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_lookslikeyears",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_normtag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_rangefilter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L147",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_rating_attr_keys",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_sort_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_sortitems",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_sortkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_itemfilters_taglabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "lib_utils_normalize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "src_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_itemfilters",
+      "target": "src_types_collectionitem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_sortkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_sortkey",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_sortitems",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_sortitems",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_rangefilter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_rangefilter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/itemFilters.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "lib_itemfilters_normtag",
+      "target": "lib_utils_normalize"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_normtag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_normtag",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_collecttags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_collecttags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_taglabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_taglabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_itemmatchestags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_itemmatchestags",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/CollectionDetail.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "pages_collectiondetail",
+      "target": "lib_itemfilters_itemmatchesranges",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "lib_itemfilters_itemmatchesranges",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -13004,6 +14269,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/PublicCollection.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "pages_publiccollection",
+      "target": "pages_publiccollection_sort_options",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PublicCollection.tsx",
       "source_location": "L12",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -13669,5 +14944,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6503f17d47cb807ccce900c66474ef5356857ce0"
+  "built_at_commit": "cb3ccc8487d9c89235e7324f051bec347daadffe"
 }

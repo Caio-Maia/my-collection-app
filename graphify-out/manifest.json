@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "src/components/CollectionForm.tsx": {
-    "mtime": 1780597300.5510552,
-    "ast_hash": "73be1ba87c400114bcb29b7837fdb4de",
+    "mtime": 1780600874.1656594,
+    "ast_hash": "ae0aba43182ebff57f303e52193892f9",
     "semantic_hash": ""
   },
   "src/components/EmptyState.tsx": {
@@ -125,13 +125,13 @@
     "semantic_hash": ""
   },
   "src/data/DataProvider.ts": {
-    "mtime": 1780595978.341594,
-    "ast_hash": "876e73f47beccc1c3ba93680235a5158",
+    "mtime": 1780600870.9749444,
+    "ast_hash": "66f18f833d1febc21d8eb56cf5496ac2",
     "semantic_hash": ""
   },
   "src/data/local/LocalAdapter.ts": {
-    "mtime": 1780599200.716171,
-    "ast_hash": "854a775aadcd792782d8ddfb42055896",
+    "mtime": 1780600889.991359,
+    "ast_hash": "91d5f60de3cf8ebea04cd29e525028b2",
     "semantic_hash": ""
   },
   "src/data/local/db.ts": {
@@ -165,8 +165,8 @@
     "semantic_hash": ""
   },
   "src/pages/CollectionDetail.tsx": {
-    "mtime": 1780600039.1516066,
-    "ast_hash": "4d34203a8eb3b4ed69af76329e588425",
+    "mtime": 1780601562.5567307,
+    "ast_hash": "79007d55791ee4a499cb4767b2e6cfa9",
     "semantic_hash": ""
   },
   "src/pages/Collections.tsx": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "src/types.ts": {
-    "mtime": 1780597265.0553823,
-    "ast_hash": "3dbea7880d66c961863ac1e85400b370",
+    "mtime": 1780600867.6338253,
+    "ast_hash": "11ddb376e3a4df10361ae109760a6a17",
     "semantic_hash": ""
   },
   "supabase/migrations/0001_init.sql": {
@@ -285,13 +285,13 @@
     "semantic_hash": ""
   },
   "src/components/shelf/ShelfFormDialog.tsx": {
-    "mtime": 1780596574.247713,
-    "ast_hash": "5e4985248246702e457343f4471b22aa",
+    "mtime": 1780600954.3417966,
+    "ast_hash": "3a310cee5ac0043fed77d6286dec54a8",
     "semantic_hash": ""
   },
   "src/components/shelf/ShelfGrid.tsx": {
-    "mtime": 1780599807.266083,
-    "ast_hash": "3e594f95e7d3cffede7f19e7829a027a",
+    "mtime": 1780600929.302157,
+    "ast_hash": "807a3132e318d816a215db35771237bb",
     "semantic_hash": ""
   },
   "src/components/shelf/ShelfItemPreview.tsx": {
@@ -320,13 +320,13 @@
     "semantic_hash": ""
   },
   "src/pages/PublicCollection.tsx": {
-    "mtime": 1780599563.140741,
-    "ast_hash": "4590393bc32a81f82d4bb1eb86a17fe2",
+    "mtime": 1780601545.5591137,
+    "ast_hash": "8603015639c06b5075b194739dd0c8c7",
     "semantic_hash": ""
   },
   "src/pages/Shelves.tsx": {
-    "mtime": 1780596569.4550807,
-    "ast_hash": "56a7eda4e003b61512623bb8039c6899",
+    "mtime": 1780600897.933662,
+    "ast_hash": "33a752b30a9c73ff12f45b99b58a54cf",
     "semantic_hash": ""
   },
   "src/pages/Welcome.tsx": {
@@ -352,6 +352,31 @@
   "src/components/SearchDialog.tsx": {
     "mtime": 1780599970.666957,
     "ast_hash": "2b648eedccfd2e091d7e218a3ee00cc9",
+    "semantic_hash": ""
+  },
+  "src/components/ItemFilterPanel.tsx": {
+    "mtime": 1780601267.9714262,
+    "ast_hash": "3ff0380102c40c3160d673fa563cf5c5",
+    "semantic_hash": ""
+  },
+  "src/components/shelf/shelfThemes.ts": {
+    "mtime": 1780600857.6722941,
+    "ast_hash": "faaa22c1a5af2ca38d0b0c4508c94073",
+    "semantic_hash": ""
+  },
+  "src/lib/constants.ts": {
+    "mtime": 1780600830.775112,
+    "ast_hash": "abe35644bbab36a6eec0f38fbe04f5e3",
+    "semantic_hash": ""
+  },
+  "src/lib/itemFilters.ts": {
+    "mtime": 1780601225.336056,
+    "ast_hash": "295018d51d88dc1217b5c89999b258a3",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/0006_shelf_theme.sql": {
+    "mtime": 1780600834.9888482,
+    "ast_hash": "bc7370f08f6d3d00b51d32f3d8466c26",
     "semantic_hash": ""
   }
 }
