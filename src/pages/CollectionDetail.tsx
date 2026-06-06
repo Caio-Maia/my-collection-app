@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -6,6 +6,7 @@ import {
   LayoutGrid, LayoutList, ArrowUpAZ, ArrowDownAZ,
   CalendarArrowUp, CalendarArrowDown, SlidersHorizontal, Library,
   Download, Globe, Lock, Share2, Search, MoreVertical,
+  Check, Trash2, X,
 } from 'lucide-react';
 import { useData } from '../data/DataContext';
 import { useAuth } from '../auth/AuthContext';
@@ -57,17 +58,24 @@ export function CollectionDetail() {
   const { user } = useAuth();
   const qc = useQueryClient();
 
-  const [searchOpen, setSearchOpen]     = useState(false);
-  const [viewMode, setViewMode]         = usePersistedViewMode(id);
-  const [sortBy, setSortBy]             = useState<SortKey>('date-desc');
-  const [activeTags, setActiveTags]     = useState<Set<string>>(new Set());
-  const [activeRanges, setActiveRanges] = useState<RangeFilter[]>([]);
-  const [showFilters, setShowFilters]   = useState(false);
-  const [selectedItem, setSelectedItem] = useState<CollectionItem | null>(null);
-  const [addOpen, setAddOpen]           = useState(false);
-  const [importOpen, setImportOpen]     = useState(false);
-  const [menuOpen, setMenuOpen]         = useState(false);
-  const [sharingLink, setSharingLink]   = useState(false);
+  const [searchOpen, setSearchOpen]         = useState(false);
+  const [viewMode, setViewMode]             = usePersistedViewMode(id);
+  const [sortBy, setSortBy]                 = useState<SortKey>('date-desc');
+  const [activeTags, setActiveTags]         = useState<Set<string>>(new Set());
+  const [activeRanges, setActiveRanges]     = useState<RangeFilter[]>([]);
+  const [showFilters, setShowFilters]       = useState(false);
+  const [selectedItem, setSelectedItem]     = useState<CollectionItem | null>(null);
+  const [addOpen, setAddOpen]               = useState(false);
+  const [importOpen, setImportOpen]         = useState(false);
+  const [menuOpen, setMenuOpen]             = useState(false);
+  const [sharingLink, setSharingLink]       = useState(false);
+  const [selectMode, setSelectMode]         = useState(false);
+  const [selectedIds, setSelectedIds]       = useState<Set<string>>(new Set());
+  const [shelfMenuOpen, setShelfMenuOpen]   = useState(false);
+  const [batchConfirmDelete, setBatchConfirmDelete] = useState(false);
+
+  const longPressTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longPressDidFire  = useRef(false);
 
   const { data: collection, isLoading: loadingCol } = useQuery({
     queryKey: ['collection', id],
@@ -79,6 +87,12 @@ export function CollectionDetail() {
     queryKey: ['items', id],
     queryFn: () => data.listItems(id!),
     enabled: !!id,
+  });
+
+  const { data: shelves = [] } = useQuery({
+    queryKey: ['shelves', id],
+    queryFn: () => data.listShelves(id!),
+    enabled: !!id && selectMode,
   });
 
   const togglePublicMutation = useMutation({
@@ -98,6 +112,31 @@ export function CollectionDetail() {
       qc.invalidateQueries({ queryKey: ['activities', user?.id] });
       setAddOpen(false);
       toast.success('Item adicionado!');
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const batchDeleteMutation = useMutation({
+    mutationFn: async (ids: string[]) => {
+      for (const itemId of ids) await data.deleteItem(itemId);
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['items', id] });
+      qc.invalidateQueries({ queryKey: ['activities', user?.id] });
+      exitSelectMode();
+      toast.success('Itens removidos.');
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const batchMoveMutation = useMutation({
+    mutationFn: async ({ ids, shelfId }: { ids: string[]; shelfId: string }) => {
+      for (const itemId of ids) await data.updateItem(itemId, { shelf_id: shelfId, shelf_row: null, shelf_col: null });
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['items', id] });
+      exitSelectMode();
+      toast.success('Itens adicionados à estante.');
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -164,6 +203,39 @@ export function CollectionDetail() {
   function clearFilters() {
     setActiveTags(new Set());
     setActiveRanges([]);
+  }
+
+  function toggleSelect(itemId: string) {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      next.has(itemId) ? next.delete(itemId) : next.add(itemId);
+      if (next.size === 0) setSelectMode(false);
+      return next;
+    });
+  }
+
+  function exitSelectMode() {
+    setSelectMode(false);
+    setSelectedIds(new Set());
+    setBatchConfirmDelete(false);
+    setShelfMenuOpen(false);
+  }
+
+  function startLongPress(item: CollectionItem) {
+    if (selectMode) return;
+    longPressDidFire.current = false;
+    longPressTimer.current = setTimeout(() => {
+      longPressDidFire.current = true;
+      setSelectMode(true);
+      setSelectedIds(new Set([item.id]));
+    }, 500);
+  }
+
+  function cancelLongPress() {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
   }
 
   const hasActiveFilters = activeTags.size > 0 || activeRanges.length > 0;
@@ -421,11 +493,32 @@ export function CollectionDetail() {
           {processed.map((item) => (
             <button
               key={item.id}
-              onClick={() => setSelectedItem(item)}
-              className="w-full flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors text-left group"
+              onClick={() => {
+                if (longPressDidFire.current) { longPressDidFire.current = false; return; }
+                selectMode ? toggleSelect(item.id) : setSelectedItem(item);
+              }}
+              onMouseDown={() => startLongPress(item)}
+              onMouseUp={cancelLongPress}
+              onMouseLeave={cancelLongPress}
+              onTouchStart={() => startLongPress(item)}
+              onTouchEnd={cancelLongPress}
+              onTouchMove={cancelLongPress}
+              onContextMenu={(e) => e.preventDefault()}
+              className={cn(
+                'w-full flex items-center gap-4 px-4 py-3 transition-colors text-left group',
+                selectMode && selectedIds.has(item.id) ? 'bg-primary/5' : 'hover:bg-accent/50',
+              )}
             >
+              {selectMode && (
+                <div className={cn(
+                  'h-5 w-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all',
+                  selectedIds.has(item.id) ? 'border-primary bg-primary' : 'border-muted-foreground/40',
+                )}>
+                  {selectedIds.has(item.id) && <Check className="h-3 w-3 text-primary-foreground" />}
+                </div>
+              )}
               {item.photo_url ? (
-                <img src={item.photo_url} alt={item.title} className="h-12 w-12 rounded-md object-cover border shrink-0" />
+                <img src={item.photo_url} alt={item.title} className="h-12 w-12 rounded-md object-cover border shrink-0" referrerPolicy="no-referrer" />
               ) : (
                 <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center shrink-0">
                   <Package className="h-5 w-5 text-muted-foreground" />
@@ -458,8 +551,23 @@ export function CollectionDetail() {
           {processed.map((item) => (
             <button
               key={item.id}
-              onClick={() => setSelectedItem(item)}
-              className="group rounded-lg border bg-card overflow-hidden text-left hover:shadow-md hover:border-primary/30 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              onClick={() => {
+                if (longPressDidFire.current) { longPressDidFire.current = false; return; }
+                selectMode ? toggleSelect(item.id) : setSelectedItem(item);
+              }}
+              onMouseDown={() => startLongPress(item)}
+              onMouseUp={cancelLongPress}
+              onMouseLeave={cancelLongPress}
+              onTouchStart={() => startLongPress(item)}
+              onTouchEnd={cancelLongPress}
+              onTouchMove={cancelLongPress}
+              onContextMenu={(e) => e.preventDefault()}
+              className={cn(
+                'group rounded-lg border overflow-hidden text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                selectMode && selectedIds.has(item.id)
+                  ? 'border-primary bg-primary/5 shadow-md'
+                  : 'bg-card hover:shadow-md hover:border-primary/30',
+              )}
             >
               <div className="relative aspect-[3/4] bg-muted overflow-hidden">
                 {item.photo_url ? (
@@ -467,6 +575,7 @@ export function CollectionDetail() {
                     src={item.photo_url}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -474,6 +583,14 @@ export function CollectionDetail() {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                {selectMode && (
+                  <div className={cn(
+                    'absolute top-2 right-2 h-6 w-6 rounded-full border-2 flex items-center justify-center transition-all',
+                    selectedIds.has(item.id) ? 'border-primary bg-primary' : 'border-white/80 bg-black/20',
+                  )}>
+                    {selectedIds.has(item.id) && <Check className="h-3.5 w-3.5 text-white" />}
+                  </div>
+                )}
               </div>
               <div className="p-2.5">
                 <p className="font-medium text-sm leading-tight line-clamp-2 group-hover:text-primary transition-colors">
@@ -538,6 +655,88 @@ export function CollectionDetail() {
         open={importOpen}
         onOpenChange={setImportOpen}
       />
+
+      {/* Batch action bar */}
+      {selectMode && selectedIds.size > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full border bg-popover shadow-xl px-4 py-2.5 whitespace-nowrap">
+          <span className="text-sm font-medium">
+            {selectedIds.size} selecionado{selectedIds.size !== 1 ? 's' : ''}
+          </span>
+          <div className="w-px h-4 bg-border mx-1" />
+          <button
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setSelectedIds(new Set(processed.map(i => i.id)))}
+          >
+            Todos
+          </button>
+
+          {/* Move to shelf */}
+          <div className="relative">
+            <button
+              onClick={() => { setShelfMenuOpen(v => !v); setBatchConfirmDelete(false); }}
+              className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm hover:bg-accent transition-colors disabled:opacity-50"
+              disabled={batchMoveMutation.isPending}
+            >
+              <Library className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Estante</span>
+            </button>
+            {shelfMenuOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setShelfMenuOpen(false)} />
+                <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 z-50 min-w-40 rounded-md border bg-popover shadow-md py-1">
+                  {shelves.length === 0 ? (
+                    <p className="px-3 py-2 text-sm text-muted-foreground">Nenhuma estante</p>
+                  ) : shelves.map(shelf => (
+                    <button
+                      key={shelf.id}
+                      className="w-full flex items-center px-3 py-2 text-sm hover:bg-accent transition-colors text-left disabled:opacity-50"
+                      onClick={() => batchMoveMutation.mutate({ ids: Array.from(selectedIds), shelfId: shelf.id })}
+                      disabled={batchMoveMutation.isPending}
+                    >
+                      {shelf.name}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Delete */}
+          {batchConfirmDelete ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-destructive font-medium">
+                Remover {selectedIds.size} {selectedIds.size === 1 ? 'item' : 'itens'}?
+              </span>
+              <button
+                className="rounded-md px-2.5 py-1.5 text-sm bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors disabled:opacity-50"
+                onClick={() => batchDeleteMutation.mutate(Array.from(selectedIds))}
+                disabled={batchDeleteMutation.isPending}
+              >
+                {batchDeleteMutation.isPending ? 'Removendo...' : 'Confirmar'}
+              </button>
+              <button
+                className="text-sm text-muted-foreground hover:text-foreground"
+                onClick={() => setBatchConfirmDelete(false)}
+              >
+                Não
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => { setBatchConfirmDelete(true); setShelfMenuOpen(false); }}
+              className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm text-destructive hover:bg-destructive/10 transition-colors"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Remover</span>
+            </button>
+          )}
+
+          <div className="w-px h-4 bg-border mx-1" />
+          <button onClick={exitSelectMode} className="text-muted-foreground hover:text-foreground transition-colors p-1">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

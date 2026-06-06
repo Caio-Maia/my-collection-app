@@ -22,7 +22,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 const ICONS = Object.keys(ICON_MAP);
 
-import { COVER_COLORS } from '../lib/constants';
+import { COVER_COLORS, imageUrlSchema } from '../lib/constants';
 
 const ATTR_TYPES = [
   { value: 'text',     label: 'Texto'                 },
@@ -36,7 +36,7 @@ const schema = z.object({
   description:  z.string(),
   icon:         z.string(),
   cover_color:  z.string(),
-  cover_image:  z.string(),
+  cover_image:  imageUrlSchema,
   attr_schema:  z.array(z.object({
     key:  z.string(),
     type: z.enum(['text', 'person', 'year', 'duration']),
@@ -179,7 +179,7 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
         {/* Preview */}
         <div className="h-20 w-full rounded-md border overflow-hidden bg-muted">
           {coverImage ? (
-            <img src={coverImage} alt="preview" className="w-full h-full object-cover" />
+            <img src={coverImage} alt="preview" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           ) : coverColor ? (
             <div className="w-full h-full" style={{ backgroundColor: coverColor }} />
           ) : (
@@ -229,18 +229,21 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
               placeholder="https://..."
               value={coverImage}
               onChange={e => {
-                form.setValue('cover_image', e.target.value);
+                form.setValue('cover_image', e.target.value, { shouldValidate: true });
                 if (e.target.value) form.setValue('cover_color', '');
               }}
               className="flex-1"
             />
             {coverImage && (
               <Button type="button" variant="ghost" size="icon"
-                onClick={() => form.setValue('cover_image', '')}>
+                onClick={() => form.setValue('cover_image', '', { shouldValidate: true })}>
                 <X className="h-4 w-4" />
               </Button>
             )}
           </div>
+          {form.formState.errors.cover_image && (
+            <p className="text-xs text-destructive">{form.formState.errors.cover_image.message}</p>
+          )}
           <p className="text-xs text-muted-foreground">A imagem tem prioridade sobre a cor sólida.</p>
         </div>
       </CollapsibleSection>

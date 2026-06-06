@@ -38,10 +38,11 @@ export function Shelves() {
   // ghost position is updated imperatively to avoid re-renders on every touchmove.
   const [touchDragItem, setTouchDragItem]         = useState<CollectionItem | null>(null);
   const [touchDragOverCell, setTouchDragOverCell] = useState<{ row: number; col: number } | null>(null);
+  // Initial ghost position — set once when a drag starts (not per move).
+  const [ghostStart, setGhostStart]               = useState<{ x: number; y: number } | null>(null);
 
   const touchDragItemRef     = useRef<CollectionItem | null>(null);
   const touchDragOverCellRef = useRef<{ row: number; col: number } | null>(null);
-  const initialPosRef        = useRef<{ x: number; y: number } | null>(null);
   const ghostRef             = useRef<HTMLDivElement>(null);
   const scrollContainerRef   = useRef<HTMLDivElement>(null);
   const scrollRafRef         = useRef<number | null>(null);
@@ -145,10 +146,13 @@ export function Shelves() {
     placementMutation.mutate({ itemId, shelfId: null, row: null, col: null });
   }
 
-  handleDropRef.current = handleDrop;
+  // Keep the drop handler ref current without assigning during render.
+  useEffect(() => {
+    handleDropRef.current = handleDrop;
+  });
 
   function handleLongPressStart(item: CollectionItem, x: number, y: number) {
-    initialPosRef.current = { x, y };
+    setGhostStart({ x, y });
     touchDragItemRef.current = item;
     setTouchDragItem(item);
     setSelectedItem(null); // close ItemDialog if open
@@ -237,9 +241,9 @@ export function Shelves() {
       }
       touchDragItemRef.current     = null;
       touchDragOverCellRef.current = null;
-      initialPosRef.current        = null;
       setTouchDragItem(null);
       setTouchDragOverCell(null);
+      setGhostStart(null);
     }
 
     document.addEventListener('touchmove', onTouchMove, { passive: false });
@@ -405,14 +409,14 @@ export function Shelves() {
           ref={ghostRef}
           className="fixed z-[9999] pointer-events-none select-none"
           style={{
-            left: initialPosRef.current?.x ?? -9999,
-            top:  initialPosRef.current?.y ?? -9999,
+            left: ghostStart?.x ?? -9999,
+            top:  ghostStart?.y ?? -9999,
             transform: 'translate(-50%, -50%)',
           }}
         >
           <div className="flex items-center gap-1.5 rounded-md border bg-card shadow-xl px-2 py-1.5 text-xs font-medium opacity-90 scale-110">
             {touchDragItem.photo_url ? (
-              <img src={touchDragItem.photo_url} alt="" className="h-5 w-5 rounded object-cover shrink-0" />
+              <img src={touchDragItem.photo_url} alt="" className="h-5 w-5 rounded object-cover shrink-0" referrerPolicy="no-referrer" />
             ) : (
               <Package className="h-4 w-4 text-muted-foreground shrink-0" />
             )}

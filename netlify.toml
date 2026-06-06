@@ -6,3 +6,13 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Security headers. img-src allows any https host + data: so OMDB posters,
+# user-pasted image links, and local data-URL uploads all render, while
+# blocking active content (scripts/iframes) from untrusted sources.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"

@@ -11,12 +11,14 @@ import { AttributeInput } from './AttributeInput';
 import { OmdbSearchPanel } from './OmdbSearchPanel';
 import { useData } from '../data/DataContext';
 import { normalize } from '../lib/utils';
+import { imageUrlSchema, validateImageFile } from '../lib/constants';
+import { toast } from 'sonner';
 import type { CollectionItem, AttributeSchema } from '../types';
 
 const schema = z.object({
   title: z.string().min(1, 'Título é obrigatório'),
   description: z.string(),
-  photo_url: z.string(),
+  photo_url: imageUrlSchema,
   attributes: z.array(z.object({ key: z.string(), value: z.string() })),
 });
 
@@ -58,6 +60,12 @@ export function ItemForm({ initial, onSubmit, onCancel, loading, enableOmdb, att
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    const error = validateImageFile(file);
+    if (error) {
+      toast.error(error);
+      e.target.value = '';
+      return;
+    }
     setUploading(true);
     try {
       const url = await data.uploadImage(file);
@@ -70,7 +78,7 @@ export function ItemForm({ initial, onSubmit, onCancel, loading, enableOmdb, att
 
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPreview(e.target.value);
-    form.setValue('photo_url', e.target.value);
+    form.setValue('photo_url', e.target.value, { shouldValidate: true });
   };
 
   const handleSubmit = async (values: FormData) => {
@@ -131,7 +139,7 @@ export function ItemForm({ initial, onSubmit, onCancel, loading, enableOmdb, att
       <div className="space-y-1.5">
         <Label>Foto</Label>
         {preview && (
-          <img src={preview} alt="preview" className="w-full h-40 object-cover rounded-md border" />
+          <img src={preview} alt="preview" className="w-full h-40 object-cover rounded-md border" referrerPolicy="no-referrer" />
         )}
         <div className="flex gap-2">
           <Input
@@ -157,6 +165,9 @@ export function ItemForm({ initial, onSubmit, onCancel, loading, enableOmdb, att
           className="hidden"
           onChange={handleFileChange}
         />
+        {form.formState.errors.photo_url && (
+          <p className="text-xs text-destructive">{form.formState.errors.photo_url.message}</p>
+        )}
       </div>
 
       <div className="space-y-2">

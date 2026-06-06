@@ -171,7 +171,7 @@ export function Collections() {
                   {/* Cover — ~65% of card height via aspect ratio */}
                   <div className="aspect-[16/7] relative overflow-hidden">
                     {col.cover_image ? (
-                      <img src={col.cover_image} alt="" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                      <img src={col.cover_image} alt="" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" referrerPolicy="no-referrer" />
                     ) : col.cover_color ? (
                       <div className="w-full h-full" style={{ backgroundColor: col.cover_color }} />
                     ) : (

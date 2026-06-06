@@ -88,6 +88,7 @@ export function SearchDialog({ open, onOpenChange, items, attributeSchema, onSel
                         src={item.photo_url}
                         alt={item.title}
                         className="h-11 w-11 rounded-md object-cover border shrink-0"
+                        referrerPolicy="no-referrer"
                       />
                     ) : (
                       <div className="h-11 w-11 rounded-md bg-muted flex items-center justify-center shrink-0">

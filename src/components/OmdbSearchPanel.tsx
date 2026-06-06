@@ -91,7 +91,7 @@ export function OmdbSearchPanel({ onSelect, onClose }: Props) {
                 )}
               >
                 {item.Poster && item.Poster !== 'N/A' ? (
-                  <img src={item.Poster} alt={item.Title} className="h-10 w-7 object-cover rounded flex-shrink-0" />
+                  <img src={item.Poster} alt={item.Title} className="h-10 w-7 object-cover rounded flex-shrink-0" referrerPolicy="no-referrer" />
                 ) : (
                   <div className="h-10 w-7 rounded bg-muted flex items-center justify-center flex-shrink-0">
                     <Film className="h-4 w-4 text-muted-foreground" />

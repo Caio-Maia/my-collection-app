@@ -131,7 +131,7 @@ function TrayItem({
         title={item.title}
       >
         {item.photo_url ? (
-          <img src={item.photo_url} alt="" className="h-5 w-5 rounded object-cover shrink-0" />
+          <img src={item.photo_url} alt="" className="h-5 w-5 rounded object-cover shrink-0" referrerPolicy="no-referrer" />
         ) : (
           <Package className="h-4 w-4 text-muted-foreground shrink-0" />
         )}

@@ -137,6 +137,7 @@ export function ItemDialog({ item, open, onOpenChange, attributeSchema, autocomp
                 src={current.photo_url}
                 alt={current.title}
                 className="w-full h-56 object-cover rounded-md border"
+                referrerPolicy="no-referrer"
               />
             )}
 

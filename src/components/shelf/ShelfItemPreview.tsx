@@ -23,7 +23,7 @@ export function ShelfItemPreview({ item, schema }: Props) {
   return (
     <div className="w-48 bg-popover border rounded-lg shadow-lg overflow-hidden text-sm">
       {item.photo_url ? (
-        <img src={item.photo_url} alt={item.title} className="w-full h-28 object-cover" />
+        <img src={item.photo_url} alt={item.title} className="w-full h-28 object-cover" referrerPolicy="no-referrer" />
       ) : (
         <div className="w-full h-28 bg-muted flex items-center justify-center">
           <Package className="h-8 w-8 text-muted-foreground/40" />

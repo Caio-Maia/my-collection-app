@@ -235,7 +235,7 @@ export function PublicCollection() {
                 className="w-full flex items-center gap-4 px-4 py-3 hover:bg-accent/50 transition-colors text-left group"
               >
                 {item.photo_url ? (
-                  <img src={item.photo_url} alt={item.title} className="h-12 w-12 rounded-md object-cover border shrink-0" />
+                  <img src={item.photo_url} alt={item.title} className="h-12 w-12 rounded-md object-cover border shrink-0" referrerPolicy="no-referrer" />
                 ) : (
                   <div className="h-12 w-12 rounded-md bg-muted flex items-center justify-center shrink-0">
                     <Package className="h-5 w-5 text-muted-foreground" />
@@ -269,7 +269,7 @@ export function PublicCollection() {
               >
                 <div className="relative aspect-[3/4] bg-muted overflow-hidden">
                   {item.photo_url ? (
-                    <img src={item.photo_url} alt={item.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                    <img src={item.photo_url} alt={item.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" referrerPolicy="no-referrer" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
                       <Package className="h-8 w-8 text-muted-foreground/40" />
