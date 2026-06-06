@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Home, Library, LogOut, Menu, User, X } from 'lucide-react';
+import { BookOpen, Download, Home, Library, LogOut, Menu, User, X } from 'lucide-react';
 import { useAuth } from '../auth/AuthContext';
+import { useInstallPWA } from '../hooks/useInstallPWA';
 import { Button } from './ui/button';
 import {
   DropdownMenu,
@@ -24,6 +25,8 @@ export function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { canInstall, isIOS, install } = useInstallPWA();
+  const [iosHint, setIosHint] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
@@ -64,6 +67,19 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* Install button */}
+          {canInstall && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden md:flex items-center gap-2 text-xs"
+              onClick={isIOS ? () => setIosHint((v) => !v) : install}
+            >
+              <Download className="h-3.5 w-3.5" />
+              Instalar app
+            </Button>
+          )}
+
           {/* User menu (desktop) */}
           {user && (
             <DropdownMenu>
@@ -110,6 +126,15 @@ export function Navbar() {
         </div>
       </div>
 
+      {/* iOS install hint */}
+      {iosHint && (
+        <div className="border-t bg-accent/50 px-4 py-3 text-sm text-center text-muted-foreground">
+          No Safari, toque em{' '}
+          <span className="font-semibold text-foreground">Compartilhar</span> →{' '}
+          <span className="font-semibold text-foreground">Adicionar à Tela de Início</span>
+        </div>
+      )}
+
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="md:hidden border-t bg-background px-4 py-3 space-y-1">
@@ -138,6 +163,15 @@ export function Navbar() {
             <User className="h-4 w-4" />
             Perfil
           </Link>
+          {canInstall && (
+            <button
+              onClick={isIOS ? () => { setIosHint((v) => !v); setMenuOpen(false); } : install}
+              className="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
+            >
+              <Download className="h-4 w-4" />
+              Instalar app
+            </button>
+          )}
           <button
             onClick={handleSignOut}
             className="flex w-full items-center gap-3 px-3 py-2 rounded-md text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
