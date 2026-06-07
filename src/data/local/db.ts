@@ -5,6 +5,7 @@ interface LocalUser {
   id: string;
   email: string;
   display_name: string;
+  username: string;
   password_hash: string;
   created_at: string;
 }
@@ -59,6 +60,17 @@ export class CollectionsDB extends Dexie {
     this.version(4).stores({
       users: 'id, email',
       profiles: 'id, email',
+      collections: 'id, user_id, created_at',
+      items: 'id, collection_id, created_at, shelf_id',
+      activities: 'id, user_id, created_at',
+      images: 'id',
+      shelves: 'id, collection_id, created_at',
+      wishlists: 'id, user_id, created_at',
+      wishlistItems: 'id, wishlist_id, user_id, target_collection_id, created_at',
+    });
+    this.version(5).stores({
+      users: 'id, email, &username',
+      profiles: 'id, email, &username',
       collections: 'id, user_id, created_at',
       items: 'id, collection_id, created_at, shelf_id',
       activities: 'id, user_id, created_at',

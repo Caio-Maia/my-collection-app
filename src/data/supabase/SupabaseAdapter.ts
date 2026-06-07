@@ -21,6 +21,7 @@ function toAuthUser(user: { id: string; email?: string }, profile?: Profile | nu
     id: user.id,
     email: user.email ?? '',
     display_name: profile?.display_name ?? user.email ?? '',
+    username: profile?.username ?? user.email?.split('@')[0] ?? '',
   };
 }
 
@@ -72,14 +73,17 @@ export class SupabaseAdapter implements DataProvider {
     return data ?? null;
   }
 
-  async updateProfile(userId: string, updates: Partial<Pick<Profile, 'display_name'>>): Promise<Profile> {
+  async updateProfile(userId: string, updates: Partial<Pick<Profile, 'display_name' | 'username'>>): Promise<Profile> {
     const { data, error } = await supabase
       .from('profiles')
       .update(updates)
       .eq('id', userId)
       .select()
       .single();
-    if (error) throw new Error(error.message);
+    if (error) {
+      if (error.code === '23505') throw new Error('Nome de usuário já está em uso.');
+      throw new Error(error.message);
+    }
     return data;
   }
 

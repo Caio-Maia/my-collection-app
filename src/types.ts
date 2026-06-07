@@ -10,6 +10,7 @@ export interface Profile {
   id: string;
   email: string;
   display_name: string;
+  username: string;
   created_at: string;
 }
 
@@ -66,6 +67,7 @@ export interface AuthUser {
   id: string;
   email: string;
   display_name: string;
+  username: string;
 }
 
 export interface Wishlist {

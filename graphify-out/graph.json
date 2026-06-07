@@ -1798,7 +1798,7 @@
       "label": ".signIn()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L73",
+      "source_location": "L75",
       "id": "local_localadapter_localadapter_signin",
       "community": 22,
       "norm_label": ".signin()"
@@ -1807,7 +1807,7 @@
       "label": ".signOut()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L84",
+      "source_location": "L87",
       "id": "local_localadapter_localadapter_signout",
       "community": 22,
       "norm_label": ".signout()"
@@ -1816,7 +1816,7 @@
       "label": ".getCurrentUser()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L89",
+      "source_location": "L92",
       "id": "local_localadapter_localadapter_getcurrentuser",
       "community": 17,
       "norm_label": ".getcurrentuser()"
@@ -1825,7 +1825,7 @@
       "label": ".onAuthChange()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L93",
+      "source_location": "L96",
       "id": "local_localadapter_localadapter_onauthchange",
       "community": 17,
       "norm_label": ".onauthchange()"
@@ -1834,7 +1834,7 @@
       "label": ".getProfile()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L100",
+      "source_location": "L103",
       "id": "local_localadapter_localadapter_getprofile",
       "community": 25,
       "norm_label": ".getprofile()"
@@ -1843,7 +1843,7 @@
       "label": ".updateProfile()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L104",
+      "source_location": "L107",
       "id": "local_localadapter_localadapter_updateprofile",
       "community": 25,
       "norm_label": ".updateprofile()"
@@ -1852,7 +1852,7 @@
       "label": ".normalizeCollection()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L116",
+      "source_location": "L126",
       "id": "local_localadapter_localadapter_normalizecollection",
       "community": 23,
       "norm_label": ".normalizecollection()"
@@ -1861,7 +1861,7 @@
       "label": ".listCollections()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L120",
+      "source_location": "L130",
       "id": "local_localadapter_localadapter_listcollections",
       "community": 23,
       "norm_label": ".listcollections()"
@@ -1870,7 +1870,7 @@
       "label": ".getCollection()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L125",
+      "source_location": "L135",
       "id": "local_localadapter_localadapter_getcollection",
       "community": 23,
       "norm_label": ".getcollection()"
@@ -1879,7 +1879,7 @@
       "label": ".createCollection()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L130",
+      "source_location": "L140",
       "id": "local_localadapter_localadapter_createcollection",
       "community": 17,
       "norm_label": ".createcollection()"
@@ -1888,7 +1888,7 @@
       "label": ".updateCollection()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L136",
+      "source_location": "L146",
       "id": "local_localadapter_localadapter_updatecollection",
       "community": 23,
       "norm_label": ".updatecollection()"
@@ -1897,7 +1897,7 @@
       "label": ".deleteCollection()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L143",
+      "source_location": "L153",
       "id": "local_localadapter_localadapter_deletecollection",
       "community": 17,
       "norm_label": ".deletecollection()"
@@ -1906,7 +1906,7 @@
       "label": ".normalizeItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L156",
+      "source_location": "L166",
       "id": "local_localadapter_localadapter_normalizeitem",
       "community": 17,
       "norm_label": ".normalizeitem()"
@@ -1915,7 +1915,7 @@
       "label": ".listItems()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L160",
+      "source_location": "L170",
       "id": "local_localadapter_localadapter_listitems",
       "community": 17,
       "norm_label": ".listitems()"
@@ -1924,7 +1924,7 @@
       "label": ".getItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L165",
+      "source_location": "L175",
       "id": "local_localadapter_localadapter_getitem",
       "community": 17,
       "norm_label": ".getitem()"
@@ -1933,7 +1933,7 @@
       "label": ".logActivity()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L169",
+      "source_location": "L179",
       "id": "local_localadapter_localadapter_logactivity",
       "community": 17,
       "norm_label": ".logactivity()"
@@ -1942,7 +1942,7 @@
       "label": ".createItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L187",
+      "source_location": "L197",
       "id": "local_localadapter_localadapter_createitem",
       "community": 17,
       "norm_label": ".createitem()"
@@ -1951,7 +1951,7 @@
       "label": ".updateItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L205",
+      "source_location": "L215",
       "id": "local_localadapter_localadapter_updateitem",
       "community": 17,
       "norm_label": ".updateitem()"
@@ -1960,7 +1960,7 @@
       "label": ".deleteItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L220",
+      "source_location": "L230",
       "id": "local_localadapter_localadapter_deleteitem",
       "community": 17,
       "norm_label": ".deleteitem()"
@@ -1969,7 +1969,7 @@
       "label": ".bulkCreateItems()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L229",
+      "source_location": "L239",
       "id": "local_localadapter_localadapter_bulkcreateitems",
       "community": 17,
       "norm_label": ".bulkcreateitems()"
@@ -1978,7 +1978,7 @@
       "label": ".listActivities()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L258",
+      "source_location": "L268",
       "id": "local_localadapter_localadapter_listactivities",
       "community": 0,
       "norm_label": ".listactivities()"
@@ -1987,7 +1987,7 @@
       "label": ".uploadImage()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L263",
+      "source_location": "L273",
       "id": "local_localadapter_localadapter_uploadimage",
       "community": 0,
       "norm_label": ".uploadimage()"
@@ -1996,7 +1996,7 @@
       "label": ".setItemPlacement()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L268",
+      "source_location": "L278",
       "id": "local_localadapter_localadapter_setitemplacement",
       "community": 17,
       "norm_label": ".setitemplacement()"
@@ -2005,7 +2005,7 @@
       "label": ".normalizeShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L280",
+      "source_location": "L290",
       "id": "local_localadapter_localadapter_normalizeshelf",
       "community": 25,
       "norm_label": ".normalizeshelf()"
@@ -2014,7 +2014,7 @@
       "label": ".listShelves()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L284",
+      "source_location": "L294",
       "id": "local_localadapter_localadapter_listshelves",
       "community": 25,
       "norm_label": ".listshelves()"
@@ -2023,7 +2023,7 @@
       "label": ".createShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L289",
+      "source_location": "L299",
       "id": "local_localadapter_localadapter_createshelf",
       "community": 17,
       "norm_label": ".createshelf()"
@@ -2032,7 +2032,7 @@
       "label": ".updateShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L302",
+      "source_location": "L312",
       "id": "local_localadapter_localadapter_updateshelf",
       "community": 25,
       "norm_label": ".updateshelf()"
@@ -2041,7 +2041,7 @@
       "label": ".deleteShelf()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L323",
+      "source_location": "L333",
       "id": "local_localadapter_localadapter_deleteshelf",
       "community": 17,
       "norm_label": ".deleteshelf()"
@@ -2050,7 +2050,7 @@
       "label": ".listWishlists()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L333",
+      "source_location": "L343",
       "id": "local_localadapter_localadapter_listwishlists",
       "community": 24,
       "norm_label": ".listwishlists()"
@@ -2059,7 +2059,7 @@
       "label": ".getWishlist()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L337",
+      "source_location": "L347",
       "id": "local_localadapter_localadapter_getwishlist",
       "community": 24,
       "norm_label": ".getwishlist()"
@@ -2068,7 +2068,7 @@
       "label": ".createWishlist()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L341",
+      "source_location": "L351",
       "id": "local_localadapter_localadapter_createwishlist",
       "community": 17,
       "norm_label": ".createwishlist()"
@@ -2077,7 +2077,7 @@
       "label": ".updateWishlist()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L347",
+      "source_location": "L357",
       "id": "local_localadapter_localadapter_updatewishlist",
       "community": 24,
       "norm_label": ".updatewishlist()"
@@ -2086,7 +2086,7 @@
       "label": ".deleteWishlist()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L354",
+      "source_location": "L364",
       "id": "local_localadapter_localadapter_deletewishlist",
       "community": 17,
       "norm_label": ".deletewishlist()"
@@ -2095,7 +2095,7 @@
       "label": ".listWishlistItems()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L360",
+      "source_location": "L370",
       "id": "local_localadapter_localadapter_listwishlistitems",
       "community": 3,
       "norm_label": ".listwishlistitems()"
@@ -2104,7 +2104,7 @@
       "label": ".listAllWishlistItems()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L364",
+      "source_location": "L374",
       "id": "local_localadapter_localadapter_listallwishlistitems",
       "community": 3,
       "norm_label": ".listallwishlistitems()"
@@ -2113,7 +2113,7 @@
       "label": ".createWishlistItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L368",
+      "source_location": "L378",
       "id": "local_localadapter_localadapter_createwishlistitem",
       "community": 17,
       "norm_label": ".createwishlistitem()"
@@ -2122,7 +2122,7 @@
       "label": ".updateWishlistItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L386",
+      "source_location": "L396",
       "id": "local_localadapter_localadapter_updatewishlistitem",
       "community": 17,
       "norm_label": ".updatewishlistitem()"
@@ -2131,7 +2131,7 @@
       "label": ".deleteWishlistItem()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L396",
+      "source_location": "L406",
       "id": "local_localadapter_localadapter_deletewishlistitem",
       "community": 17,
       "norm_label": ".deletewishlistitem()"
@@ -2140,7 +2140,7 @@
       "label": ".moveWishlistItemToCollection()",
       "file_type": "code",
       "source_file": "src/data/local/LocalAdapter.ts",
-      "source_location": "L400",
+      "source_location": "L410",
       "id": "local_localadapter_localadapter_movewishlistitemtocollection",
       "community": 17,
       "norm_label": ".movewishlistitemtocollection()"
@@ -2167,7 +2167,7 @@
       "label": "StoredImage",
       "file_type": "code",
       "source_file": "src/data/local/db.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "id": "local_db_storedimage",
       "community": 25,
       "norm_label": "storedimage"
@@ -2176,7 +2176,7 @@
       "label": "CollectionsDB",
       "file_type": "code",
       "source_file": "src/data/local/db.ts",
-      "source_location": "L18",
+      "source_location": "L19",
       "id": "local_db_collectionsdb",
       "community": 25,
       "norm_label": "collectionsdb"
@@ -2185,7 +2185,7 @@
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/data/local/db.ts",
-      "source_location": "L29",
+      "source_location": "L30",
       "id": "local_db_collectionsdb_constructor",
       "community": 25,
       "norm_label": ".constructor()"
@@ -2194,7 +2194,7 @@
       "label": "db",
       "file_type": "code",
       "source_file": "src/data/local/db.ts",
-      "source_location": "L73",
+      "source_location": "L85",
       "id": "local_db_db",
       "community": 25,
       "norm_label": "db"
@@ -2284,7 +2284,7 @@
       "label": "SupabaseAdapter",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L27",
+      "source_location": "L28",
       "id": "supabase_supabaseadapter_supabaseadapter",
       "community": 3,
       "norm_label": "supabaseadapter"
@@ -2293,7 +2293,7 @@
       "label": ".signUp()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L28",
+      "source_location": "L29",
       "id": "supabase_supabaseadapter_supabaseadapter_signup",
       "community": 22,
       "norm_label": ".signup()"
@@ -2302,7 +2302,7 @@
       "label": ".signIn()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L39",
+      "source_location": "L40",
       "id": "supabase_supabaseadapter_supabaseadapter_signin",
       "community": 22,
       "norm_label": ".signin()"
@@ -2311,7 +2311,7 @@
       "label": ".signOut()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L47",
+      "source_location": "L48",
       "id": "supabase_supabaseadapter_supabaseadapter_signout",
       "community": 3,
       "norm_label": ".signout()"
@@ -2320,7 +2320,7 @@
       "label": ".getCurrentUser()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L51",
+      "source_location": "L52",
       "id": "supabase_supabaseadapter_supabaseadapter_getcurrentuser",
       "community": 22,
       "norm_label": ".getcurrentuser()"
@@ -2329,7 +2329,7 @@
       "label": ".onAuthChange()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L58",
+      "source_location": "L59",
       "id": "supabase_supabaseadapter_supabaseadapter_onauthchange",
       "community": 3,
       "norm_label": ".onauthchange()"
@@ -2338,7 +2338,7 @@
       "label": ".getProfile()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L70",
+      "source_location": "L71",
       "id": "supabase_supabaseadapter_supabaseadapter_getprofile",
       "community": 22,
       "norm_label": ".getprofile()"
@@ -2347,7 +2347,7 @@
       "label": ".updateProfile()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L75",
+      "source_location": "L76",
       "id": "supabase_supabaseadapter_supabaseadapter_updateprofile",
       "community": 25,
       "norm_label": ".updateprofile()"
@@ -2356,7 +2356,7 @@
       "label": ".listCollections()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L86",
+      "source_location": "L90",
       "id": "supabase_supabaseadapter_supabaseadapter_listcollections",
       "community": 23,
       "norm_label": ".listcollections()"
@@ -2365,7 +2365,7 @@
       "label": ".getCollection()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L96",
+      "source_location": "L100",
       "id": "supabase_supabaseadapter_supabaseadapter_getcollection",
       "community": 3,
       "norm_label": ".getcollection()"
@@ -2374,7 +2374,7 @@
       "label": ".createCollection()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L101",
+      "source_location": "L105",
       "id": "supabase_supabaseadapter_supabaseadapter_createcollection",
       "community": 23,
       "norm_label": ".createcollection()"
@@ -2383,7 +2383,7 @@
       "label": ".updateCollection()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L111",
+      "source_location": "L115",
       "id": "supabase_supabaseadapter_supabaseadapter_updatecollection",
       "community": 23,
       "norm_label": ".updatecollection()"
@@ -2392,7 +2392,7 @@
       "label": ".deleteCollection()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L122",
+      "source_location": "L126",
       "id": "supabase_supabaseadapter_supabaseadapter_deletecollection",
       "community": 3,
       "norm_label": ".deletecollection()"
@@ -2401,7 +2401,7 @@
       "label": ".listItems()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L127",
+      "source_location": "L131",
       "id": "supabase_supabaseadapter_supabaseadapter_listitems",
       "community": 3,
       "norm_label": ".listitems()"
@@ -2410,7 +2410,7 @@
       "label": ".getItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L137",
+      "source_location": "L141",
       "id": "supabase_supabaseadapter_supabaseadapter_getitem",
       "community": 3,
       "norm_label": ".getitem()"
@@ -2419,7 +2419,7 @@
       "label": ".logActivity()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L142",
+      "source_location": "L146",
       "id": "supabase_supabaseadapter_supabaseadapter_logactivity",
       "community": 3,
       "norm_label": ".logactivity()"
@@ -2428,7 +2428,7 @@
       "label": ".createItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L158",
+      "source_location": "L162",
       "id": "supabase_supabaseadapter_supabaseadapter_createitem",
       "community": 3,
       "norm_label": ".createitem()"
@@ -2437,7 +2437,7 @@
       "label": ".updateItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L174",
+      "source_location": "L178",
       "id": "supabase_supabaseadapter_supabaseadapter_updateitem",
       "community": 3,
       "norm_label": ".updateitem()"
@@ -2446,7 +2446,7 @@
       "label": ".deleteItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L193",
+      "source_location": "L197",
       "id": "supabase_supabaseadapter_supabaseadapter_deleteitem",
       "community": 3,
       "norm_label": ".deleteitem()"
@@ -2455,7 +2455,7 @@
       "label": ".bulkCreateItems()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L206",
+      "source_location": "L210",
       "id": "supabase_supabaseadapter_supabaseadapter_bulkcreateitems",
       "community": 3,
       "norm_label": ".bulkcreateitems()"
@@ -2464,7 +2464,7 @@
       "label": ".listActivities()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L223",
+      "source_location": "L227",
       "id": "supabase_supabaseadapter_supabaseadapter_listactivities",
       "community": 0,
       "norm_label": ".listactivities()"
@@ -2473,7 +2473,7 @@
       "label": ".uploadImage()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L234",
+      "source_location": "L238",
       "id": "supabase_supabaseadapter_supabaseadapter_uploadimage",
       "community": 3,
       "norm_label": ".uploadimage()"
@@ -2482,7 +2482,7 @@
       "label": ".setItemPlacement()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L243",
+      "source_location": "L247",
       "id": "supabase_supabaseadapter_supabaseadapter_setitemplacement",
       "community": 3,
       "norm_label": ".setitemplacement()"
@@ -2491,7 +2491,7 @@
       "label": ".listShelves()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L259",
+      "source_location": "L263",
       "id": "supabase_supabaseadapter_supabaseadapter_listshelves",
       "community": 25,
       "norm_label": ".listshelves()"
@@ -2500,7 +2500,7 @@
       "label": ".createShelf()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L269",
+      "source_location": "L273",
       "id": "supabase_supabaseadapter_supabaseadapter_createshelf",
       "community": 25,
       "norm_label": ".createshelf()"
@@ -2509,7 +2509,7 @@
       "label": ".updateShelf()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L279",
+      "source_location": "L283",
       "id": "supabase_supabaseadapter_supabaseadapter_updateshelf",
       "community": 25,
       "norm_label": ".updateshelf()"
@@ -2518,7 +2518,7 @@
       "label": ".deleteShelf()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L298",
+      "source_location": "L302",
       "id": "supabase_supabaseadapter_supabaseadapter_deleteshelf",
       "community": 3,
       "norm_label": ".deleteshelf()"
@@ -2527,7 +2527,7 @@
       "label": ".listWishlists()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L304",
+      "source_location": "L308",
       "id": "supabase_supabaseadapter_supabaseadapter_listwishlists",
       "community": 24,
       "norm_label": ".listwishlists()"
@@ -2536,7 +2536,7 @@
       "label": ".getWishlist()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L314",
+      "source_location": "L318",
       "id": "supabase_supabaseadapter_supabaseadapter_getwishlist",
       "community": 24,
       "norm_label": ".getwishlist()"
@@ -2545,7 +2545,7 @@
       "label": ".createWishlist()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L319",
+      "source_location": "L323",
       "id": "supabase_supabaseadapter_supabaseadapter_createwishlist",
       "community": 24,
       "norm_label": ".createwishlist()"
@@ -2554,7 +2554,7 @@
       "label": ".updateWishlist()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L329",
+      "source_location": "L333",
       "id": "supabase_supabaseadapter_supabaseadapter_updatewishlist",
       "community": 24,
       "norm_label": ".updatewishlist()"
@@ -2563,7 +2563,7 @@
       "label": ".deleteWishlist()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L340",
+      "source_location": "L344",
       "id": "supabase_supabaseadapter_supabaseadapter_deletewishlist",
       "community": 3,
       "norm_label": ".deletewishlist()"
@@ -2572,7 +2572,7 @@
       "label": ".listWishlistItems()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L345",
+      "source_location": "L349",
       "id": "supabase_supabaseadapter_supabaseadapter_listwishlistitems",
       "community": 3,
       "norm_label": ".listwishlistitems()"
@@ -2581,7 +2581,7 @@
       "label": ".listAllWishlistItems()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L355",
+      "source_location": "L359",
       "id": "supabase_supabaseadapter_supabaseadapter_listallwishlistitems",
       "community": 3,
       "norm_label": ".listallwishlistitems()"
@@ -2590,7 +2590,7 @@
       "label": ".createWishlistItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L364",
+      "source_location": "L368",
       "id": "supabase_supabaseadapter_supabaseadapter_createwishlistitem",
       "community": 3,
       "norm_label": ".createwishlistitem()"
@@ -2599,7 +2599,7 @@
       "label": ".updateWishlistItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L378",
+      "source_location": "L382",
       "id": "supabase_supabaseadapter_supabaseadapter_updatewishlistitem",
       "community": 3,
       "norm_label": ".updatewishlistitem()"
@@ -2608,7 +2608,7 @@
       "label": ".deleteWishlistItem()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L392",
+      "source_location": "L396",
       "id": "supabase_supabaseadapter_supabaseadapter_deletewishlistitem",
       "community": 3,
       "norm_label": ".deletewishlistitem()"
@@ -2617,7 +2617,7 @@
       "label": ".moveWishlistItemToCollection()",
       "file_type": "code",
       "source_file": "src/data/supabase/SupabaseAdapter.ts",
-      "source_location": "L397",
+      "source_location": "L401",
       "id": "supabase_supabaseadapter_supabaseadapter_movewishlistitemtocollection",
       "community": 3,
       "norm_label": ".movewishlistitemtocollection()"
@@ -3616,7 +3616,7 @@
       "label": "Collection",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L16",
+      "source_location": "L17",
       "id": "src_types_collection",
       "community": 23,
       "norm_label": "collection"
@@ -3625,7 +3625,7 @@
       "label": "CollectionItem",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L30",
+      "source_location": "L31",
       "id": "src_types_collectionitem",
       "community": 2,
       "norm_label": "collectionitem"
@@ -3634,7 +3634,7 @@
       "label": "Shelf",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L44",
+      "source_location": "L45",
       "id": "src_types_shelf",
       "community": 25,
       "norm_label": "shelf"
@@ -3643,7 +3643,7 @@
       "label": "Activity",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L55",
+      "source_location": "L56",
       "id": "src_types_activity",
       "community": 0,
       "norm_label": "activity"
@@ -3652,7 +3652,7 @@
       "label": "AuthUser",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L65",
+      "source_location": "L66",
       "id": "src_types_authuser",
       "community": 22,
       "norm_label": "authuser"
@@ -3661,7 +3661,7 @@
       "label": "Wishlist",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L71",
+      "source_location": "L73",
       "id": "src_types_wishlist",
       "community": 24,
       "norm_label": "wishlist"
@@ -3670,7 +3670,7 @@
       "label": "WishlistItem",
       "file_type": "code",
       "source_file": "src/types.ts",
-      "source_location": "L80",
+      "source_location": "L82",
       "id": "src_types_wishlistitem",
       "community": 3,
       "norm_label": "wishlistitem"
@@ -6140,9 +6140,9 @@
       "source_file": "src/components/CollectionForm.tsx",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_collectionform",
-      "target": "components_collectionform_collection_types",
-      "confidence_score": 1.0
+      "target": "components_collectionform_collection_types"
     },
     {
       "relation": "contains",
@@ -17499,5 +17499,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "884f7cad45c9b8a644ec221b4b7a40e242fe110c"
+  "built_at_commit": "65067e0b975db97209ffcae902a9c3c0d1fe02af"
 }

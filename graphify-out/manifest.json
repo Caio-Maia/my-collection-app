@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "src/components/ui/badge.tsx": {
-    "mtime": 1780528875.582608,
-    "ast_hash": "e167b0a9458841c3672b0b909d6b7f97",
+    "mtime": 1780794180.3418787,
+    "ast_hash": "047e465a3b2797711e305f585f88c58d",
     "semantic_hash": ""
   },
   "src/components/ui/button.tsx": {
@@ -125,23 +125,23 @@
     "semantic_hash": ""
   },
   "src/data/DataProvider.ts": {
-    "mtime": 1780780747.2968464,
-    "ast_hash": "7480ee4fe142d5c506f5efd15defe4b8",
+    "mtime": 1780794868.2222416,
+    "ast_hash": "f1aa90a229735ad0f435da3bf1bbc9b9",
     "semantic_hash": ""
   },
   "src/data/local/LocalAdapter.ts": {
-    "mtime": 1780781591.6874378,
-    "ast_hash": "91126ee10cc861559ab91782b8b9853e",
+    "mtime": 1780794923.5570455,
+    "ast_hash": "1e410f1df748db64738dd99e13f54d46",
     "semantic_hash": ""
   },
   "src/data/local/db.ts": {
-    "mtime": 1780793842.3972356,
-    "ast_hash": "ef3248190a193b37d2f0d4699f3877cd",
+    "mtime": 1780794886.6759522,
+    "ast_hash": "3c6b36b3684003d2824bcda9bd6577de",
     "semantic_hash": ""
   },
   "src/data/supabase/SupabaseAdapter.ts": {
-    "mtime": 1780780819.7500103,
-    "ast_hash": "5eceda5836905c67b799e4cecefb3dbf",
+    "mtime": 1780794900.9667854,
+    "ast_hash": "44ea69d2c1e2b970484f8aa61cb81779",
     "semantic_hash": ""
   },
   "src/lib/config.ts": {
@@ -185,8 +185,8 @@
     "semantic_hash": ""
   },
   "src/pages/Profile.tsx": {
-    "mtime": 1780781585.3537414,
-    "ast_hash": "29a4d27b65f6a9c0e9e4c9312f0f60eb",
+    "mtime": 1780794948.6743178,
+    "ast_hash": "65c350635a967be152aa6f7b1e3effc0",
     "semantic_hash": ""
   },
   "src/pages/SignUp.tsx": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "src/types.ts": {
-    "mtime": 1780793830.2697358,
-    "ast_hash": "a400589a50b84e73499c276a33151346",
+    "mtime": 1780794864.9222417,
+    "ast_hash": "ef5c5a358dc0071adc3c99b45bb8f4f2",
     "semantic_hash": ""
   },
   "supabase/migrations/0001_init.sql": {
@@ -442,6 +442,11 @@
   "supabase/migrations/0008_collection_type.sql": {
     "mtime": 1780793833.4139025,
     "ast_hash": "6c1a6ae5dc29f0fa47e79cd225f993e6",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/0009_username.sql": {
+    "mtime": 1780794872.2189083,
+    "ast_hash": "7127d2d36d3fab6a8b8538fe07a703b9",
     "semantic_hash": ""
   }
 }

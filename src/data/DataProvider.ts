@@ -12,7 +12,7 @@ export interface DataProvider {
 
   // Profile
   getProfile(userId: string): Promise<Profile | null>;
-  updateProfile(userId: string, data: Partial<Pick<Profile, 'display_name'>>): Promise<Profile>;
+  updateProfile(userId: string, data: Partial<Pick<Profile, 'display_name' | 'username'>>): Promise<Profile>;
 
   // Collections
   listCollections(userId: string): Promise<Collection[]>;

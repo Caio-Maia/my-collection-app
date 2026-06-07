@@ -53,18 +53,20 @@ export class LocalAdapter implements DataProvider {
 
     const id = generateId();
     const createdAt = now();
+    const username = email.split('@')[0];
 
     await db.users.add({
       id,
       email,
       display_name: displayName,
+      username,
       password_hash: hashPassword(password),
       created_at: createdAt,
     });
 
-    await db.profiles.add({ id, email, display_name: displayName, created_at: createdAt });
+    await db.profiles.add({ id, email, display_name: displayName, username, created_at: createdAt });
 
-    const user: AuthUser = { id, email, display_name: displayName };
+    const user: AuthUser = { id, email, display_name: displayName, username };
     setSessionUser(user);
     this.notifyAuth(user);
     return user;
@@ -75,7 +77,8 @@ export class LocalAdapter implements DataProvider {
     if (!record || record.password_hash !== hashPassword(password)) {
       throw new Error('Email ou senha inválidos.');
     }
-    const user: AuthUser = { id: record.id, email: record.email, display_name: record.display_name };
+    const username = record.username ?? email.split('@')[0];
+    const user: AuthUser = { id: record.id, email: record.email, display_name: record.display_name, username };
     setSessionUser(user);
     this.notifyAuth(user);
     return user;
@@ -101,14 +104,21 @@ export class LocalAdapter implements DataProvider {
     return (await db.profiles.get(userId)) ?? null;
   }
 
-  async updateProfile(userId: string, data: Partial<Pick<Profile, 'display_name'>>): Promise<Profile> {
+  async updateProfile(userId: string, data: Partial<Pick<Profile, 'display_name' | 'username'>>): Promise<Profile> {
+    if (data.username) {
+      const existing = await db.profiles.where('username').equals(data.username).first();
+      if (existing && existing.id !== userId) throw new Error('Nome de usuário já está em uso.');
+    }
     await db.profiles.update(userId, data);
     const profile = await db.profiles.get(userId);
     if (!profile) throw new Error('Profile not found');
-    // Keep session in sync
     const current = getSessionUser();
-    if (current && data.display_name) {
-      setSessionUser({ ...current, display_name: data.display_name });
+    if (current) {
+      setSessionUser({
+        ...current,
+        ...(data.display_name ? { display_name: data.display_name } : {}),
+        ...(data.username ? { username: data.username } : {}),
+      });
     }
     return profile;
   }

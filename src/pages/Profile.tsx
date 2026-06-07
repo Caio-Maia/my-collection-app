@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { User, Package, ChevronRight, Pencil, Check, X } from 'lucide-react';
+import { User, Package, Heart, ChevronRight, Pencil, Check, X } from 'lucide-react';
 import { useData } from '../data/DataContext';
 import { useAuth } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
@@ -18,6 +18,10 @@ export function Profile() {
   const qc = useQueryClient();
   const [editingName, setEditingName] = useState(false);
   const [nameValue, setNameValue] = useState(user?.display_name ?? '');
+  const [editingUsername, setEditingUsername] = useState(false);
+  const [usernameValue, setUsernameValue] = useState(
+    user?.username ?? user?.email?.split('@')[0] ?? ''
+  );
 
   const { data: collections = [] } = useQuery({
     queryKey: ['collections', user?.id],
@@ -42,11 +46,25 @@ export function Profile() {
 
   const totalItems = Object.values(itemCountQueries.data ?? {}).reduce((a, b) => a + b, 0);
 
+  const { data: wishlists = [] } = useQuery({
+    queryKey: ['wishlists', user?.id],
+    queryFn: () => data.listWishlists(user!.id),
+    enabled: !!user,
+  });
+
   const { data: wishlistItems = [] } = useQuery({
     queryKey: ['wishlist-all', user?.id],
     queryFn: () => data.listAllWishlistItems(user!.id),
     enabled: !!user,
   });
+
+  const wishlistItemCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const item of wishlistItems) {
+      counts[item.wishlist_id] = (counts[item.wishlist_id] ?? 0) + 1;
+    }
+    return counts;
+  }, [wishlistItems]);
 
   const updateMutation = useMutation({
     mutationFn: (name: string) => data.updateProfile(user!.id, { display_name: name }),
@@ -54,6 +72,16 @@ export function Profile() {
       qc.invalidateQueries({ queryKey: ['profile', user?.id] });
       setEditingName(false);
       toast.success('Nome atualizado!');
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const usernameMutation = useMutation({
+    mutationFn: (username: string) => data.updateProfile(user!.id, { username }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['profile', user?.id] });
+      setEditingUsername(false);
+      toast.success('Nome de usuário atualizado!');
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -122,6 +150,51 @@ export function Profile() {
                 </Button>
               </div>
             )}
+            {editingUsername ? (
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-sm text-muted-foreground">@</span>
+                <Input
+                  value={usernameValue}
+                  onChange={(e) => setUsernameValue(e.target.value)}
+                  className="h-7 text-sm"
+                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') usernameMutation.mutate(usernameValue);
+                    if (e.key === 'Escape') setEditingUsername(false);
+                  }}
+                />
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-7 w-7"
+                  onClick={() => usernameMutation.mutate(usernameValue)}
+                  disabled={usernameMutation.isPending}
+                >
+                  <Check className="h-3.5 w-3.5 text-green-600" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-7 w-7"
+                  onClick={() => { setEditingUsername(false); setUsernameValue(user?.username ?? user?.email?.split('@')[0] ?? ''); }}
+                >
+                  <X className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1 mt-0.5">
+                <p className="text-sm text-muted-foreground">@{user?.username ?? user?.email?.split('@')[0]}</p>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="h-6 w-6"
+                  onClick={() => setEditingUsername(true)}
+                  title="Editar nome de usuário"
+                >
+                  <Pencil className="h-3 w-3" />
+                </Button>
+              </div>
+            )}
             <p className="text-sm text-muted-foreground truncate">{user?.email}</p>
             {!IS_SUPABASE_MODE && (
               <p className="text-xs text-amber-600 mt-1">Modo local (sem Supabase)</p>
@@ -176,6 +249,41 @@ export function Profile() {
                         <Package className="h-4 w-4 text-primary" />
                       </div>
                       <span className="flex-1 text-sm font-medium">{col.name}</span>
+                      <span className="text-sm text-muted-foreground">{count} item{count !== 1 ? 's' : ''}</span>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Per-wishlist breakdown */}
+      {wishlists.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <Heart className="h-4 w-4" />
+              Lista de Desejos
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <ul className="divide-y">
+              {wishlists.map((wl, i) => {
+                const count = wishlistItemCounts[wl.id] ?? 0;
+                return (
+                  <li key={wl.id}>
+                    {i > 0 && <Separator />}
+                    <Link
+                      to={`/wishlists/${wl.id}`}
+                      className="flex items-center gap-3 px-6 py-3 hover:bg-accent/50 transition-colors"
+                    >
+                      <div className="rounded-md bg-pink-500/10 p-1.5">
+                        <Heart className="h-4 w-4 text-pink-500" />
+                      </div>
+                      <span className="flex-1 text-sm font-medium">{wl.name}</span>
                       <span className="text-sm text-muted-foreground">{count} item{count !== 1 ? 's' : ''}</span>
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
                     </Link>
