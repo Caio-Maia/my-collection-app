@@ -880,7 +880,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "src/components/ItemDialog.tsx",
-      "source_location": "L23",
+      "source_location": "L22",
       "id": "components_itemdialog_props",
       "community": 2,
       "norm_label": "props"
@@ -889,7 +889,7 @@
       "label": "ItemDialog()",
       "file_type": "code",
       "source_file": "src/components/ItemDialog.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "id": "components_itemdialog_itemdialog",
       "community": 1,
       "norm_label": "itemdialog()"
@@ -3517,7 +3517,7 @@
       "label": "ItemActions()",
       "file_type": "code",
       "source_file": "src/pages/WishlistDetail.tsx",
-      "source_location": "L672",
+      "source_location": "L670",
       "id": "pages_wishlistdetail_itemactions",
       "community": 1,
       "norm_label": "itemactions()"
@@ -3526,7 +3526,7 @@
       "label": "WishlistItemRow()",
       "file_type": "code",
       "source_file": "src/pages/WishlistDetail.tsx",
-      "source_location": "L707",
+      "source_location": "L705",
       "id": "pages_wishlistdetail_wishlistitemrow",
       "community": 1,
       "norm_label": "wishlistitemrow()"
@@ -3535,7 +3535,7 @@
       "label": "WishlistItemCard()",
       "file_type": "code",
       "source_file": "src/pages/WishlistDetail.tsx",
-      "source_location": "L762",
+      "source_location": "L760",
       "id": "pages_wishlistdetail_wishlistitemcard",
       "community": 1,
       "norm_label": "wishlistitemcard()"
@@ -17499,5 +17499,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "65067e0b975db97209ffcae902a9c3c0d1fe02af"
+  "built_at_commit": "3a52afbef1a762f68a782ee1851f7a0ce4dfe25c"
 }

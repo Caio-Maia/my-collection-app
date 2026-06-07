@@ -572,13 +572,11 @@ export function WishlistDetail() {
               {Object.entries(selectedItem.attributes).filter(([k]) => k.trim()).length > 0 && (
                 <>
                   <Separator />
-                  <dl className="grid grid-cols-2 gap-2">
+                  <dl className="grid grid-cols-2 gap-3">
                     {Object.entries(selectedItem.attributes).filter(([k]) => k.trim()).map(([key, value]) => (
-                      <div key={key}>
-                        <dt className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{key}</dt>
-                        <dd className="text-sm mt-0.5">
-                          <Badge variant="secondary">{value}</Badge>
-                        </dd>
+                      <div key={key} className="bg-muted/50 rounded-lg p-3 border border-border/40">
+                        <dt className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-1">{key}</dt>
+                        <dd className="text-sm font-medium text-foreground leading-snug">{value}</dd>
                       </div>
                     ))}
                   </dl>

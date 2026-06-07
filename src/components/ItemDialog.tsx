@@ -10,7 +10,6 @@ import {
   DialogFooter,
 } from './ui/dialog';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { ItemForm } from './ItemForm';
 import { useData } from '../data/DataContext';
@@ -148,13 +147,11 @@ export function ItemDialog({ item, open, onOpenChange, attributeSchema, autocomp
             {attrEntries.length > 0 && (
               <>
                 <Separator />
-                <dl className="grid grid-cols-2 gap-2">
+                <dl className="grid grid-cols-2 gap-3">
                   {attrEntries.map(([key, value]) => (
-                    <div key={key}>
-                      <dt className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{key}</dt>
-                      <dd className="text-sm mt-0.5">
-                        <Badge variant="secondary">{displayValue(key, value)}</Badge>
-                      </dd>
+                    <div key={key} className="bg-muted/50 rounded-lg p-3 border border-border/40">
+                      <dt className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest mb-1">{key}</dt>
+                      <dd className="text-sm font-medium text-foreground leading-snug">{displayValue(key, value)}</dd>
                     </div>
                   ))}
                 </dl>
