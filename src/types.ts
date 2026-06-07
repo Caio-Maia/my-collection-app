@@ -19,6 +19,7 @@ export interface Collection {
   name: string;
   description: string;
   icon: string;
+  collection_type: string;
   attribute_schema: AttributeSchema;
   cover_color: string;
   cover_image: string;
@@ -65,4 +66,26 @@ export interface AuthUser {
   id: string;
   email: string;
   display_name: string;
+}
+
+export interface Wishlist {
+  id: string;
+  user_id: string;
+  name: string;
+  description: string;
+  is_public: boolean;
+  created_at: string;
+}
+
+export interface WishlistItem {
+  id: string;
+  wishlist_id: string;
+  user_id: string;
+  target_collection_id: string | null;
+  title: string;
+  description: string;
+  photo_url: string;
+  attributes: Record<string, string>;
+  created_at: string;
+  updated_at: string;
 }

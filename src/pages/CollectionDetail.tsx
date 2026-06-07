@@ -11,7 +11,7 @@ import {
 import { useData } from '../data/DataContext';
 import { useAuth } from '../auth/AuthContext';
 import { Button } from '../components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '../components/ui/dialog';
 import { ItemDialog } from '../components/ItemDialog';
 import { ItemForm } from '../components/ItemForm';
 import { ImportDialog } from '../components/ImportDialog';
@@ -19,7 +19,8 @@ import { SearchDialog } from '../components/SearchDialog';
 import { EmptyState } from '../components/EmptyState';
 import { ItemFilterPanel } from '../components/ItemFilterPanel';
 import { cn } from '../lib/utils';
-import type { CollectionItem, AttributeSchema } from '../types';
+import type { CollectionItem, AttributeSchema, WishlistItem } from '../types';
+import { findWishlistMatch } from '../lib/similarity';
 import { formatDate, normalize, sortedAttrs } from '../lib/utils';
 import { exportCollection } from '../lib/export';
 import { formatDuration } from '../components/AttributeInput';
@@ -58,7 +59,7 @@ export function CollectionDetail() {
   const { user } = useAuth();
   const qc = useQueryClient();
 
-  const [searchOpen, setSearchOpen]         = useState(false);
+  const [searchOpen, setSearchOpen]          = useState(false);
   const [viewMode, setViewMode]             = usePersistedViewMode(id);
   const [sortBy, setSortBy]                 = useState<SortKey>('date-desc');
   const [activeTags, setActiveTags]         = useState<Set<string>>(new Set());
@@ -73,6 +74,7 @@ export function CollectionDetail() {
   const [selectedIds, setSelectedIds]       = useState<Set<string>>(new Set());
   const [shelfMenuOpen, setShelfMenuOpen]   = useState(false);
   const [batchConfirmDelete, setBatchConfirmDelete] = useState(false);
+  const [wishlistMatch, setWishlistMatch] = useState<WishlistItem | null>(null);
 
   const longPressTimer    = useRef<ReturnType<typeof setTimeout> | null>(null);
   const longPressDidFire  = useRef(false);
@@ -95,10 +97,17 @@ export function CollectionDetail() {
     enabled: !!id && selectMode,
   });
 
+  const { data: allWishlistItems = [] } = useQuery({
+    queryKey: ['wishlist-all', user?.id],
+    queryFn: () => data.listAllWishlistItems(user!.id),
+    enabled: !!user,
+  });
+
   const togglePublicMutation = useMutation({
     mutationFn: () => data.updateCollection(id!, { is_public: !collection?.is_public }),
     onSuccess: (updated) => {
       qc.invalidateQueries({ queryKey: ['collection', id] });
+      qc.invalidateQueries({ queryKey: ['collections', user?.id] });
       toast.success(updated.is_public ? 'Coleção agora é pública.' : 'Coleção agora é privada.');
     },
     onError: (e: Error) => toast.error(e.message),
@@ -107,11 +116,23 @@ export function CollectionDetail() {
   const addMutation = useMutation({
     mutationFn: (vals: Omit<CollectionItem, 'id' | 'collection_id' | 'created_at' | 'updated_at'>) =>
       data.createItem(id!, user!.id, vals),
-    onSuccess: () => {
+    onSuccess: (created) => {
       qc.invalidateQueries({ queryKey: ['items', id] });
       qc.invalidateQueries({ queryKey: ['activities', user?.id] });
       setAddOpen(false);
       toast.success('Item adicionado!');
+      const match = findWishlistMatch(created.title, id!, allWishlistItems);
+      if (match) setWishlistMatch(match);
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
+  const deleteWishlistMatchMutation = useMutation({
+    mutationFn: (wishlistItemId: string) => data.deleteWishlistItem(wishlistItemId),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['wishlist-all', user?.id] });
+      setWishlistMatch(null);
+      toast.success('Item removido da lista de desejos.');
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -263,25 +284,39 @@ export function CollectionDetail() {
   return (
     <div className="container mx-auto max-w-5xl px-4 py-6 space-y-6">
       {/* Header */}
-      <div className="flex items-start gap-3">
-        <Link to="/collections">
-          <Button variant="ghost" size="icon">
-            <ArrowLeft className="h-5 w-5" />
-          </Button>
+      <div className="space-y-1">
+        <Link
+          to="/collections"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Coleções
         </Link>
-        <div className="flex-1 min-w-0">
-          <h1 className="text-2xl font-bold truncate">{collection.name}</h1>
-          {collection.description && (
-            <p className="text-sm text-muted-foreground mt-0.5">{collection.description}</p>
-          )}
-          <p className="text-xs text-muted-foreground mt-1">
-            {items.length} item{items.length !== 1 ? 's' : ''}
-            {hasActiveFilters && processed.length !== items.length && (
-              <span className="text-primary font-medium"> · {processed.length} visíveis</span>
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-2xl font-bold">{collection.name}</h1>
+              {collection.is_public ? (
+                <span className="flex items-center gap-1 text-xs bg-muted px-2 py-0.5 rounded-full text-muted-foreground">
+                  <Globe className="h-3 w-3" /> Pública
+                </span>
+              ) : (
+                <span className="flex items-center gap-1 text-xs bg-muted px-2 py-0.5 rounded-full text-muted-foreground">
+                  <Lock className="h-3 w-3" /> Privada
+                </span>
+              )}
+            </div>
+            {collection.description && (
+              <p className="text-sm text-muted-foreground mt-0.5">{collection.description}</p>
             )}
-          </p>
-        </div>
-        <div className="flex gap-2 shrink-0 flex-wrap justify-end">
+            <p className="text-xs text-muted-foreground mt-1">
+              {items.length} item{items.length !== 1 ? 's' : ''}
+              {hasActiveFilters && processed.length !== items.length && (
+                <span className="text-primary font-medium"> · {processed.length} visíveis</span>
+              )}
+            </p>
+          </div>
+          <div className="flex gap-2 shrink-0 flex-wrap justify-end">
           <Button
             variant="outline"
             size="icon"
@@ -367,16 +402,17 @@ export function CollectionDetail() {
             <span className="hidden sm:inline">Adicionar</span>
           </Button>
         </div>
+        </div>
       </div>
 
       {/* Toolbar */}
       {items.length > 0 && (
         <div className="space-y-2">
-          <div className="flex gap-2">
-            {/* Search button */}
+          <div className="flex flex-wrap gap-2">
+            {/* Search */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 h-9 flex-1 rounded-md border border-input bg-background px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors text-left"
+              className="flex items-center gap-2 h-9 w-full sm:flex-1 sm:w-auto rounded-md border border-input bg-background px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors text-left"
             >
               <Search className="h-4 w-4 shrink-0" />
               <span className="truncate">Buscar itens...</span>
@@ -384,22 +420,26 @@ export function CollectionDetail() {
 
             {/* Filter toggle */}
             {hasTags && (
-              <Button
-                variant={showFilters || activeTags.size > 0 ? 'secondary' : 'outline'}
-                size="sm"
-                className="shrink-0 gap-1.5"
+              <button
                 onClick={() => setShowFilters((v) => !v)}
+                className={cn(
+                  'relative flex items-center justify-center h-9 w-9 rounded-md border shrink-0 transition-colors',
+                  showFilters || activeTags.size > 0
+                    ? 'bg-secondary border-secondary-foreground/20'
+                    : 'bg-background border-input hover:bg-accent text-muted-foreground',
+                )}
+                title="Filtros"
               >
                 <SlidersHorizontal className="h-4 w-4" />
                 {activeTags.size > 0 && (
-                  <span className="rounded-full bg-primary text-primary-foreground text-[10px] w-4 h-4 flex items-center justify-center font-bold">
+                  <span className="absolute -top-1 -right-1 rounded-full bg-primary text-primary-foreground text-[10px] w-4 h-4 flex items-center justify-center font-bold">
                     {activeTags.size}
                   </span>
                 )}
-              </Button>
+              </button>
             )}
 
-            {/* Sort — cycles through options on click */}
+            {/* Sort — cycles on click */}
             <button
               onClick={() => {
                 const idx = SORT_OPTIONS.findIndex(o => o.value === sortBy);
@@ -411,15 +451,13 @@ export function CollectionDetail() {
               {currentSort.icon}
             </button>
 
-            {/* View toggle + shelf */}
-            <div className="flex shrink-0 h-9 rounded-md border border-input overflow-hidden">
+            {/* View toggle + shelf — ml-auto on mobile pushes to row-2 right */}
+            <div className="flex ml-auto sm:ml-0 shrink-0 h-9 rounded-md border border-input overflow-hidden">
               <button
                 onClick={() => setViewMode('list')}
                 className={cn(
                   'flex items-center justify-center w-9 h-full transition-colors',
-                  viewMode === 'list'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-background hover:bg-accent text-muted-foreground'
+                  viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-accent text-muted-foreground'
                 )}
                 title="Lista"
               >
@@ -429,9 +467,7 @@ export function CollectionDetail() {
                 onClick={() => setViewMode('grid')}
                 className={cn(
                   'flex items-center justify-center w-9 h-full transition-colors border-l border-input',
-                  viewMode === 'grid'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-background hover:bg-accent text-muted-foreground'
+                  viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-background hover:bg-accent text-muted-foreground'
                 )}
                 title="Grade"
               >
@@ -622,7 +658,7 @@ export function CollectionDetail() {
             onSubmit={(vals) => addMutation.mutateAsync(vals)}
             onCancel={() => setAddOpen(false)}
             loading={addMutation.isPending}
-            enableOmdb
+            enableOmdb={collection?.collection_type === 'film'}
             attributeSchema={attributeSchema}
             autocompleteValues={autocompleteValues}
             attributeKeyDisplays={attributeKeyDisplays}
@@ -655,6 +691,27 @@ export function CollectionDetail() {
         open={importOpen}
         onOpenChange={setImportOpen}
       />
+
+      {/* Wishlist similarity prompt */}
+      <Dialog open={!!wishlistMatch} onOpenChange={(v) => !v && setWishlistMatch(null)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Item na lista de desejos</DialogTitle>
+            <DialogDescription>
+              Você tinha <strong>"{wishlistMatch?.title}"</strong> na lista de desejos. Deseja removê-lo de lá?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={() => setWishlistMatch(null)}>Manter</Button>
+            <Button
+              onClick={() => deleteWishlistMatchMutation.mutate(wishlistMatch!.id)}
+              disabled={deleteWishlistMatchMutation.isPending}
+            >
+              {deleteWishlistMatchMutation.isPending ? 'Removendo...' : 'Remover da lista'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Batch action bar */}
       {selectMode && selectedIds.size > 0 && (

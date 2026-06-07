@@ -1,6 +1,6 @@
 import { supabase } from '../../lib/supabaseClient';
 import type { DataProvider, AuthChangeCallback } from '../DataProvider';
-import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf } from '../../types';
+import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf, Wishlist, WishlistItem } from '../../types';
 
 function translateAuthError(message: string): string {
   if (message.includes('over_email_send_rate_limit') || message.includes('email rate limit'))
@@ -299,5 +299,123 @@ export class SupabaseAdapter implements DataProvider {
     // on delete set null na FK cuida dos itens
     const { error } = await supabase.from('shelves').delete().eq('id', id);
     if (error) throw new Error(error.message);
+  }
+
+  async listWishlists(userId: string): Promise<Wishlist[]> {
+    const { data, error } = await supabase
+      .from('wishlists')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: true });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  }
+
+  async getWishlist(id: string): Promise<Wishlist | null> {
+    const { data } = await supabase.from('wishlists').select('*').eq('id', id).single();
+    return data ?? null;
+  }
+
+  async createWishlist(userId: string, data: Pick<Wishlist, 'name' | 'description' | 'is_public'>): Promise<Wishlist> {
+    const { data: result, error } = await supabase
+      .from('wishlists')
+      .insert({ ...data, user_id: userId })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return result;
+  }
+
+  async updateWishlist(id: string, data: Partial<Pick<Wishlist, 'name' | 'description' | 'is_public'>>): Promise<Wishlist> {
+    const { data: result, error } = await supabase
+      .from('wishlists')
+      .update(data)
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return result;
+  }
+
+  async deleteWishlist(id: string): Promise<void> {
+    const { error } = await supabase.from('wishlists').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+  }
+
+  async listWishlistItems(wishlistId: string): Promise<WishlistItem[]> {
+    const { data, error } = await supabase
+      .from('wishlist_items')
+      .select('*')
+      .eq('wishlist_id', wishlistId)
+      .order('created_at', { ascending: false });
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  }
+
+  async listAllWishlistItems(userId: string): Promise<WishlistItem[]> {
+    const { data, error } = await supabase
+      .from('wishlist_items')
+      .select('*')
+      .eq('user_id', userId);
+    if (error) throw new Error(error.message);
+    return data ?? [];
+  }
+
+  async createWishlistItem(
+    wishlistId: string,
+    userId: string,
+    data: Omit<WishlistItem, 'id' | 'wishlist_id' | 'user_id' | 'created_at' | 'updated_at'>,
+  ): Promise<WishlistItem> {
+    const { data: result, error } = await supabase
+      .from('wishlist_items')
+      .insert({ ...data, wishlist_id: wishlistId, user_id: userId })
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return result;
+  }
+
+  async updateWishlistItem(
+    id: string,
+    data: Partial<Omit<WishlistItem, 'id' | 'wishlist_id' | 'user_id' | 'created_at'>>,
+  ): Promise<WishlistItem> {
+    const { data: result, error } = await supabase
+      .from('wishlist_items')
+      .update({ ...data, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return result;
+  }
+
+  async deleteWishlistItem(id: string): Promise<void> {
+    const { error } = await supabase.from('wishlist_items').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+  }
+
+  async moveWishlistItemToCollection(
+    wishlistItemId: string,
+    collectionId: string,
+    userId: string,
+  ): Promise<CollectionItem> {
+    const { data: wishlistItem, error: fetchErr } = await supabase
+      .from('wishlist_items')
+      .select('*')
+      .eq('id', wishlistItemId)
+      .single();
+    if (fetchErr || !wishlistItem) throw new Error('Wishlist item not found');
+    const created = await this.createItem(collectionId, userId, {
+      title: wishlistItem.title,
+      description: wishlistItem.description,
+      photo_url: wishlistItem.photo_url,
+      attributes: wishlistItem.attributes,
+      shelf_id: null,
+      shelf_row: null,
+      shelf_col: null,
+    });
+    const { error: delErr } = await supabase.from('wishlist_items').delete().eq('id', wishlistItemId);
+    if (delErr) throw new Error(delErr.message);
+    return created;
   }
 }

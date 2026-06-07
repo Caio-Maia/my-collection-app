@@ -1,4 +1,4 @@
-import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf } from '../types';
+import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf, Wishlist, WishlistItem } from '../types';
 
 export type AuthChangeCallback = (user: AuthUser | null) => void;
 
@@ -41,4 +41,18 @@ export interface DataProvider {
 
   // Storage
   uploadImage(file: File): Promise<string>;
+
+  // Wishlists
+  listWishlists(userId: string): Promise<Wishlist[]>;
+  getWishlist(id: string): Promise<Wishlist | null>;
+  createWishlist(userId: string, data: Pick<Wishlist, 'name' | 'description' | 'is_public'>): Promise<Wishlist>;
+  updateWishlist(id: string, data: Partial<Pick<Wishlist, 'name' | 'description' | 'is_public'>>): Promise<Wishlist>;
+  deleteWishlist(id: string): Promise<void>;
+
+  listWishlistItems(wishlistId: string): Promise<WishlistItem[]>;
+  listAllWishlistItems(userId: string): Promise<WishlistItem[]>;
+  createWishlistItem(wishlistId: string, userId: string, data: Omit<WishlistItem, 'id' | 'wishlist_id' | 'user_id' | 'created_at' | 'updated_at'>): Promise<WishlistItem>;
+  updateWishlistItem(id: string, data: Partial<Omit<WishlistItem, 'id' | 'wishlist_id' | 'user_id' | 'created_at'>>): Promise<WishlistItem>;
+  deleteWishlistItem(id: string): Promise<void>;
+  moveWishlistItemToCollection(wishlistItemId: string, collectionId: string, userId: string): Promise<CollectionItem>;
 }

@@ -7,6 +7,9 @@ import { Collections } from './pages/Collections';
 import { CollectionDetail } from './pages/CollectionDetail';
 import { Shelves } from './pages/Shelves';
 import { PublicCollection } from './pages/PublicCollection';
+import { PublicWishlist } from './pages/PublicWishlist';
+import { Wishlists } from './pages/Wishlists';
+import { WishlistDetail } from './pages/WishlistDetail';
 import { Profile } from './pages/Profile';
 import { Login } from './pages/Login';
 import { SignUp } from './pages/SignUp';
@@ -64,6 +67,22 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/wishlists"
+            element={
+              <ProtectedRoute>
+                <Wishlists />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlists/:id"
+            element={
+              <ProtectedRoute>
+                <WishlistDetail />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
@@ -76,6 +95,7 @@ function App() {
     <>
       <Routes>
         <Route path="/p/:id" element={<PublicCollection />} />
+        <Route path="/pw/:id" element={<PublicWishlist />} />
         <Route path="*" element={<AppRoutes />} />
       </Routes>
       <Toaster richColors position="top-right" />

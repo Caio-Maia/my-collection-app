@@ -42,6 +42,12 @@ export function Profile() {
 
   const totalItems = Object.values(itemCountQueries.data ?? {}).reduce((a, b) => a + b, 0);
 
+  const { data: wishlistItems = [] } = useQuery({
+    queryKey: ['wishlist-all', user?.id],
+    queryFn: () => data.listAllWishlistItems(user!.id),
+    enabled: !!user,
+  });
+
   const updateMutation = useMutation({
     mutationFn: (name: string) => data.updateProfile(user!.id, { display_name: name }),
     onSuccess: () => {
@@ -125,7 +131,7 @@ export function Profile() {
       </Card>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <Card>
           <CardContent className="text-center p-4">
             <p className="text-3xl font-bold text-primary">{collections.length}</p>
@@ -136,6 +142,12 @@ export function Profile() {
           <CardContent className="text-center p-4">
             <p className="text-3xl font-bold text-primary">{totalItems}</p>
             <p className="text-sm text-muted-foreground mt-1">Itens no total</p>
+          </CardContent>
+        </Card>
+        <Card className="col-span-2 md:col-span-1">
+          <CardContent className="text-center p-4">
+            <p className="text-3xl font-bold text-primary">{wishlistItems.length}</p>
+            <p className="text-sm text-muted-foreground mt-1">Itens desejados</p>
           </CardContent>
         </Card>
       </div>

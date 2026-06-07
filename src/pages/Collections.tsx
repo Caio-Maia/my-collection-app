@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Library, Plus, MoreVertical, Pencil, Trash2, FileUp,
   BookOpen, Disc, Film, Music, Star, Heart, Gamepad2,
-  Camera, Shirt, Wine, Trophy, Puzzle, Globe, Leaf,
+  Camera, Shirt, Wine, Trophy, Puzzle, Globe, Leaf, Lock,
   type LucideIcon,
 } from 'lucide-react';
 import { isCollectionExport, type CollectionExport } from '../lib/export';
@@ -82,6 +82,7 @@ export function Collections() {
     mutationFn: async () => {
       if (!importColData) throw new Error('Nenhum arquivo selecionado.');
       const col = await data.createCollection(user!.id, {
+        collection_type: 'other',
         ...importColData.collection,
         is_public: false,
       });
@@ -180,6 +181,18 @@ export function Collections() {
                     {/* Dynamic icon badge */}
                     <div className="absolute bottom-2 left-3 rounded-lg bg-background/90 backdrop-blur-sm p-2 shadow-sm">
                       {(() => { const Icon = ICON_MAP[col.icon] ?? BookOpen; return <Icon className="h-5 w-5 text-primary" />; })()}
+                    </div>
+                    {/* Public/private badge */}
+                    <div className="absolute top-2 left-2">
+                      {col.is_public ? (
+                        <span className="flex items-center gap-1 text-[10px] bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded-full text-muted-foreground">
+                          <Globe className="h-3 w-3" />Pública
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-1 text-[10px] bg-background/80 backdrop-blur-sm px-2 py-0.5 rounded-full text-muted-foreground">
+                          <Lock className="h-3 w-3" />Privada
+                        </span>
+                      )}
                     </div>
                   </div>
                   {/* Info */}

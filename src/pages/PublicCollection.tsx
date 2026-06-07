@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import {
-  Package, LayoutGrid, LayoutList, Lock,
+  Package, LayoutGrid, LayoutList, Lock, Search,
   SlidersHorizontal, ArrowUpAZ, ArrowDownAZ, CalendarArrowUp, CalendarArrowDown,
 } from 'lucide-react';
 import { getPublicCollection, listPublicItems } from '../data/public';
@@ -134,15 +134,13 @@ export function PublicCollection() {
         {/* Toolbar */}
         {items.length > 0 && (
           <div className="space-y-2">
-            <div className="flex gap-2">
-              {/* Search button */}
+            <div className="flex flex-wrap gap-2">
+              {/* Search */}
               <button
                 onClick={() => setSearchOpen(true)}
-                className="flex items-center gap-2 h-9 flex-1 rounded-md border border-input bg-background px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors text-left"
+                className="flex items-center gap-2 h-9 w-full sm:flex-1 sm:w-auto rounded-md border border-input bg-background px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-colors text-left"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
-                </svg>
+                <Search className="h-4 w-4 shrink-0" />
                 <span className="truncate">Buscar itens...</span>
               </button>
 
@@ -151,21 +149,23 @@ export function PublicCollection() {
                 <button
                   onClick={() => setShowFilters(v => !v)}
                   className={cn(
-                    'flex items-center justify-center h-9 w-9 rounded-md border shrink-0 transition-colors',
+                    'relative flex items-center justify-center h-9 w-9 rounded-md border shrink-0 transition-colors',
                     showFilters || hasActiveFilters
                       ? 'bg-secondary border-secondary-foreground/20'
-                      : 'bg-background border-input hover:bg-accent',
+                      : 'bg-background border-input hover:bg-accent text-muted-foreground',
                   )}
                   title="Filtros"
                 >
                   <SlidersHorizontal className="h-4 w-4" />
                   {activeTags.size > 0 && (
-                    <span className="sr-only">{activeTags.size} filtros ativos</span>
+                    <span className="absolute -top-1 -right-1 rounded-full bg-primary text-primary-foreground text-[10px] w-4 h-4 flex items-center justify-center font-bold">
+                      {activeTags.size}
+                    </span>
                   )}
                 </button>
               )}
 
-              {/* Sort — cycles through options on click */}
+              {/* Sort — cycles on click */}
               <button
                 onClick={() => {
                   const idx = SORT_OPTIONS.findIndex(o => o.value === sortBy);
@@ -177,8 +177,8 @@ export function PublicCollection() {
                 {currentSort.icon}
               </button>
 
-              {/* View toggle */}
-              <div className="flex shrink-0 h-9 rounded-md border border-input overflow-hidden">
+              {/* View toggle — ml-auto pushes to row-2 right on mobile */}
+              <div className="flex ml-auto sm:ml-0 shrink-0 h-9 rounded-md border border-input overflow-hidden">
                 <button
                   onClick={() => setViewMode('list')}
                   className={cn(

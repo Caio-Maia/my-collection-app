@@ -31,13 +31,22 @@ const ATTR_TYPES = [
   { value: 'duration', label: 'Duração (minutos)'     },
 ] as const;
 
+const COLLECTION_TYPES = [
+  { value: 'other',  label: 'Outros'        },
+  { value: 'film',   label: 'Filme'         },
+  { value: 'book',   label: 'Livro'         },
+  { value: 'vinyl',  label: 'Disco de Vinil' },
+  { value: 'cd',     label: 'CDs'           },
+] as const;
+
 const schema = z.object({
-  name:         z.string().min(1, 'Nome é obrigatório'),
-  description:  z.string(),
-  icon:         z.string(),
-  cover_color:  z.string(),
-  cover_image:  imageUrlSchema,
-  attr_schema:  z.array(z.object({
+  name:            z.string().min(1, 'Nome é obrigatório'),
+  description:     z.string(),
+  icon:            z.string(),
+  collection_type: z.string(),
+  cover_color:     z.string(),
+  cover_image:     imageUrlSchema,
+  attr_schema:     z.array(z.object({
     key:  z.string(),
     type: z.enum(['text', 'person', 'year', 'duration']),
   })),
@@ -79,20 +88,22 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name:        initial?.name        ?? '',
-      description: initial?.description ?? '',
-      icon:        initial?.icon        ?? 'BookOpen',
-      cover_color: initial?.cover_color ?? '',
-      cover_image: initial?.cover_image ?? '',
-      attr_schema: existingSchema,
+      name:            initial?.name            ?? '',
+      description:     initial?.description     ?? '',
+      icon:            initial?.icon            ?? 'BookOpen',
+      collection_type: initial?.collection_type ?? 'other',
+      cover_color:     initial?.cover_color     ?? '',
+      cover_image:     initial?.cover_image     ?? '',
+      attr_schema:     existingSchema,
     },
   });
 
   const { fields, append, remove } = useFieldArray({ control: form.control, name: 'attr_schema' });
 
-  const selectedIcon  = form.watch('icon');
-  const coverColor    = form.watch('cover_color');
-  const coverImage    = form.watch('cover_image');
+  const selectedIcon        = form.watch('icon');
+  const selectedType        = form.watch('collection_type');
+  const coverColor          = form.watch('cover_color');
+  const coverImage          = form.watch('cover_image');
 
   const handleSubmit = (values: FormData) => {
     const attribute_schema: AttributeSchema = {};
@@ -100,11 +111,12 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
       if (key.trim()) attribute_schema[key.trim()] = { type };
     });
     return onSubmit({
-      name:        values.name,
-      description: values.description,
-      icon:        values.icon,
-      cover_color: values.cover_color,
-      cover_image: values.cover_image,
+      name:            values.name,
+      description:     values.description,
+      icon:            values.icon,
+      collection_type: values.collection_type,
+      cover_color:     values.cover_color,
+      cover_image:     values.cover_image,
       attribute_schema,
       is_public: initial?.is_public ?? false,
     });
@@ -123,6 +135,27 @@ export function CollectionForm({ initial, onSubmit, onCancel, loading }: Props) 
       <div className="space-y-1.5">
         <Label htmlFor="col-desc">Descrição</Label>
         <Textarea id="col-desc" {...form.register('description')} placeholder="Sobre o que é essa coleção?" rows={2} />
+      </div>
+
+      <div className="space-y-1.5">
+        <Label>Tipo</Label>
+        <div className="flex flex-wrap gap-1.5">
+          {COLLECTION_TYPES.map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => form.setValue('collection_type', value)}
+              className={cn(
+                'rounded-md border px-3 py-1.5 text-sm transition-colors',
+                selectedType === value
+                  ? 'bg-primary text-primary-foreground border-primary'
+                  : 'bg-background hover:bg-accent border-input text-muted-foreground hover:text-foreground'
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-1.5">

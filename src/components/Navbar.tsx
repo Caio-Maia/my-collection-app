@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, Download, Home, Library, LogOut, Menu, User, X } from 'lucide-react';
+import { BookOpen, Download, Heart, Home, Library, LogOut, Menu, User, X } from 'lucide-react';
 import { useAuth } from '../auth/AuthContext';
 import { useInstallPWA } from '../hooks/useInstallPWA';
 import { Button } from './ui/button';
@@ -18,6 +18,7 @@ import { cn } from '../lib/utils';
 const navLinks = [
   { to: '/', label: 'Início', icon: Home },
   { to: '/collections', label: 'Coleções', icon: Library },
+  { to: '/wishlists', label: 'Lista de Desejos', icon: Heart },
 ];
 
 export function Navbar() {

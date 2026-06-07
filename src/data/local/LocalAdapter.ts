@@ -1,6 +1,6 @@
 import { db } from './db';
 import type { DataProvider, AuthChangeCallback } from '../DataProvider';
-import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf } from '../../types';
+import type { Profile, Collection, CollectionItem, Activity, AuthUser, Shelf, Wishlist, WishlistItem } from '../../types';
 import { generateId, now, fileToBase64 } from '../../lib/utils';
 
 // DEV-ONLY: LocalAdapter is an unauthenticated, client-editable mock. It must never
@@ -143,6 +143,13 @@ export class LocalAdapter implements DataProvider {
   async deleteCollection(id: string): Promise<void> {
     const items = await db.items.where('collection_id').equals(id).toArray();
     await db.items.bulkDelete(items.map((i) => i.id));
+    const wishlistItemsToUpdate = await db.wishlistItems
+      .where('target_collection_id').equals(id).toArray();
+    if (wishlistItemsToUpdate.length > 0) {
+      await db.wishlistItems.bulkPut(
+        wishlistItemsToUpdate.map((i) => ({ ...i, target_collection_id: null })),
+      );
+    }
     await db.collections.delete(id);
   }
 
@@ -321,5 +328,92 @@ export class LocalAdapter implements DataProvider {
       );
     }
     await db.shelves.delete(id);
+  }
+
+  async listWishlists(userId: string): Promise<Wishlist[]> {
+    return db.wishlists.where('user_id').equals(userId).toArray();
+  }
+
+  async getWishlist(id: string): Promise<Wishlist | null> {
+    return (await db.wishlists.get(id)) ?? null;
+  }
+
+  async createWishlist(userId: string, data: Pick<Wishlist, 'name' | 'description' | 'is_public'>): Promise<Wishlist> {
+    const wishlist: Wishlist = { ...data, id: generateId(), user_id: userId, created_at: now() };
+    await db.wishlists.add(wishlist);
+    return wishlist;
+  }
+
+  async updateWishlist(id: string, data: Partial<Pick<Wishlist, 'name' | 'description' | 'is_public'>>): Promise<Wishlist> {
+    await db.wishlists.update(id, data);
+    const wishlist = await db.wishlists.get(id);
+    if (!wishlist) throw new Error('Wishlist not found');
+    return wishlist;
+  }
+
+  async deleteWishlist(id: string): Promise<void> {
+    const items = await db.wishlistItems.where('wishlist_id').equals(id).toArray();
+    await db.wishlistItems.bulkDelete(items.map(i => i.id));
+    await db.wishlists.delete(id);
+  }
+
+  async listWishlistItems(wishlistId: string): Promise<WishlistItem[]> {
+    return db.wishlistItems.where('wishlist_id').equals(wishlistId).toArray();
+  }
+
+  async listAllWishlistItems(userId: string): Promise<WishlistItem[]> {
+    return db.wishlistItems.where('user_id').equals(userId).toArray();
+  }
+
+  async createWishlistItem(
+    wishlistId: string,
+    userId: string,
+    data: Omit<WishlistItem, 'id' | 'wishlist_id' | 'user_id' | 'created_at' | 'updated_at'>,
+  ): Promise<WishlistItem> {
+    const timestamp = now();
+    const item: WishlistItem = {
+      ...data,
+      id: generateId(),
+      wishlist_id: wishlistId,
+      user_id: userId,
+      created_at: timestamp,
+      updated_at: timestamp,
+    };
+    await db.wishlistItems.add(item);
+    return item;
+  }
+
+  async updateWishlistItem(
+    id: string,
+    data: Partial<Omit<WishlistItem, 'id' | 'wishlist_id' | 'user_id' | 'created_at'>>,
+  ): Promise<WishlistItem> {
+    await db.wishlistItems.update(id, { ...data, updated_at: now() });
+    const item = await db.wishlistItems.get(id);
+    if (!item) throw new Error('Wishlist item not found');
+    return item;
+  }
+
+  async deleteWishlistItem(id: string): Promise<void> {
+    await db.wishlistItems.delete(id);
+  }
+
+  async moveWishlistItemToCollection(
+    wishlistItemId: string,
+    collectionId: string,
+    userId: string,
+  ): Promise<CollectionItem> {
+    const wishlistItem = await db.wishlistItems.get(wishlistItemId);
+    if (!wishlistItem) throw new Error('Wishlist item not found');
+    const created = await this.createItem(collectionId, userId, {
+      title: wishlistItem.title,
+      description: wishlistItem.description,
+      photo_url: wishlistItem.photo_url,
+      attributes: wishlistItem.attributes,
+      shelf_id: null,
+      shelf_row: null,
+      shelf_col: null,
+    });
+    await db.wishlistItems.delete(wishlistItemId);
+    return created;
   }
 }
